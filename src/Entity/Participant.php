@@ -85,11 +85,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $estInscrit;
 
-    /**
-     * @ORM\Column(type="string", length=1)
-     */
-    private $yes;
-
     public function __construct()
     {
         $this->sortieOrganiser = new ArrayCollection();
@@ -319,18 +314,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeEstInscrit(Sortie $estInscrit): self
     {
         $this->estInscrit->removeElement($estInscrit);
-
-        return $this;
-    }
-
-    public function getYes(): ?string
-    {
-        return $this->yes;
-    }
-
-    public function setYes(string $yes): self
-    {
-        $this->yes = $yes;
 
         return $this;
     }

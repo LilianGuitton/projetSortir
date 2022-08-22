@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use App\Entity\Campus;
 
 class RegistrationFormType extends AbstractType
 {
@@ -18,6 +19,12 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('pseudo')
+            ->add('nom')
+            ->add('prenom')
+            ->add('email')
+            ->add('telephone')
+            ->add('estRattacherA')
+
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
