@@ -3,9 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Sortie;
+use App\Entity\Lieu;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+
 
 class CreerSortieType extends AbstractType
 {
@@ -18,13 +23,6 @@ class CreerSortieType extends AbstractType
             ->add('dateLimiteInscription')
             ->add('nbInscriptionMax')
             ->add('lieu')
-            ->add('etat')
-            ->add('campus')
-            ->add('organisateur')
-            ->add('participants')
-            ->add('enregistrer', SubmitType::class, ['label' => "Enregistrer"])
-            ->add('publier la sortie', SubmitType::class, ['label' => "Publier la sortie"])
-            ->add('annuler', SubmitType::class, ['label' => "Annuler"])
         ;
     }
 

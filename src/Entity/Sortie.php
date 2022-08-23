@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -20,26 +21,39 @@ class Sortie
     private $id;
 
     /**
+     * @Assert\NotBlank(message = "Veuillez renseigner un nom pour la sortie, voyou!")
      * @ORM\Column(type="string", length=100)
      */
     private $nom;
 
     /**
+     * @Assert\Date()
+     * @Assert\GreaterThan("today")
+     * @Assert\Expression(
+     *     "this.getDateHeureDebut() < this.getLimiteInscription()",
+     *     message="La date de la sortie ne doit pas être antérieure à la date du début des inscriptions, dis donc")
+     *
      * @ORM\Column(type="datetime")
      */
     private $dateHeureDebut;
 
     /**
+     * @Assert\Positive(
+     *     message="La durée doit être positive, pauvre fou!")
+     *
      * @ORM\Column(type="integer")
      */
     private $duree;
 
     /**
+     * @Assert\Date()
+     * @Assert\GreaterThan("today")
      * @ORM\Column(type="datetime")
      */
     private $dateLimiteInscription;
 
     /**
+     * @Assert\GreaterThan (2)
      * @ORM\Column(type="integer")
      */
     private $nbInscriptionMax;
@@ -72,6 +86,7 @@ class Sortie
      * @ORM\ManyToMany(targetEntity=Participant::class, mappedBy="estInscrit")
      */
     private $participants;
+
 
     public function __construct()
     {
@@ -216,5 +231,10 @@ class Sortie
         }
 
         return $this;
+    }
+
+    public function __constructDate()
+    {
+        $this->dateHeureDebut = new \DateTime('now');
     }
 }

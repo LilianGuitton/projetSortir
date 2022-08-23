@@ -2,10 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Lieu;
 use App\Form\CreerSortieType;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Sortie;
+
 
 class SortieController extends AbstractController
 {
@@ -19,50 +24,80 @@ class SortieController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/sortie/create/{id}", name="app_sortie_create")
-//     */
-//    public function sortieCreate($id = -1, Request $request): Response
-//    {
-//
-//        $sortie = new Sortie();
-//
-//        if ($id > 0 ){
-//            $repoSortie = $this->getDoctrine()->getRepository(Sortie::class);
-//
-//            $sortie = $repoSortie->find($id);
-//        }
-//
-//
-//        $createForm = $this->createForm(CreerSortieType::class, $sortie);
-//
-//        createForm->handleRequest($request);
-//
-//        if (createForm->isSubmitted() && $createForm->isValid()){
-//
-//            $sortieToSave = $createForm->getData();
-//
-//
-//            // c'est ici quon génére un slug en théorie quand necessaire
-//
-//            // -- partie base de données
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($sortieToSave);
-//            $em->flush();
-//
-//            // Message temporaire
-//            $this->addFlash("message_success", "Idea successfully added!");
-//
-//
-//            return $this->redirectToRoute("app_wish_show", [
-//                "id" => $sortieToSave->getId()
-//            ]);
-//        }
-//
-//        // -- Sinon juste afficherr le formualaire vide par défaut (premiere fois)
-//        // Retourner le rendu
-//        return $this->render('wish/wish-form.html.twig', [
-//            "wishForm" => $createForm->createView()
-//        ]);
-//    }
+    /**
+     * @Route("/sortie/creation", name="app_sortie_creation")
+     */
+    public function sortieCreate(ManagerRegistry $doctrine,$id = -1, Request $request): Response
+    {
+
+        $sortie = new Sortie();
+
+        if ($id > 0 ){
+            $repoSortie = $doctrine->getRepository(Sortie::class);
+
+            $sortie = $repoSortie->find($id);
+        }
+
+        $createForm = $this->createForm(CreerSortieType::class, $sortie);
+
+        $createForm->handleRequest($request);
+
+        if ($createForm->isSubmitted() && $createForm->isValid()){
+            if ($request->get('save')->isClicked){
+                $sortie->setEtat('En création');
+            }
+                $sortieToSave = $createForm->getData();
+
+            $sortieToSave->setDateHeureDebut(new \Datetime());
+            $em = $doctrine->getManager();
+            $em->persist($sortieToSave);
+            $em->flush();
+
+            return $this->redirectToRoute("app_home", [
+                "id" => $sortieToSave->getId()
+            ]);
+        }
+
+        return $this->render('sortie/index.html.twig', [
+            "createForm" => $createForm->createView()
+        ]);
+    }
+    /**
+     * @Route("/sortie/creation", name="app_sortie_creation")
+     */
+    public function sortiePublish(ManagerRegistry $doctrine,$id = -1, Request $request): Response
+    {
+
+        $sortie = new Sortie();
+
+        if ($id > 0 ){
+            $repoSortie = $doctrine->getRepository(Sortie::class);
+
+            $sortie = $repoSortie->find($id);
+        }
+
+        $createForm = $this->createForm(CreerSortieType::class, $sortie);
+
+        $createForm->handleRequest($request);
+
+        if ($createForm->isSubmitted() && $createForm->isValid()){
+            if ($request->get('save')->isClicked){
+                $sortie->setEtat('Ouvert');
+            }
+            $sortieToSave = $createForm->getData();
+
+            $sortieToSave->setDateHeureDebut(new \Datetime());
+            $em = $doctrine->getManager();
+            $em->persist($sortieToSave);
+            $em->flush();
+
+            return $this->redirectToRoute("app_home", [
+                "id" => $sortieToSave->getId()
+            ]);
+        }
+
+        return $this->render('sortie/index.html.twig', [
+            "createForm" => $createForm->createView()
+        ]);
+    }
 }
