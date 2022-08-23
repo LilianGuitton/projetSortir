@@ -10,13 +10,44 @@
         </div>
     </div>
     <div>
-        <h2>Filtrer les sorties</h2>
-        <form action="{{ path("app_home") }}">
-            <input type="text" id="nom" name="nom">
-            <button>Rechercher</button>
-        </form>
-        {% foreach sortie in sortieList %}
+        <h2>Filtrer les sorties : {{ filtre["monOrga"] }}</h2>
+        {{ form_start(filterForm) }}
+        <div class="group">
+            {{ form_label(filterForm.campus) }}
+            {{ form_widget(filterForm.campus) }}
+            {{ form_errors(filterForm.campus) }}
+        </div>
+        <div class="group">
+            {{ form_label(filterForm.nom) }}
+            <input type="text" name="{{ field_name(filterForm.nom) }}">
+            {{ form_errors(filterForm.nom) }}
+        </div>
+        <div class="group d-flex">
+            {{ form_label(filterForm.debut) }}
+            <input type="date" name="{{ field_name(filterForm.debut) }}">
+            {{ form_label(filterForm.fin) }}
+            <input type="date" name="{{ field_name(filterForm.fin) }}">
+        </div>
+        <div class="group">
+            <input type="checkbox" name="{{ field_name(filterForm.monOrga) }}">
+            {{ form_label(filterForm.monOrga) }}
+        </div>
+        <div class="group">
+            <input type="checkbox" name="{{ field_name(filterForm.inscrit) }}">
+            {{ form_label(filterForm.inscrit) }}
+        </div>
+        <div class="group">
+            <input type="checkbox" name="{{ field_name(filterForm.nonInscrit) }}">
+            {{ form_label(filterForm.nonInscrit) }}
+        </div>
+        <div class="group">
+            <input type="checkbox" name="{{ field_name(filterForm.passee) }}">
+            {{ form_label(filterForm.passee) }}
+        </div>
+        {{ form_end(filterForm) }}
+        {% for sortie in sortieList %}
             <p>{{ sortie.nom }}</p>
         {% endfor %}
     </div>
+
 {% endblock %}

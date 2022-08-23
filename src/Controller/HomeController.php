@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
+use App\Entity\Sortie;
+use App\Form\FiltreType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,25 +18,29 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_home")
      */
-    public function index(Request $request, ManagerRegistry $doctrine): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$this->getUser()){
             throw new AccessDeniedException("Non connecté");
         }
 
-        $test = "";
+        $filtre = $request->get("filtre");
 
-        if($request->isMethod("post")){
-            $test = $request->request->get("test", "1");
-        }
+        $nom = $filtre["nom"];
+        $campus = $filtre["campus"];
+        $debut = $filtre["debut"];
+        $fin = $filtre["fin"];
+        //$monOrga = $filtre["monOrga"];
+        $inscrit = $filtre["inscrit"];
+        //$nonInscrit = $filtre["nonInscrit"];
+        $passee = $filtre["passee"];
 
-        $conn = $doctrine->getManager()->getConnection();
+        $repoSortie = $entityManager->getRepository(Sortie::class);
 
-        $sql = "SELECT * FROM Sortie s";
+        $sortieList = $repoSortie->findAll();
 
-        $stmt = $conn->query($sql);
-        $sortieList = $stmt->fetchAllAssociative();
-
-        return $this->render('home/index.html.twig', ["sortieList" => $sortieList, "test" => $test]);
+        return $this->render('home/index.html.twig', ["sortieList" => $sortieList, "filtre"=>$filtre,
+            "filterForm" => $this->createForm(FiltreType::class)->createView()
+        ]);
     }
 }
