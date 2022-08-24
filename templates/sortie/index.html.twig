@@ -15,6 +15,8 @@
         {{ form_start(createForm) }}
 
             <div>
+
+
                  <label for="{{ field_name(createForm.nom) }}">
                      Nom :
                  </label>
@@ -26,14 +28,7 @@
             </div>
 
             <div>
-                <label for="{{ field_name(createForm.dateHeureDebut) }}">
-                    Date et heure du début de la sortie :
-                </label>
-                <input type="datetime-local" id="{{ field_name(createForm.dateHeureDebut) }}"
-                       name="{{ field_name(createForm.dateHeureDebut) }}">
-                {% for error in field_errors(createForm.dateHeureDebut) %}
-                    <div class="error">{{ error }}</div>
-                 {% endfor %}
+                {{ form_widget(createForm.dateHeureDebut) }}
             </div>
 
             <div>
@@ -48,14 +43,8 @@
             </div>
 
             <div>
-                <label for="{{ field_name(createForm.dateLimiteInscription) }}">
-                    Date limite d'inscription :
-                </label>
-                <input type="datetime-local" id="{{ field_name(createForm.dateLimiteInscription) }}"
-                    name="{{ field_name(createForm.dateLimiteInscription) }}" >
-                {% for error in field_errors(createForm.dateLimiteInscription) %}
-                    <div class="error">{{ error }}</div>
-                {% endfor %}
+                {{ form_widget(createForm.dateLimiteInscription) }}
+
             </div>
 
             <div>
@@ -87,10 +76,9 @@
         {{ form_end(createForm) }}
 
         <div>
-            <a class="btn btn-danger" href="{{ path("app_home") }}" role="button" >
+            <a class="btn" href="{{ path("app_home") }}" role="button" >
                 Annuler
             </a>
-
         </div>
 
 
