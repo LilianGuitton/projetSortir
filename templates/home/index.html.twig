@@ -146,7 +146,8 @@
                             <span><a href="/profil/{{ sortie.organisateur.pseudo }}">{{ sortie.organisateur.pseudo }}</a></span>
                         </div>
                         <div class="column-8">
-                            <span></span>
+                            {% if sortie.etat.libelle ==  %}
+
                         </div>
                     </div>
                 {% endfor %}
