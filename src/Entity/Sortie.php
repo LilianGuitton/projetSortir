@@ -27,11 +27,6 @@ class Sortie
     private $nom;
 
     /**
-     * @Assert\Date()
-     * @Assert\GreaterThan("today")
-     * @Assert\Expression(
-     *     "this.getDateHeureDebut() < this.getLimiteInscription()",
-     *     message="La date de la sortie ne doit pas être antérieure à la date du début des inscriptions, dis donc")
      *
      * @ORM\Column(type="datetime")
      */
@@ -40,20 +35,18 @@ class Sortie
     /**
      * @Assert\Positive(
      *     message="La durée doit être positive, pauvre fou!")
-     *
      * @ORM\Column(type="integer")
      */
     private $duree;
 
     /**
-     * @Assert\Date()
-     * @Assert\GreaterThan("today")
+     *
      * @ORM\Column(type="datetime")
      */
     private $dateLimiteInscription;
 
     /**
-     * @Assert\GreaterThan (2)
+     * @Assert\GreaterThan (1)
      * @ORM\Column(type="integer")
      */
     private $nbInscriptionMax;

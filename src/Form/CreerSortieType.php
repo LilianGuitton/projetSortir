@@ -6,6 +6,7 @@ use App\Entity\Sortie;
 use App\Entity\Lieu;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,7 @@ class CreerSortieType extends AbstractType
             ->add('nom')
             ->add('dateHeureDebut')
             ->add('duree')
-            ->add('dateLimiteInscription')
+            ->add('dateLimiteInscription', DateTimeType::class)
             ->add('nbInscriptionMax')
             ->add('lieu')
         ;
