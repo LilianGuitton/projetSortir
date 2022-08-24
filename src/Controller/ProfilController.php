@@ -21,6 +21,8 @@ class ProfilController extends AbstractController
 
         $monProfil = $this->getUser();
 
+        
+
         $monProfilForm = $this->createForm(MonProfilType::class, $monProfil);
         return $this->render('profil/index.html.twig', [
             'MonProfilForm' => $monProfilForm->createView(),

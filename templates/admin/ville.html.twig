@@ -5,12 +5,57 @@
 {% block body %}
     <h1>Gérer les villes</h1>
 
-    <h2>Filtrer les villes :</h2>
 
 
 
-    {{ form(rechercheForm) }}
+
+    {{ form_start(rechercheForm) }}
+
+    <div class="groupVille">
+        <label for="{{ field_name(rechercheForm.recherche) }}">Recherche ville</label>
+        <input type="text"
+        id="{{ field_name(rechercheForm.recherche)}}"
+        name="{{ field_name(rechercheForm.recherche) }}"
+        value="{{ field_value(rechercheForm.recherche) }}"
+        class="form-control">
+        </div>
+
+    {{ form_end(rechercheForm) }}
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Nom</th>
+            <th>CodePostal</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
 
 
+        {% for ville in villes %}
+            <tr>
 
+                <td>{{ ville.nom }}</td>
+                <td>{{ ville.codePostal }}</td>
+                <td>
+
+                    <a href="{{ path('app_ville_edit', {'id': ville.id}) }}">editer</a>
+                    <a><form method="post" action="{{ path('app_ville_delete', {'id': ville.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ville.id) }}">
+                            <button class="btn">Supprimer</button>
+                        </form></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+    <a href="{{ path('app_ville_new') }}">Ajouter ville</a>
 {% endblock %}
