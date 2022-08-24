@@ -26,14 +26,14 @@ class HomeController extends AbstractController
 
         $filtre = $request->get("filtre");
 
-        $nom = $filtre["nom"];
-        $campus = $filtre["campus"];
-        $debut = $filtre["debut"];
-        $fin = $filtre["fin"];
+        //$nom = $filtre["nom"];
+        //$campus = $filtre["campus"];
+        //$debut = $filtre["debut"];
+        //$fin = $filtre["fin"];
         //$monOrga = $filtre["monOrga"];
-        $inscrit = $filtre["inscrit"];
+        //$inscrit = $filtre["inscrit"];
         //$nonInscrit = $filtre["nonInscrit"];
-        $passee = $filtre["passee"];
+        //$passee = $filtre["passee"];
 
         $repoSortie = $entityManager->getRepository(Sortie::class);
 

@@ -1,5 +1,50 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <style>
+        .wrapper
+        {
+            width:850px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        .tab-row{
+            display: flex;
+        }
+
+        .tabs {
+            height: 250px;
+            overflow-y: scroll;
+        }
+
+        .column-1{
+            width: 140px;
+        }
+        .column-2{
+            width: 140px;
+        }
+        .column-3{
+            width: 70px;
+        }
+        .column-4{
+            width: 120px;
+        }
+        .column-5{
+            width: 90px;
+        }
+        .column-6{
+            width: 60px;
+        }
+        .column-7{
+            width: 110px;
+        }
+        .column-8{
+            width: 120px;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <div>
         <div>
@@ -10,7 +55,7 @@
         </div>
     </div>
     <div>
-        <h2>Filtrer les sorties : {{ filtre["monOrga"] }}</h2>
+        <h2>Filtrer les sorties :</h2>
         {{ form_start(filterForm) }}
         <div class="group">
             {{ form_label(filterForm.campus) }}
@@ -45,9 +90,68 @@
             {{ form_label(filterForm.passee) }}
         </div>
         {{ form_end(filterForm) }}
-        {% for sortie in sortieList %}
-            <p>{{ sortie.nom }}</p>
-        {% endfor %}
+        <div class="wrapper">
+            <div class="labels d-flex">
+                <div class="label column-1">
+                    <span>Nom de la sortie</span>
+                </div>
+                <div class="label column-2">
+                    <span>Date de la sortie</span>
+                </div>
+                <div class="label column-3">
+                    <span>Clôture</span>
+                </div>
+                <div class="label column-4">
+                    <span>Inscrits/places</span>
+                </div>
+                <div class="label column-5">
+                    <span>Etat</span>
+                </div>
+                <div class="label column-6">
+                    <span>Inscrit</span>
+                </div>
+                <div class="label column-7">
+                    <span>Organisateur</span>
+                </div>
+                <div class="label column-8">
+                    <span>Actions</span>
+                </div>
+            </div>
+            <div class="tabs">
+                {% for sortie in sortieList %}
+                    <div class="tab-row">
+                        <div class="column-1">
+                            <span>{{ sortie.nom }}</span>
+                        </div>
+                        <div class="column-2">
+                            <span>{{ sortie.dateHeureDebut|date("m/d/Y H:i", "Europe/Paris") }}</span>
+                        </div>
+                        <div class="column-3">
+                            <span>{{ sortie.dateLimiteInscription|date("m/d/Y", "Europe/Paris") }}</span>
+                        </div>
+                        <div class="column-4">
+                            <span>{{ sortie.participants|length }}/{{ sortie.nbInscriptionMax }}</span>
+                        </div>
+                        <div class="column-5">
+                            <span>{{ sortie.etat }}</span>
+                        </div>
+                        <div class="column-6">
+                            <span>
+                                {% if app.user in sortie.participants %}
+                                    X
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="column-7">
+                            <span><a href="/profil/{{ sortie.organisateur.pseudo }}">{{ sortie.organisateur.pseudo }}</a></span>
+                        </div>
+                        <div class="column-8">
+                            <span></span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
 {% endblock %}
