@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une sortie{% endblock %}
+
+
+{% block body %}
+
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    <div class="example-wrapper">
+         <h1>Créer une sortie</h1>
+
+                                                <!-- FORM -->
+        <div>
+            {{ form_start(updateForm) }}
+
+            <div>
+                <label for="{{ field_name(updateForm.nom) }}">
+                    Nom :
+                </label>
+                <input type="text" id="{{ field_name(updateForm.nom) }}"
+                       name="{{ field_name(updateForm.nom) }}">
+                {% for error in field_errors(updateForm.nom) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div>
+                <label for="{{ field_name(updateForm.dateHeureDebut) }}">
+                    Date et heure du début de la sortie :
+                </label>
+                <input type="datetime-local" id="{{ field_name(updateForm.dateHeureDebut) }}"
+                       name="{{ field_name(updateForm.dateHeureDebut) }}">
+                {% for error in field_errors(updateForm.dateHeureDebut) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div>
+                <label for="{{ field_name(updateForm.duree) }}">
+                    Durée de la sortie en min :
+                </label>
+                <input type="number" id="{{ field_name(updateForm.duree) }}"
+                       name="{{ field_name(updateForm.duree) }}" min="20">
+                {% for error in field_errors(updateForm.duree) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div>
+                <label for="{{ field_name(updateForm.dateLimiteInscription) }}">
+                    Date limite d'inscription :
+                </label>
+                <input type="datetime-local" id="{{ field_name(updateForm.dateLimiteInscription) }}"
+                       name="{{ field_name(updateForm.dateLimiteInscription) }}" >
+                {% for error in field_errors(updateForm.dateLimiteInscription) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div>
+                <label for="{{ field_name(updateForm.nbInscriptionMax) }}">
+                    Nombre d'inscription maximum :
+                </label>
+                <input type="number" id="{{ field_name(updateForm.nbInscriptionMax) }}"
+                       name="{{ field_name(updateForm.nbInscriptionMax) }}" min="2">
+                {% for error in field_errors(updateForm.nbInscriptionMax) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div>
+
+                {{ form_label(updateForm.lieu) }}
+                {{ form_widget(updateForm.lieu) }}
+
+            </div>
+
+                                                <!-- BUTTON -->
+            <div>
+
+                <button name="save">Enregistrer</button>
+                <button name="publish">Publier la sortie</button>
+
+            </div>
+
+            {{ form_end(createForm) }}
+
+
+
+
+
+{% endblock %}
