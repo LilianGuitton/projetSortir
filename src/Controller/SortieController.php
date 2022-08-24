@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Lieu;
+use App\Entity\Participant;
 use App\Form\CreerSortieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,7 +55,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/creation", name="app_sortie_creation")
      */
-    public function sortieCreate(ManagerRegistry $doctrine, Request $request): Response
+    public function sortieCreate(EntityManagerInterface $entityManager, Request $request): Response
     {
 
         $sortie = new Sortie();
@@ -60,16 +63,16 @@ class SortieController extends AbstractController
         $createForm = $this->createForm(CreerSortieType::class, $sortie);
 
         $createForm->handleRequest($request);
-        dump($createForm);
 
         if ($createForm->isSubmitted() && $createForm->isValid()){
-            if ($request->get('save')->isClicked){
-                $sortie->setEtat('En création');
-            }
 
-            $em = $doctrine->getManager();
-            $em->persist($sortie);
-            $em->flush();
+            $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
+
+            $sortie->setCampus($this->getUser()->getEstRattacherA());
+            $sortie->setOrganisateur($this->getUser());
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
 
             return $this->redirectToRoute("app_home", [
                 "id" => $sortie->getId()
