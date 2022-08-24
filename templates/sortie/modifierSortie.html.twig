@@ -10,7 +10,7 @@
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
     <div class="example-wrapper">
-         <h1>Créer une sortie</h1>
+         <h1>Modifier une sortie</h1>
 
                                                 <!-- FORM -->
         <div>
@@ -83,12 +83,17 @@
 
                 <button name="save">Enregistrer</button>
                 <button name="publish">Publier la sortie</button>
+                <button name="delete">Supprimer la sortie</button>
 
             </div>
 
-            {{ form_end(createForm) }}
+            {{ form_end(updateForm) }}
 
-
+            <div>
+                <a class="btn" href="{{ path("app_home") }}" role="button" >
+                    Annuler
+                </a>
+            </div>
 
 
 
