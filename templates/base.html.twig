@@ -34,10 +34,10 @@
                         <div class="navbar-nav">
                             {% if is_granted("ROLE_ADMIN") %}
                             <div>
-                                <a class="nav-link " href="#">Ville</a>
+                                <a class="nav-link " href="{{ path('app_ville') }}">Ville</a>
                             </div>
                             <div>
-                                <a class="nav-link " href="#">Campus</a>
+                                <a class="nav-link " href="{{ path('app_campus') }}">Campus</a>
                             </div>
                             {% endif %}
                             <div>
