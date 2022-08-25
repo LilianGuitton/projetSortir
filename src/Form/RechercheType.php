@@ -15,8 +15,10 @@ class RechercheType extends AbstractType
     {
         $builder
             ->add('recherche',TextType::class)
-            ->add('Rechercher', SubmitType::class)
-        ;
+            ->add('Rechercher', SubmitType::class, [
+              'attr' => ['class' => 'btn'],
+        ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
