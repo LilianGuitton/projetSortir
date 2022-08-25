@@ -55,9 +55,12 @@
                 </div>
 
                 <div class="form-group col-md-12">
-                    <button type="submit" class="btn">Enregistrer</button>
-                    <button type="button" class="btn">Annuler</button>
+                    <button type="submit" class="btn" value="Enregistrer">Enregistrer</button>
+
                 </div>
+                    {{ form_end(MonProfilForm) }}
+                        <a href="{{ path('app_home') }}" class="btn">Annuler</a>
+
             </div>
             <div class="col-md-4">
 
@@ -72,5 +75,5 @@
 
 
 
-    {{ form_end(MonProfilForm) }}
+
 {% endblock %}
