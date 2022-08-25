@@ -20,7 +20,6 @@ class CreerSortieType extends AbstractType
         $builder
             ->add('nom')
             ->add('dateHeureDebut', DateTimeType::class, [
-
             ])
             ->add('duree')
             ->add('dateLimiteInscription', DateTimeType::class)

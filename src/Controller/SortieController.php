@@ -6,6 +6,7 @@ use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Form\CreerSortieType;
+use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use http\Client\Curl\User;
@@ -39,7 +40,6 @@ class SortieController extends AbstractController
     }
 
 
-
     /**
      * @Route("/sortie/annuler", name="app_annuler_sortie")
      */
@@ -50,7 +50,7 @@ class SortieController extends AbstractController
         ]);
     }
 
-//CREATION D'UNE SORTIE : fonction creation et publication
+//CREATION D'UNE SORTIE : fonction creation
 
     /**
      * @Route("/sortie/creation", name="app_sortie_creation")
@@ -84,17 +84,22 @@ class SortieController extends AbstractController
         ]);
     }
 
-//MODIFICATION D'UNE SORTIE : fonction update, publication, supprimer
+//MODIFICATION D'UNE SORTIE : fonction update, supprimer
 
     /**
-     * @Route("/sortie/modifier/{id}", name="app_sortie_modification")
+     * @Route("/sortie/modifier/{sortie}", name="app_sortie_modification")
      */
-    public function sortieModifier(EntityManagerInterface $entityManager,$id, Request $request): Response
+    public function sortieModifier(
+        EntityManagerInterface $entityManager,
+        Sortie $sortie,
+        Request $request,
+        SortieRepository $repoSortie
+    ): Response
     {
 
-        $repoSortie = $entityManager->getRepository(Sortie::class);
-        $sortie = $repoSortie->find($id);
-
+        //$repoSortie = $entityManager->getRepository(Sortie::class);
+//        $sortie = $repoSortie->find($id);
+       dump($sortie);
         $updateForm = $this->createForm(CreerSortieType::class, $sortie);
 
         $updateForm->handleRequest($request);
@@ -116,26 +121,26 @@ class SortieController extends AbstractController
         }
 
         return $this->render('sortie/modifierSortie.html.twig', [
-            "updateForm" => $updateForm->createView()
+            "updateForm" => $updateForm->createView(),
+            "sortie"=> $sortie
         ]);
     }
 
     /**
-     * @Route("/sortie/supprimer", name="app_sortie_supprimer")
+     * @Route("/sortie/supprimer/{id}", name="app_sortie_supprimer")
      */
     public function deleteSortie(ManagerRegistry $doctrine, $id, Request $request){
 
+
         $em = $doctrine->getEntityManager();
         $sortie = $em->getRepository()->find($id);
-        if ($request->get('delete')->isClicked){
         $em->remove($sortie);
         $em->flush();
-        }
-        return $this->redirectToRoute('app_home');
+
+        return $this->redirectToRoute('app_home', [
+        "sortie" => $sortie->getId()
+            ]);
     }
 
-    private function updateForm(string $class, $sortie)
-    {
-    }
 
 }
