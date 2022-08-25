@@ -3,11 +3,11 @@
 {% block title %}Gerer les villes{% endblock %}
 
 {% block body %}
-    <h1>Gérer les villes</h1>
+    <h1 class="h1ville">Gérer les villes</h1>
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
+
 
             <div class="col-md-4">
                 {{ form_start(rechercheForm) }}
@@ -18,7 +18,8 @@
                 name="{{ field_name(rechercheForm.recherche) }}"
                 value="{{ field_value(rechercheForm.recherche) }}"
                 class="form-control">
-            </div>
+                </div>
+
             <div class="col-md-4"></div>
         </div>
     </div>
@@ -30,7 +31,7 @@
         <thead>
         <tr>
             <th></th>
-            <th>Nom</th>
+            <th>Nom de la ville</th>
             <th>CodePostal</th>
             <th>actions</th>
         </tr>
@@ -47,8 +48,8 @@
                  <div>
                     <a><form method="post" action="{{ path('app_ville_edit', {'id': ville.id}) }}">
                             <button class="btn">Editer</button>
-                        </form></a>
-                    <a><form method="post" action="{{ path('app_ville_delete', {'id': ville.id}) }}" onsubmit="return confirm('Confirmer vous la suppression?');">
+                        </form>
+                    <form method="post" action="{{ path('app_ville_delete', {'id': ville.id}) }}" onsubmit="return confirm('Confirmez vous la suppression?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ville.id) }}">
                             <button class="btn">Supprimer</button>
                         </form></a>
@@ -71,7 +72,7 @@
         <div class="ajout">
 
             <a><form method="post" action="{{ path('app_ville_new') }}">
-            <button class="btn">Ajouter ville</button>
+            <button class="btn">Ajouter une ville</button>
         </form></a>
 
         </div>

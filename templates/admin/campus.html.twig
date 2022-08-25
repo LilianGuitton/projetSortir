@@ -8,7 +8,9 @@
 <h1>Gérer les campus</h1>
 
 
-     <h2>Filtrer les campus :</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
 
     {{ form_start(rechercheForm) }}
 
@@ -19,14 +21,57 @@
                name="{{ field_name(rechercheForm.recherche) }}"
                value="{{ field_value(rechercheForm.recherche) }}"
                class="form-control">
+               </div>
+                <div class="col-md-4"></div>
+        </div>
     </div>
 
     {{ form_end(rechercheForm) }}
 
-    {% for campus in campus %}
-        <p>{{ campus.nom }}</p>
 
+<table class="table">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Nom du campus</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for campus in campus %}
+        <tr>
+            <td></td>
+            <td>{{ campus.nom }}</td>
+            <td>
+
+
+                <a><form method="post" action="{{ path('app_campus_edit', {'id': campus.id}) }}">
+                        <button class="btn">Editer</button>
+                    </form>
+                <form method="post" action="{{ path('app_campus_delete', {'id': campus.id}) }}" onsubmit="return confirm('Confirmez vous la suppression?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campus.id) }}">
+                    <button class="btn">Supprimer</button>
+                </form></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">Pas de résultat</td>
+        </tr>
     {% endfor %}
+    </tbody>
+</table>
+
+
+    <div class="ajout">
+
+        <a><form method="post" action="{{ path('app_campus_new') }}">
+                <button class="btn">Ajouter un campus</button>
+            </form></a>
+
+    </div>
+
+
 
 
 
