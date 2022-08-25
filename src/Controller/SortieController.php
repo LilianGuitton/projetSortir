@@ -40,7 +40,7 @@ class SortieController extends AbstractController
     }
 
 
-    /**
+   /**
      * @Route("/sortie/annuler", name="app_annuler_sortie")
      */
     public function annulerSortie(): Response
@@ -139,6 +139,8 @@ class SortieController extends AbstractController
             ]);
     }
 
+
+//INSCRIPTION DANS UNE SORTIE : fonction inscrit/désinscrit
     /**
      * @Route ("/sortie/inscrit/{sortie}", name="app_sortie_inscrit")
      */
@@ -162,4 +164,33 @@ class SortieController extends AbstractController
 
         return $this->redirectToRoute("app_home");
     }
+
+//AFFICHAGE D'UNE SORTIE SUR LA TWIG ANNULER
+
+   /**
+     * @Route ("/sortie/annuler/{sortie}", name="app_annuler_sortie")
+
+
+
+
+
+
+
+    public function wishList(): Response
+    {
+        // Repo Wish
+        $repoWish = $this->getDoctrine()->getRepository(Wish::class); // Récuperer l'entity manager doctrine
+
+        // la liste de tout les voeux
+        //  $wishList = $repoWish->findAll();
+        $wishList = $repoWish->findBy(array(), null, 20, null);
+
+        return $this->render('wish/index.html.twig', [
+            "wishList" => $wishList
+        ]);
+    } */
+
+
+
+
 }
