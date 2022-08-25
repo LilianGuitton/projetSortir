@@ -114,7 +114,11 @@ class SortieController extends AbstractController
 
         if ($updateForm->isSubmitted() && $updateForm->isValid()){
 
-            $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
+            if ("save" === $request->get('save')){
+                $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
+            } elseif ("publish" === $request->get('publish')){
+                $sortie->setEtat($entityManager->getRepository(Etat::class)->find(2));
+            }
 
             $sortie->setCampus($this->getUser()->getEstRattacherA());
             $sortie->setOrganisateur($this->getUser());
