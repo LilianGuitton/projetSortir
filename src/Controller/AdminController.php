@@ -41,9 +41,6 @@ class AdminController extends AbstractController
             $listeVille = $villeRepository->rechercheVille($recherche['recherche']);
         }
 
-
-
-
         $rechercheForm = $this->createForm(RechercheType::class, $recherche);
 
 
@@ -67,8 +64,6 @@ class AdminController extends AbstractController
         }
 
 
-
-
         $rechercheForm = $this->createForm(RechercheType::class, $recherche);
 
         return $this->render('admin/campus.html.twig', [
@@ -77,7 +72,6 @@ class AdminController extends AbstractController
             'campus' => $listeCampus
         ]);
     }
-
 
 
 }

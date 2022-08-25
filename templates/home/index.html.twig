@@ -122,41 +122,66 @@
             </div>
             <div class="tabs">
                 {% for sortie in sortieList %}
-                    <div class="tab-row">
-                        <div class="column-1">
-                            <span>{{ sortie.nom }}</span>
-                        </div>
-                        <div class="column-2">
-                            <span>{{ sortie.dateHeureDebut|date("m/d/Y H:i", "Europe/Paris") }}</span>
-                        </div>
-                        <div class="column-3">
-                            <span>{{ sortie.dateLimiteInscription|date("m/d/Y", "Europe/Paris") }}</span>
-                        </div>
-                        <div class="column-4">
-                            <span>{{ sortie.participants|length }}/{{ sortie.nbInscriptionMax }}</span>
-                        </div>
-                        <div class="column-5">
-                            <span>{{ sortie.etat }}</span>
-                        </div>
-                        <div class="column-6">
-                            <span>
-                                {% if app.user in sortie.participants %}
-                                    X
+                    {% if (sortie.etat.libelle == "En création" and sortie.organisateur.pseudo == app.user.pseudo) or (sortie.etat.libelle != "En création" and sortie.etat.libelle != "Archivé") %}
+                        <div class="tab-row">
+                            <div class="column-1">
+                                <span>{{ sortie.nom }}</span>
+                            </div>
+                            <div class="column-2">
+                                <span>{{ sortie.dateHeureDebut|date("d/m/Y H:i", "Europe/Paris") }}</span>
+                            </div>
+                            <div class="column-3">
+                                <span>{{ sortie.dateLimiteInscription|date("d/m/Y", "Europe/Paris") }}</span>
+                            </div>
+                            <div class="column-4">
+                                <span>{{ sortie.participants|length }}/{{ sortie.nbInscriptionMax }}</span>
+                            </div>
+                            <div class="column-5">
+                                <span>{{ sortie.etat }}</span>
+                            </div>
+                            <div class="column-6">
+                                <span>
+                                    {% if app.user in sortie.participants %}
+                                        X
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="column-7">
+                                <span><a href="/profil/{{ sortie.organisateur.pseudo }}">{{ sortie.organisateur.pseudo }}</a></span>
+                            </div>
+                            <div class="column-8">
+                                {% if sortie.etat.libelle == "En création" %}
+                                    <span><a href="/sortie/modifier/{{ sortie.id }}">Modifier</a> - <a href="">Publier</a></span>
+                                {% elseif sortie.etat.libelle == "Ouvert" %}
+                                    <span><a href="/sortie">Afficher</a>
+                                        {% if sortie.organisateur.pseudo == app.user.pseudo %}
+                                            - <a href="/sortie/annuler">Annuler</a>
+                                        {% elseif app.user in sortie.participants %}
+                                            - <a href="/sortie/desinscrit">Se désister</a>
+                                        {% elseif sortie.participants|length < sortie.nbInscriptionMax %}
+                                            {% if  app.user not in sortie.participants %}
+                                                - <a href="/sortie/inscrit">S'inscrire</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    </span>
+                                {% elseif sortie.etat.libelle == "Fermé" %}
+                                    <span>
+                                        <a href="/sortie">Afficher</a>
+                                        {% if app.user in sortie.participants %}
+                                            - <a href="/sortie/desinscrit">Se désister</a>
+                                        {% endif %}
+                                    </span>
+                                    {% else %}
+                                <span><a href="/sortie">Afficher</a></span>
                                 {% endif %}
-                            </span>
+
+                            </div>
                         </div>
-                        <div class="column-7">
-                            <span><a href="/profil/{{ sortie.organisateur.pseudo }}">{{ sortie.organisateur.pseudo }}</a></span>
-                        </div>
-                        <div class="column-8">
-                            {% if sortie.etat.libelle == "En création" %}
-                                <span><a href="/sortie/modifier/{{ sortie.id }}">Modifier</a> - <a href="">Publier</a></span>
-                            {% endif %}
-                        </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
+        <a href="/sortie/creation" class="btn">Créer une sortie</a>
     </div>
 
 {% endblock %}
