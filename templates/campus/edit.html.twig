@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer Campus{% endblock %}
+
+{% block body %}
+    <h1>Editer Campus</h1>
+
+    {{ include('campus/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+
+    <a><form method="post" action="{{ path('app_campus') }}">
+            <button class="btn">Retour</button>
+        </form></a>
+
+
+{% endblock %}

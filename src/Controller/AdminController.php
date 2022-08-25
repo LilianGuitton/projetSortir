@@ -58,7 +58,7 @@ class AdminController extends AbstractController
     public function campus(Request $request, CampusRepository $CampusRepository): Response
     {
         $recherche = $request->get('recherche');
-        $listeCampus = [];
+        $listeCampus = $CampusRepository->findAll();
         if ($recherche != null){
             $listeCampus = $CampusRepository->rechercheCampus($recherche['recherche']);
         }
