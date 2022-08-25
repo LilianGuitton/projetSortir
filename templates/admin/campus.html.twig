@@ -4,7 +4,31 @@
 
 {% block body %}
 
+
 <h1>Gérer les campus</h1>
+
+
+     <h2>Filtrer les campus :</h2>
+
+    {{ form_start(rechercheForm) }}
+
+    <div class="groupCampus">
+        <label for="{{ field_name(rechercheForm.recherche) }}">Recherche campus</label>
+        <input type="text"
+               id="{{ field_name(rechercheForm.recherche)}}"
+               name="{{ field_name(rechercheForm.recherche) }}"
+               value="{{ field_value(rechercheForm.recherche) }}"
+               class="form-control">
+    </div>
+
+    {{ form_end(rechercheForm) }}
+
+    {% for campus in campus %}
+        <p>{{ campus.nom }}</p>
+
+    {% endfor %}
+
+
 
 
 

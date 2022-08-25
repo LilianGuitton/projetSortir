@@ -5,11 +5,76 @@
 {% block body %}
     <h1>Gérer les villes</h1>
 
-    <h2>Filtrer les villes :</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+                {{ form_start(rechercheForm) }}
+                <div class="groupVille">
+                <label for="{{ field_name(rechercheForm.recherche) }}">Recherche ville</label>
+                <input type="text"
+                id="{{ field_name(rechercheForm.recherche)}}"
+                name="{{ field_name(rechercheForm.recherche) }}"
+                value="{{ field_value(rechercheForm.recherche) }}"
+                class="form-control">
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+
+    {{ form_end(rechercheForm) }}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Nom</th>
+            <th>CodePostal</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {% for ville in villes %}
+            <tr>
+                <td></td>
+                <td>{{ ville.nom }}</td>
+                <td>{{ ville.codePostal }}</td>
+                <td>
+                 <div>
+                    <a><form method="post" action="{{ path('app_ville_edit', {'id': ville.id}) }}">
+                            <button class="btn">Editer</button>
+                        </form></a>
+                    <a><form method="post" action="{{ path('app_ville_delete', {'id': ville.id}) }}" onsubmit="return confirm('Confirmer vous la suppression?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ville.id) }}">
+                            <button class="btn">Supprimer</button>
+                        </form></a>
+                 </div>
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas de résultat</td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
 
 
 
-    {{ form(rechercheForm) }}
+        <div class="ajout">
+
+            <a><form method="post" action="{{ path('app_ville_new') }}">
+            <button class="btn">Ajouter ville</button>
+        </form></a>
+
+        </div>
 
 
 

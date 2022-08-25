@@ -83,44 +83,6 @@ class SortieController extends AbstractController
             "createForm" => $createForm->createView()
         ]);
     }
-    /*/**
-     * @Route("/sortie/creation", name="app_sortie_publish")
-     *
-    public function sortiePublish(ManagerRegistry $doctrine,$id = -1, Request $request): Response
-    {
-
-        $sortie = new Sortie();
-
-        if ($id > 0 ){
-            $repoSortie = $doctrine->getRepository(Sortie::class);
-
-            $sortie = $repoSortie->find($id);
-        }
-
-        $createForm = $this->createForm(CreerSortieType::class, $sortie);
-
-        $createForm->handleRequest($request);
-
-        if ($createForm->isSubmitted() && $createForm->isValid()){
-            if ($request->get('save')->isClicked){
-                $sortie->setEtat('Ouvert');
-            }
-            $sortieToSave = $createForm->getData();
-
-            $sortieToSave->setDateHeureDebut(new \Datetime());
-            $em = $doctrine->getManager();
-            $em->persist($sortieToSave);
-            $em->flush();
-
-            return $this->redirectToRoute("app_home", [
-                "id" => $sortieToSave->getId()
-            ]);
-        }
-
-        return $this->render('sortie/index.html.twig', [
-            "createForm" => $createForm->createView()
-        ]);
-    }*/
 
 //MODIFICATION D'UNE SORTIE : fonction update, publication, supprimer
 
@@ -133,23 +95,23 @@ class SortieController extends AbstractController
         $repoSortie = $entityManager->getRepository(Sortie::class);
         $sortie = $repoSortie->find($id);
 
-
         $updateForm = $this->createForm(CreerSortieType::class, $sortie);
 
         $updateForm->handleRequest($request);
 
         if ($updateForm->isSubmitted() && $updateForm->isValid()){
-            if ($request->get('save')->isClicked){
-                $sortie->setEtat('En création');
-            }
-            $sortieToSave = $updateForm->getData();
 
-            $sortieToSave->setDateHeureDebut(new \Datetime());
-            $entityManager->persist($sortieToSave);
+            $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
+
+            $sortie->setCampus($this->getUser()->getEstRattacherA());
+            $sortie->setOrganisateur($this->getUser());
+
+
+            $entityManager->persist($sortie);
             $entityManager->flush();
 
             return $this->redirectToRoute("app_home", [
-                "id" => $sortieToSave->getId()
+                "id" => $sortie->getId()
             ]);
         }
 
@@ -159,9 +121,8 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/sortie/modifier", name="app_sortie_supprimer")
+     * @Route("/sortie/supprimer", name="app_sortie_supprimer")
      */
-
     public function deleteSortie(ManagerRegistry $doctrine, $id, Request $request){
 
         $em = $doctrine->getEntityManager();
