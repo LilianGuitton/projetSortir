@@ -14,56 +14,76 @@
     <div>
         {{ form_start(createForm) }}
 
-            <div>
 
 
-                 <label for="{{ field_name(createForm.nom) }}">
-                     Nom :
-                 </label>
-                <input type="text" id="{{ field_name(createForm.nom) }}"
-                    name="{{ field_name(createForm.nom) }}">
-                {% for error in field_errors(createForm.nom) %}
-                    <div class="error">{{ error }}</div>
-                {% endfor %}
-            </div>
+                <div>
+                    {{ form_row(createForm.nom) }}
+                </div>
+                <div>
+                    {{ form_row(createForm.dateHeureDebut) }}
+                </div>
+                <div>
+                    {{ form_row(createForm.duree) }}
+                </div>
+                <div>
+                    {{ form_row(createForm.dateLimiteInscription) }}
+                </div>
+                <div>
+                    {{ form_row(createForm.nbInscriptionMax) }}
+                </div>
+                <div>
+                    {{ form_row(createForm.lieu) }}
+                </div>
 
-            <div>
-                {{ form_widget(createForm.dateHeureDebut) }}
-            </div>
+{#
+<div>
+    <label for="{{ field_name(createForm.nom) }}">
+         Nom :
+     </label>
+    <input type="text" id="{{ field_name(createForm.nom) }}"
+        name="{{ field_name(createForm.nom) }}">
+    {% for error in field_errors(createForm.nom) %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</div>
 
-            <div>
-                <label for="{{ field_name(createForm.duree) }}">
-                    Durée de la sortie en min :
-                </label>
-                <input type="number" id="{{ field_name(createForm.duree) }}"
-                    name="{{ field_name(createForm.duree) }}" min="20">
-                {% for error in field_errors(createForm.duree) %}
-                    <div class="error">{{ error }}</div>
-                {% endfor %}
-            </div>
+<div>
+    {{ form_widget(createForm.dateHeureDebut) }}
+</div>
 
-            <div>
-                {{ form_widget(createForm.dateLimiteInscription) }}
+<div>
+    <label for="{{ field_name(createForm.duree) }}">
+        Durée de la sortie en min :
+    </label>
+    <input type="number" id="{{ field_name(createForm.duree) }}"
+        name="{{ field_name(createForm.duree) }}" min="20">
+    {% for error in field_errors(createForm.duree) %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</div>
 
-            </div>
+<div>
+    {{ form_widget(createForm.dateLimiteInscription) }}
 
-            <div>
-                <label for="{{ field_name(createForm.nbInscriptionMax) }}">
-                    Nombre d'inscription maximum :
-                </label>
-                <input type="number" id="{{ field_name(createForm.nbInscriptionMax) }}"
-                    name="{{ field_name(createForm.nbInscriptionMax) }}" min="2">
-                {% for error in field_errors(createForm.nbInscriptionMax) %}
-                    <div class="error">{{ error }}</div>
-                {% endfor %}
-            </div>
+</div>
 
-            <div>
+<div>
+    <label for="{{ field_name(createForm.nbInscriptionMax) }}">
+        Nombre d'inscription maximum :
+    </label>
+    <input type="number" id="{{ field_name(createForm.nbInscriptionMax) }}"
+        name="{{ field_name(createForm.nbInscriptionMax) }}" min="2">
+    {% for error in field_errors(createForm.nbInscriptionMax) %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</div>
 
-                {{ form_label(createForm.lieu) }}
-                {{ form_widget(createForm.lieu) }}
+<div>
 
-            </div>
+    {{ form_label(createForm.lieu) }}
+    {{ form_widget(createForm.lieu) }}
+
+</div>#}
 
                                                 <!-- BUTTON -->
         <div>
@@ -76,7 +96,7 @@
         {{ form_end(createForm) }}
 
         <div>
-            <a class="btn" href="{{ path("app_home") }}" role="button" >
+            <a class="btn btn-secondary" href="{{ path("app_home") }}" role="button" >
                 Annuler
             </a>
         </div>

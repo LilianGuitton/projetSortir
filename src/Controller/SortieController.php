@@ -129,13 +129,10 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/supprimer/{id}", name="app_sortie_supprimer")
      */
-    public function deleteSortie(ManagerRegistry $doctrine, $id, Request $request){
+    public function deleteSortie(EntityManagerInterface $entityManager,Sortie $sortie ){
 
-
-        $em = $doctrine->getEntityManager();
-        $sortie = $em->getRepository()->find($id);
-        $em->remove($sortie);
-        $em->flush();
+        $entityManager->remove($sortie);
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_home', [
         "sortie" => $sortie->getId()

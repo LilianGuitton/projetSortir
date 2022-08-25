@@ -19,7 +19,19 @@
                 {{ form_row(updateForm.nom) }}
             </div>
             <div>
-
+                {{ form_row(updateForm.dateHeureDebut) }}
+            </div>
+            <div>
+                {{ form_row(updateForm.duree) }}
+            </div>
+            <div>
+                {{ form_row(updateForm.dateLimiteInscription) }}
+            </div>
+            <div>
+                {{ form_row(updateForm.nbInscriptionMax) }}
+            </div>
+            <div>
+                {{ form_row(updateForm.lieu) }}
             </div>
 
 {#            <div>#}
@@ -74,18 +86,19 @@
 {#                                                <!-- BUTTON -->#}
 {#            <div>#}
 
-{#                <button name="save">Enregistrer</button>#}
-{#                <button name="publish">Publier la sortie</button>#}
-{#                <div>#}
-{#                    <a class="btn btn-secondary" href="{{ path('app_sortie_supprimer', {id : sortie.id}) }}" role="button" >#}
-{#                        Supprimer la sortie#}
-{#                    </a>#}
-{#                </div>#}
+                <button name="save">Enregistrer</button>
+                <button name="publish">Publier la sortie</button>
 
-{#            </div>#}
+
+            </div>
 
             {{ form_end(updateForm) }}
 
+            <div>
+                <a class="btn btn-secondary" href="{{ path('app_sortie_supprimer', {id : sortie.id}) }}" role="button" >
+                    Supprimer la sortie
+                </a>
+            </div>
             <div>
                 <a class="btn btn-secondary" href="{{ path("app_home") }}" role="button" >
                     Annuler
@@ -93,5 +106,5 @@
             </div>
 
 
-
+    </div>
 {% endblock %}
