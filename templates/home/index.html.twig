@@ -151,11 +151,11 @@
                             </div>
                             <div class="column-8">
                                 {% if sortie.etat.libelle == "En création" %}
-                                    <span><a href="/sortie/modifier/{{ sortie.id }}">Modifier</a> - <a href="">Publier</a></span>
+                                    <span><a href="{{ path('app_sortie_modification', {sortie: sortie.id}) }}">Modifier</a> - <a href="{{ path('app_sortie_publier', {sortie: sortie.id}) }}">Publier</a></span>
                                 {% elseif sortie.etat.libelle == "Ouvert" %}
-                                    <span><a href="/sortie">Afficher</a>
+                                    <span><a href="{{ path('app_afficher_sortie') }}">Afficher</a>
                                         {% if sortie.organisateur.pseudo == app.user.pseudo %}
-                                            - <a href="/sortie/annuler">Annuler</a>
+                                            - <a href="{{ path('app_annuler_sortie') }}">Annuler</a>
                                         {% elseif app.user in sortie.participants %}
                                             - <a href="{{ path('app_sortie_desinscrit', {sortie: sortie.id}) }}">Se désister</a>
                                         {% elseif sortie.participants|length < sortie.nbInscriptionMax %}
@@ -166,13 +166,13 @@
                                     </span>
                                 {% elseif sortie.etat.libelle == "Fermé" %}
                                     <span>
-                                        <a href="/sortie">Afficher</a>
+                                        <a href="{{ path('app_afficher_sortie') }}">Afficher</a>
                                         {% if app.user in sortie.participants %}
                                             - <a href="{{ path('app_sortie_desinscrit', {sortie: sortie.id}) }}">Se désister</a>
                                         {% endif %}
                                     </span>
                                     {% else %}
-                                <span><a href="/sortie">Afficher</a></span>
+                                <span><a href="{{ path('app_afficher_sortie') }}">Afficher</a></span>
                                 {% endif %}
 
                             </div>
@@ -181,7 +181,7 @@
                 {% endfor %}
             </div>
         </div>
-        <a href="/sortie/creation" class="btn">Créer une sortie</a>
+        <a href="{{ path('app_sortie_creation') }}" class="btn">Créer une sortie</a>
     </div>
 
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Form\CreerSortieType;
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -66,7 +67,14 @@ class SortieController extends AbstractController
 
         if ($createForm->isSubmitted() && $createForm->isValid()){
 
-            $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
+            dump($request->get('save'));
+
+            if ("save" === $request->get('save')){
+                $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
+            } elseif ("publish" === $request->get('publish')){
+                $sortie->setEtat($entityManager->getRepository(Etat::class)->find(2));
+            }
+
 
             $sortie->setCampus($this->getUser()->getEstRattacherA());
             $sortie->setOrganisateur($this->getUser());
@@ -156,6 +164,18 @@ class SortieController extends AbstractController
      */
     public function desinscritSortie(Sortie $sortie, EntityManagerInterface $entityManager){
         $sortie->removeParticipant($this->getUser());
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("app_home");
+    }
+
+    /**
+     * @Route ("/sortie/publier/{sortie}", name="app_sortie_publier")
+     */
+    public function publierSortie(Sortie $sortie, EntityManagerInterface $entityManager, EtatRepository $repoEtat){
+        $sortie->setEtat($repoEtat->find('2'));
 
         $entityManager->persist($sortie);
         $entityManager->flush();
