@@ -22,11 +22,20 @@ class ProfilController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
 
-        $monProfil = $this->getUser();
+        $user = $this->getUser();
 
-        $monProfilForm = $this->createForm(MonProfilType::class, $monProfil);
+        $monProfil = new Participant();
+        $monProfil->setPseudo($user->getPseudo());
+        $monProfil->setNom($user->getNom());
+
+        $monProfilForm = $this->createForm(MonProfilType::class,$monProfil);
+
+        dump($monProfil);
+        dump($monProfilForm->isSubmitted());
 
         if ($monProfilForm->isSubmitted() && $monProfilForm->isValid()){
+
+            $monProfil->setId($user->getId());
 
             $entityManager->persist($monProfil);
             $entityManager->flush();
