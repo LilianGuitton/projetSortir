@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Participant;
 use Doctrine\DBAL\Types\StringType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -54,15 +56,18 @@ class MonProfilType extends AbstractType
                 'second_options' => ['label' => 'Repeat Password'],
 
             ])
-            ->add('estRattacherA',TextType::class, [
+            ->add('estRattacherA',EntityType::class, [
+                "class" => Campus::class,
                 "attr" => [
                     "class" => "form-control"
                 ]
             ])
             ->add('photo', TextType::class, [
                 "attr" => [
+
                     "class" => "form-control"
-                ]
+                ],
+                'required' => false
             ])
 
         ;
