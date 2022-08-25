@@ -142,5 +142,27 @@ class SortieController extends AbstractController
             ]);
     }
 
+    /**
+     * @Route ("/sortie/inscrit/{sortie}", name="app_sortie_inscrit")
+     */
+    public function inscritSortie(Sortie $sortie, EntityManagerInterface $entityManager){
+        $sortie->addParticipant($this->getUser());
 
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("app_home");
+    }
+
+    /**
+     * @Route ("/sortie/desinscrit/{sortie}", name="app_sortie_desinscrit")
+     */
+    public function desinscritSortie(Sortie $sortie, EntityManagerInterface $entityManager){
+        $sortie->removeParticipant($this->getUser());
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("app_home");
+    }
 }

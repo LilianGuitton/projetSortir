@@ -157,10 +157,10 @@
                                         {% if sortie.organisateur.pseudo == app.user.pseudo %}
                                             - <a href="/sortie/annuler">Annuler</a>
                                         {% elseif app.user in sortie.participants %}
-                                            - <a href="/sortie/desinscrit">Se désister</a>
+                                            - <a href="{{ path('app_sortie_desinscrit', {sortie: sortie.id}) }}">Se désister</a>
                                         {% elseif sortie.participants|length < sortie.nbInscriptionMax %}
                                             {% if  app.user not in sortie.participants %}
-                                                - <a href="/sortie/inscrit">S'inscrire</a>
+                                                - <a href="{{ path('app_sortie_inscrit', {sortie: sortie.id}) }}">S'inscrire</a>
                                             {% endif %}
                                         {% endif %}
                                     </span>
@@ -168,7 +168,7 @@
                                     <span>
                                         <a href="/sortie">Afficher</a>
                                         {% if app.user in sortie.participants %}
-                                            - <a href="/sortie/desinscrit">Se désister</a>
+                                            - <a href="{{ path('app_sortie_desinscrit', {sortie: sortie.id}) }}">Se désister</a>
                                         {% endif %}
                                     </span>
                                     {% else %}
