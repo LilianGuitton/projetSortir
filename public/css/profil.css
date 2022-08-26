@@ -1,3 +1,7 @@
+.header{
+    background-image: url();
+    background-size: 50%;
+}
 
 
 .titre1{
@@ -6,7 +10,21 @@
 
 }
 h2{
+    /*text-align: center;*/
 
     justify-content: center;
 
+}
+.ml4 {
+    position: relative;
+    font-weight: 700;
+    font-size: 3.5em;
+}
+.ml4 .letters {
+    position: absolute;
+    /*margin: auto;*/
+    /*left: 0;*/
+    /*top: 0.3em;*/
+    /*right: 0;*/
+    /*opacity: 0;*/
 }

@@ -146,9 +146,7 @@ class SortieController extends AbstractController
         $entityManager->remove($sortie);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_home', [
-        "sortie" => $sortie->getId()
-            ]);
+        return $this->redirectToRoute('app_home');
     }
 
 
