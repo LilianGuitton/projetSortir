@@ -53,7 +53,7 @@ class MonProfilType extends AbstractType
                 'options' => ['attr' => ['class' => 'form-control']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'second_options' => ['label' => 'Repeat Password']
 
             ])
             ->add('estRattacherA',EntityType::class, [
