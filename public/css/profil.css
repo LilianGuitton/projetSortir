@@ -1,10 +1,16 @@
-h1{
+.header{
+    background-image: url();
+    background-size: 50%;
+}
+
+
+.titre1{
     text-align: center;
 
 
 }
 h2{
-    text-align: center;
+    /*text-align: center;*/
 
 }
 .ml4 {
@@ -14,9 +20,9 @@ h2{
 }
 .ml4 .letters {
     position: absolute;
-    margin: auto;
-    left: 0;
-    top: 0.3em;
-    right: 0;
-    opacity: 0;
+    /*margin: auto;*/
+    /*left: 0;*/
+    /*top: 0.3em;*/
+    /*right: 0;*/
+    /*opacity: 0;*/
 }
