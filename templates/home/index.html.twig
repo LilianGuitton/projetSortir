@@ -147,7 +147,7 @@
                                 </span>
                             </div>
                             <div class="column-7">
-                                <span><a href="/profil/{{ sortie.organisateur.pseudo }}">{{ sortie.organisateur.pseudo }}</a></span>
+                                <span><a href="{{ path('app_afficher_profil', {participant: sortie.organisateur.id}) }}">{{ sortie.organisateur.pseudo }}</a></span>
                             </div>
                             <div class="column-8">
                                 {% if sortie.etat.libelle == "En création" %}
