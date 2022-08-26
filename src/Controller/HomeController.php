@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\FiltreType;
+use App\Services\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,18 +28,19 @@ class HomeController extends AbstractController
 
         $filtre = $request->get("filtre");
 
-        //$nom = $filtre["nom"];
-        //$campus = $filtre["campus"];
-        //$debut = $filtre["debut"];
-        //$fin = $filtre["fin"];
-        //$monOrga = $filtre["monOrga"];
-        //$inscrit = $filtre["inscrit"];
-        //$nonInscrit = $filtre["nonInscrit"];
-        //$passee = $filtre["passee"];
-
         $repoSortie = $entityManager->getRepository(Sortie::class);
 
-        $sortieList = $repoSortie->findAll();
+        if ($filtre!=null){
+            if ($filtre["debut"]==""){
+                $filtre["début"]="1971-01-01";
+            }
+            if ($filtre["fin"]==""){
+                $filtre["fin"]="2037-12-12";
+            }
+            $sortieList = $repoSortie->findByFilter($filtre["campus"], $filtre["nom"], $filtre["debut"], $filtre["fin"], isset($filtre["monOrga"]) ? $this->getUser()->getId() : 0, isset($filtre["passee"]) ? 5 : 0, isset($filtre["inscrit"]) ? $this->getUser()->getEstInscrit() : null, isset($filtre["nonInscrit"]) ? $this->getUser()->getEstInscrit() : null);
+        } else {
+            $sortieList = $repoSortie->findAll();
+        }
 
         $now = new \DateTime('now');
 

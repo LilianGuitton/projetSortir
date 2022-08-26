@@ -27,6 +27,8 @@ class Sortie
     private $nom;
 
     /**
+     * @Assert\GreaterThan("now", message="La date saisie est invalide")
+     * @Assert\Expression("value > this.getDateLimiteInscription()", message="La date de début doit être supérieur à la date d'inscription")
      * @ORM\Column(type="datetime")
      */
     private $dateHeureDebut;
@@ -39,6 +41,7 @@ class Sortie
     private $duree;
 
     /**
+     * @Assert\GreaterThan("now")
      * @ORM\Column(type="datetime")
      */
     private $dateLimiteInscription;
