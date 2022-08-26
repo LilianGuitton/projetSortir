@@ -51,4 +51,15 @@ class ProfilController extends AbstractController
     }
 
 
+    /**
+     * @Route("/profil/{participant}", name="app_afficher_profil")
+     */
+    public function afficherProfil(Participant $participant){
+
+        if ($participant == $this->getUser()){
+            return $this->redirectToRoute("app_profil");
+        }
+
+        return $this->render('profil/afficher.html.twig', ["participant" => $participant]);
+    }
 }
