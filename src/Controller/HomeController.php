@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\FiltreType;
+use App\Services\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,15 +27,6 @@ class HomeController extends AbstractController
         }
 
         $filtre = $request->get("filtre");
-
-        //$nom = $filtre["nom"];
-        //$campus = $filtre["campus"];
-        //$debut = $filtre["debut"];
-        //$fin = $filtre["fin"];
-        //$monOrga = $filtre["monOrga"];
-        //$inscrit = $filtre["inscrit"];
-        //$nonInscrit = $filtre["nonInscrit"];
-        //$passee = $filtre["passee"];
 
         $repoSortie = $entityManager->getRepository(Sortie::class);
 
