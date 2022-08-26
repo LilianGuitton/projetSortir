@@ -16,48 +16,51 @@
                 {{ form_start(MonProfilForm) }}
 
 
-                <div class="form-group col-md-12">
-                    {{ form_row(MonProfilForm.pseudo) }}
-                </div>
+{#                <div class="form-group col-md-12">#}
+{#                    {{ form_row(MonProfilForm.pseudo) }}#}
+{#                </div>#}
 
 
-                <div class="form-group col-md-12">
-                    {{ form_row(MonProfilForm.prenom) }}
-                </div>
+{#                <div class="form-group col-md-12">#}
+{#                    {{ form_row(MonProfilForm.prenom) }}#}
+{#                </div>#}
 
-                <div class="form-group col-md-12">
-                    {{ form_row(MonProfilForm.nom) }}
-                </div>
+{#                <div class="form-group col-md-12">#}
+{#                    {{ form_row(MonProfilForm.nom) }}#}
+{#                </div>#}
 
-                <div class="form-group col-md-12">
-                    {{ form_row(MonProfilForm.telephone) }}
-                </div>
+{#                <div class="form-group col-md-12">#}
+{#                    {{ form_row(MonProfilForm.telephone) }}#}
+{#                </div>#}
 
-                <div class="form-group col-md-12">
-                    {{ form_row(MonProfilForm.email) }}
-                </div>
+{#                <div class="form-group col-md-12">#}
+{#                    {{ form_row(MonProfilForm.email) }}#}
+{#                </div>#}
 
 
-                <div class="form-group col-md-12">
-                    {{ form_row(MonProfilForm.password.first) }}
-                </div>
+{#                <div class="form-group col-md-12">#}
+{#                    {{ form_row(MonProfilForm.password.first) }}#}
+{#                </div>#}
 
-                <div class="form-group col-md-12">
-                    {{ form_row(MonProfilForm.password.second) }}
-                </div>
+{#                <div class="form-group col-md-12">#}
+{#                    {{ form_row(MonProfilForm.password.second) }}#}
+{#                </div>#}
 
-                <div class="form-group col-md-12">
-                    {{ form_row(MonProfilForm.estRattacherA) }}
-                </div>
+{#                <div class="form-group col-md-12">#}
+{#                    {{ form_row(MonProfilForm.estRattacherA) }}#}
+{#                </div>#}
 
-                <div class="form-group col-md-12">
-                    {{ form_row(MonProfilForm.photo) }}
-                </div>
+{#                <div class="form-group col-md-12">#}
+{#                    {{ form_row(MonProfilForm.photo) }}#}
+{#                </div>#}
 
-                <div class="form-group col-md-12">
-                    <button type="submit" class="btn">Enregistrer</button>
-                    <button type="button" class="btn">Annuler</button>
-                </div>
+{#                <div class="form-group col-md-12">#}
+                    <button class="btn" value="Enregistrer">Enregistrer</button>
+{#                    <a href="{{ path('app_home') }}" class="btn">Annuler</a>#}
+{#                </div>#}
+                    {{ form_end(MonProfilForm) }}
+
+
             </div>
             <div class="col-md-4">
 
@@ -72,5 +75,5 @@
 
 
 
-    {{ form_end(MonProfilForm) }}
+
 {% endblock %}
