@@ -15,46 +15,64 @@
                 <h1 class="titre1">Mon profil</h1>
                 {{ form_start(MonProfilForm) }}
 
+                <div>
+                    {{ form_start(MonProfilForm) }}
+                    <div>
+                        <p>Pseudo :
+                            {{ form_widget(MonProfilForm.pseudo) }}
+                            {{ form_errors(MonProfilForm.pseudo) }}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Prénom :
+                            {{ form_widget(MonProfilForm.prenom) }}
+                            {{ form_errors(MonProfilForm.prenom) }}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Nom :
+                            {{ form_widget(MonProfilForm.nom) }}
+                            {{ form_errors(MonProfilForm.nom) }}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Téléphone :
+                            {{ form_widget(MonProfilForm.telephone) }}
+                            {{ form_errors(MonProfilForm.telephone) }}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Email :
+                            {{ form_widget(MonProfilForm.email) }}
+                            {{ form_errors(MonProfilForm.email) }}
+                        </p>
+                    </div>
 
-{#                <div class="form-group col-md-12">#}
-{#                    {{ form_row(MonProfilForm.pseudo) }}#}
-{#                </div>#}
+                    <div>
+                        <p>Mot de passe  :
+                            {{ form_widget(MonProfilForm.password.first) }}
+                            {{ form_errors(MonProfilForm.password.first) }}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Confirmation :
+                            {{ form_widget(MonProfilForm.password.second) }}
+                            {{ form_errors(MonProfilForm.password.second) }}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Campus :
+                            {{ form_widget(MonProfilForm.estRattacherA) }}
+                            {{ form_errors(MonProfilForm.estRattacherA) }}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Ma photo :
+                            {{ form_widget(MonProfilForm.photo) }}
+                            {{ form_errors(MonProfilForm.photo) }}
+                        </p>
+                    </div>
 
-
-{#                <div class="form-group col-md-12">#}
-{#                    {{ form_row(MonProfilForm.prenom) }}#}
-{#                </div>#}
-
-{#                <div class="form-group col-md-12">#}
-{#                    {{ form_row(MonProfilForm.nom) }}#}
-{#                </div>#}
-
-{#                <div class="form-group col-md-12">#}
-{#                    {{ form_row(MonProfilForm.telephone) }}#}
-{#                </div>#}
-
-{#                <div class="form-group col-md-12">#}
-{#                    {{ form_row(MonProfilForm.email) }}#}
-{#                </div>#}
-
-
-{#                <div class="form-group col-md-12">#}
-{#                    {{ form_row(MonProfilForm.password.first) }}#}
-{#                </div>#}
-
-{#                <div class="form-group col-md-12">#}
-{#                    {{ form_row(MonProfilForm.password.second) }}#}
-{#                </div>#}
-
-{#                <div class="form-group col-md-12">#}
-{#                    {{ form_row(MonProfilForm.estRattacherA) }}#}
-{#                </div>#}
-
-{#                <div class="form-group col-md-12">#}
-{#                    {{ form_row(MonProfilForm.photo) }}#}
-{#                </div>#}
-
-{#                <div class="form-group col-md-12">#}
                     <button class="btn-wide btn-normal" value="Enregistrer">Enregistrer</button>
                     <a href="{{ path('app_home') }}" class="btn-wide btn-normal">Annuler</a>
 {#                </div>#}
