@@ -153,7 +153,7 @@
                                 {% if sortie.etat.libelle == "En création" %}
                                     <span><a href="{{ path('app_sortie_modification', {sortie: sortie.id}) }}">Modifier</a> - <a href="{{ path('app_sortie_publier', {sortie: sortie.id}) }}">Publier</a></span>
                                 {% elseif sortie.etat.libelle == "Ouvert" %}
-                                    <span><a href="{{ path('app_afficher_sortie') }}">Afficher</a>
+                                    <span><a href="{{ path('app_afficher_sortie', {sortie: sortie.id}) }}">Afficher</a>
                                         {% if sortie.organisateur.pseudo == app.user.pseudo %}
                                             - <a href="{{ path('app_annuler_sortie') }}">Annuler</a>
                                         {% elseif app.user in sortie.participants %}
@@ -166,13 +166,13 @@
                                     </span>
                                 {% elseif sortie.etat.libelle == "Fermé" %}
                                     <span>
-                                        <a href="{{ path('app_afficher_sortie') }}">Afficher</a>
+                                        <a href="{{ path('app_afficher_sortie', {sortie: sortie.id}) }}">Afficher</a>
                                         {% if app.user in sortie.participants %}
                                             - <a href="{{ path('app_sortie_desinscrit', {sortie: sortie.id}) }}">Se désister</a>
                                         {% endif %}
                                     </span>
                                     {% else %}
-                                <span><a href="{{ path('app_afficher_sortie') }}">Afficher</a></span>
+                                <span><a href="{{ path('app_afficher_sortie', {sortie: sortie.id}) }}">Afficher</a></span>
                                 {% endif %}
 
                             </div>

@@ -1,7 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annuler une sortie{% endblock %}
+{% block stylesheets %}
+    <style>
+        .wrapper
+        {
+            width:500px;
+        }
+
+        .tab-row{
+            display: flex;
+        }
+
+        .tabs {
+            height: 250px;
+            overflow-y: scroll;
+        }
+
+        .column-1{
+            width: 150px;
+        }
+        .column-2{
+            width: 350px;
+        }
+
+    </style>
+{% endblock %}
 
 {% block body %}
-
+    <div class="row justify-content-center">
+        <h2>Afficher une sortie</h2>
+        <div class="col-5">
+            <p>Nom de la sortie : {{ sortie.nom }}</p>
+            <p>Date et heure de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y H:i:s", "Europe/Paris") }}</p>
+            <p>Date limite d'inscription : {{ sortie.dateLimiteInscription|date("d/m/Y H:i:s", "Europe/Paris") }}</p>
+            <p>Nombre de places : {{ sortie.nbInscriptionMax }}</p>
+            <p>Durée : {{ sortie.duree }} minutes</p>
+        </div>
+        <div class="col-5">
+            <p>Campus : {{ sortie.campus }}</p>
+            <p>Lieu : {{ sortie.lieu }}</p>
+            <p>Rue : {{ sortie.lieu.rue }}</p>
+            <p>Code postal : {{ sortie.lieu.ville.codePostal }}</p>
+            <p>Latitude : {{ sortie.lieu.latitude }}</p>
+            <p>Longitude : {{ sortie.lieu.longitude }}</p>
+        </div>
+    </div>
+    <div>
+        <h3>Liste des participants inscrits :</h3>
+        <div class="wrapper">
+            <div class="labels d-flex">
+                <div class="label column-1">
+                    <span>Pseudo</span>
+                </div>
+                <div class="label column-2">
+                    <span>Nom</span>
+                </div>
+            </div>
+            <div class="tabs">
+                {% for participant in sortie.participants %}
+                    <div class="tab-row">
+                        <div class="column-1">
+                            <span>{{ participant.pseudo }}</span>
+                        </div>
+                        <div class="column-2">
+                            <span>{{ participant.prenom }} {{ participant.nom }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
