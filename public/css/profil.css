@@ -1,11 +1,14 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
 
-.header{
-    background-image: url("https://ibb.co/2PBtq9k");
-}
-
+/*body*/
+/*{*/
+/*    background-image: url(../img/.....);*/
+/*}*/
 
 .titre1{
+    font-family: 'Roboto Mono', monospace;
+    margin-top: 3%;
+    margin-bottom: 3%;
     text-align: center;
 
 
@@ -18,11 +21,14 @@ h2{
 }
 
 .header {
+    background-image: url("https://ibb.co/2PBtq9k");
     /*font-family: 'Roboto Mono', monospace;*/
-    background: rgba(187, 186, 186, 0.96);
-    height: 100%;
+    /*background: rgba(187, 186, 186, 0.96);*/
+    /*height: 100%;*/
+
 }
 .container1 {
+
     height: 100%;
     width: 100%;
     justify-content: center;
@@ -30,7 +36,7 @@ h2{
     display: flex;
 }
 .text {
-    font-weight: 100;
+    font-weight: 200;
     font-size: 28px;
     color: #000000;
     font-family: 'Roboto Mono', monospace;
