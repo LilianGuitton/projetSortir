@@ -2,68 +2,36 @@
 
 {% block stylesheets %}
     <style>
-        .wrapper
-        {
-            width:1000px;
-            margin-left:auto;
-            margin-right:auto;
-            text-align: center;
-        }
-
-        .tab-row{
-            display: flex;
-        }
-
-        .tabs {
-            height: 250px;
-            overflow-y: scroll;
-        }
-
-        .column-1{
-            width: 160px;
-        }
-        .column-2{
-            width: 160px;
-        }
-        .column-3{
-            width: 90px;
-        }
-        .column-4{
-            width: 140px;
-        }
-        .column-5{
-            width: 110px;
-        }
-        .column-6{
-            width: 60px;
-        }
-        .column-7{
-            width: 100px;
-        }
-        .column-8{
-            width: 160px;
-        }
-
 
     </style>
 {% endblock %}
 
 {% block body %}
-    <div>
-        <div>
+    <div class="date">
+        <div >
             <p><strong>Date du jour : {{ "now"|date("m/d/Y") }}</strong></p>
         </div>
         <div>
             <p><strong>Participant : {{ app.user.prenom }} {{ app.user.nom|slice(0,1) }}.</strong></p>
         </div>
     </div>
+<div class="container">
+    <div class="row">
+
+
+
+        <div class="form-label">
+
     <div>
         <h2>Filtrer les sorties :</h2>
         {{ form_start(filterForm) }}
         <div class="group">
             {{ form_label(filterForm.campus) }}
+
             {{ form_widget(filterForm.campus) }}
+
             {{ form_errors(filterForm.campus) }}
+
         </div>
         <div class="group">
             {{ form_label(filterForm.nom) }}
@@ -93,6 +61,13 @@
             {{ form_label(filterForm.passee) }}
         </div>
         {{ form_end(filterForm) }}
+    </div>
+
+    </div>
+    </div>
+
+
+
         <div class="wrapper">
             <div class="labels d-flex">
                 <div class="label column-1">
