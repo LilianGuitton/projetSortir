@@ -47,7 +47,7 @@ class Sortie
     private $dateLimiteInscription;
 
     /**
-     * @Assert\GreaterThan (1)
+     * @Assert\GreaterThan (3)
      * @ORM\Column(type="integer")
      */
     private $nbInscriptionMax;
@@ -80,6 +80,16 @@ class Sortie
      * @ORM\ManyToMany(targetEntity=Participant::class, mappedBy="estInscrit")
      */
     private $participants;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
 
     public function __construct()
@@ -230,5 +240,29 @@ class Sortie
     public function __constructDate()
     {
         $this->dateHeureDebut = new \DateTime('now');
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

@@ -36,13 +36,14 @@ class AdminController extends AbstractController
     public function ville(Request $request, VilleRepository $villeRepository): Response
     {
         $recherche = $request->get('recherche');
-        $listeVille = $villeRepository->findAll();
+
         if ($recherche != null){
             $listeVille = $villeRepository->rechercheVille($recherche['recherche']);
+        } else {
+            $listeVille = $villeRepository->findAll();
         }
 
         $rechercheForm = $this->createForm(RechercheType::class, $recherche);
-
 
         return $this->render('admin/ville.html.twig', [
             'rechercheForm' => $rechercheForm->createView(),
@@ -58,11 +59,11 @@ class AdminController extends AbstractController
     public function campus(Request $request, CampusRepository $CampusRepository): Response
     {
         $recherche = $request->get('recherche');
-        $listeCampus = $CampusRepository->findAll();
         if ($recherche != null){
             $listeCampus = $CampusRepository->rechercheCampus($recherche['recherche']);
+        } else {
+            $listeCampus = $CampusRepository->findAll();
         }
-
 
         $rechercheForm = $this->createForm(RechercheType::class, $recherche);
 

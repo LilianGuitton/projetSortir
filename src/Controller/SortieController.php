@@ -16,39 +16,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Sortie;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/sortie", name="app_sortie")
-     */
-    public function index(): Response
-    {
-        return $this->render('sortie/index.html.twig', [
-            'controller_name' => 'SortieController',
-        ]);
-    }
-
-    /**
      * @Route("/sortie/afficher/{sortie}", name="app_afficher_sortie")
      */
-    public function afficherSortie(Sortie $sortie): Response
+    public function afficherSortie($sortie, SortieRepository $repoSortie): Response
     {
+        $sortie = $repoSortie->find($sortie);
+
+        if ($sortie==null){
+            return $this->redirectToRoute("app_home");
+        }
 
         return $this->render('sortie/afficherSortie.html.twig', [
             'sortie'=>$sortie
-        ]);
-    }
-
-
-    /**
-     * @Route("/sortie/annuler", name="app_annuler_sortie")
-     */
-    public function annulerSortie(): Response
-    {
-        return $this->render('sortie/annulerSortie.html.twig', [
-            'controller_name' => 'SortieController',
         ]);
     }
 
@@ -59,11 +44,8 @@ class SortieController extends AbstractController
      */
     public function sortieCreate(EntityManagerInterface $entityManager, Request $request): Response
     {
-
         $sortie = new Sortie();
-
         $createForm = $this->createForm(CreerSortieType::class, $sortie);
-
         $createForm->handleRequest($request);
 
         if ($createForm->isSubmitted() && $createForm->isValid()){
@@ -76,16 +58,13 @@ class SortieController extends AbstractController
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(2));
             }
 
-
             $sortie->setCampus($this->getUser()->getEstRattacherA());
             $sortie->setOrganisateur($this->getUser());
 
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            return $this->redirectToRoute("app_home", [
-                "id" => $sortie->getId()
-            ]);
+            return $this->redirectToRoute("app_home");
         }
 
         return $this->render('sortie/index.html.twig', [
@@ -105,12 +84,11 @@ class SortieController extends AbstractController
         SortieRepository $repoSortie
     ): Response
     {
+        if ($sortie->getEtat()->getLibelle()!="En création"){
+            return $this->redirectToRoute("app_home");
+        }
 
-        //$repoSortie = $entityManager->getRepository(Sortie::class);
-//        $sortie = $repoSortie->find($id);
-       dump($sortie);
         $updateForm = $this->createForm(CreerSortieType::class, $sortie);
-
         $updateForm->handleRequest($request);
 
         if ($updateForm->isSubmitted() && $updateForm->isValid()){
@@ -181,6 +159,7 @@ class SortieController extends AbstractController
      */
     public function publierSortie(Sortie $sortie, EntityManagerInterface $entityManager, EtatRepository $repoEtat){
         $sortie->setEtat($repoEtat->find('2'));
+        $sortie->addParticipant($this->getUser());
 
         $entityManager->persist($sortie);
         $entityManager->flush();
@@ -190,30 +169,13 @@ class SortieController extends AbstractController
 
 //AFFICHAGE D'UNE SORTIE SUR LA TWIG ANNULER
 
-   /**
-     * @Route ("/sortie/annuler/{sortie}", name="app_annuler_sortie")
-
-
-
-
-
-
-
-    public function wishList(): Response
+    /**
+     * @Route("/sortie/annuler/{sortie}", name="app_annuler_sortie")
+     */
+    public function annulerSortie(Sortie $sortie): Response
     {
-        // Repo Wish
-        $repoWish = $this->getDoctrine()->getRepository(Wish::class); // Récuperer l'entity manager doctrine
-
-        // la liste de tout les voeux
-        //  $wishList = $repoWish->findAll();
-        $wishList = $repoWish->findBy(array(), null, 20, null);
-
-        return $this->render('wish/index.html.twig', [
-            "wishList" => $wishList
+        return $this->render('sortie/annulerSortie.html.twig', [
+           'sortie' => $sortie
         ]);
-    } */
-
-
-
-
+    }
 }

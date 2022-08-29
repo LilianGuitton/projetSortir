@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 class ProfilController extends AbstractController
@@ -23,9 +24,7 @@ class ProfilController extends AbstractController
     public function index(EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $monProfil = $this->getUser();
-
         $monProfilForm = $this->createForm(MonProfilType::class,$monProfil);
-
         $monProfilForm->handleRequest($request);
 
         if ($monProfilForm->isSubmitted() && $monProfilForm->isValid()){
@@ -45,8 +44,6 @@ class ProfilController extends AbstractController
 
         return $this->render('profil/index.html.twig', [
             'MonProfilForm' => $monProfilForm->createView(),
-
-
         ]);
     }
 
@@ -55,7 +52,6 @@ class ProfilController extends AbstractController
      * @Route("/profil/{participant}", name="app_afficher_profil")
      */
     public function afficherProfil(Participant $participant){
-
         if ($participant == $this->getUser()){
             return $this->redirectToRoute("app_profil");
         }

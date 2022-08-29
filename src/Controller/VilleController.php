@@ -11,25 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/ville")
+ * @Route("/admin/ville")
  */
 class VilleController extends AbstractController
 {
     /**
-     * @Route("/", name="app_ville_index", methods={"GET"})
-     */
-    #IsGranted["ROLE_ADMIN"]
-    public function index(VilleRepository $villeRepository): Response
-    {
-        return $this->render('ville/index.html.twig', [
-            'villes' => $villeRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/new", name="app_ville_new", methods={"GET", "POST"})
      */
-    #IsGranted["ROLE_ADMIN"]
     public function new(Request $request, VilleRepository $villeRepository): Response
     {
         $ville = new Ville();
@@ -49,20 +37,8 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_ville_show", methods={"GET"})
+     * @Route("/edit/{id}", name="app_ville_edit", methods={"GET", "POST"})
      */
-    #IsGranted["ROLE_ADMIN"]
-    public function show(Ville $ville): Response
-    {
-        return $this->render('ville/show.html.twig', [
-            'ville' => $ville,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="app_ville_edit", methods={"GET", "POST"})
-     */
-    #IsGranted["ROLE_ADMIN"]
     public function edit(Request $request, Ville $ville, VilleRepository $villeRepository): Response
     {
         $form = $this->createForm(VilleType::class, $ville);
@@ -81,9 +57,8 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_ville_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="app_ville_delete", methods={"POST"})
      */
-    #IsGranted["ROLE_ADMIN"]
     public function delete(Request $request, Ville $ville, VilleRepository $villeRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ville->getId(), $request->request->get('_token'))) {
