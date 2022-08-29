@@ -1,9 +1,9 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
 
-/*body*/
-/*{*/
-/*    background-image: url(../img/.....);*/
-/*}*/
+.header{
+    background-image: url("https://ibb.co/2PBtq9k");
+}
+
 
 .titre1{
     font-family: 'Roboto Mono', monospace;
@@ -15,9 +15,7 @@
 }
 h2{
     /*text-align: center;*/
-
     justify-content: center;
-
 }
 
 .header {
@@ -28,7 +26,6 @@ h2{
 
 }
 .container1 {
-
     height: 100%;
     width: 100%;
     justify-content: center;
