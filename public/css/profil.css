@@ -1,7 +1,15 @@
-@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,500&display=swap');
+
+
 
 body{
 
+}
+
+
+.form-label{
+    margin-left: 13%;
 }
 .titre1{
     font-family: 'Roboto Mono', monospace;
@@ -16,7 +24,8 @@ h2{
 
 .header {
     /*font-family: 'Roboto Mono', monospace;*/
-
+    /*background: rgba(187, 186, 186, 0.96);*/
+    /*height: 100%;*/
 }
 .container1 {
     height: 100%;
@@ -26,10 +35,12 @@ h2{
     display: flex;
 }
 .text {
-    font-weight: 100;
+    font-style: italic;
+    font-weight: bold;
     font-size: 28px;
     color: #000000;
     font-family: 'Roboto Mono', monospace;
+
 }
 .dud {
     color: #757575;
@@ -66,4 +77,49 @@ h2{
     user-select: none;
 }
 
+.date{
+    margin-left: 3%;
+    margin-top: 3%;
+}
+.wrapper
+{
+    width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
+.tab-row{
+    display: flex;
+}
+
+.tabs {
+    height: 250px;
+    overflow-y: scroll;
+}
+
+.column-1{
+    width: 160px;
+}
+.column-2{
+    width: 160px;
+}
+.column-3{
+    width: 90px;
+}
+.column-4{
+    width: 140px;
+}
+.column-5{
+    width: 110px;
+}
+.column-6{
+    width: 60px;
+}
+.column-7{
+    width: 100px;
+}
+.column-8{
+    width: 160px;
+}
 
