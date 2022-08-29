@@ -1,5 +1,8 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
 
+body{
+
+}
 .titre1{
     font-family: 'Roboto Mono', monospace;
     margin-top: 3%;
@@ -13,8 +16,7 @@ h2{
 
 .header {
     /*font-family: 'Roboto Mono', monospace;*/
-    background: rgba(187, 186, 186, 0.96);
-    height: 100%;
+
 }
 .container1 {
     height: 100%;

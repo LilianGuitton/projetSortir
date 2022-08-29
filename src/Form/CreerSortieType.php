@@ -29,7 +29,7 @@ class CreerSortieType extends AbstractType
             ->add('dateLimiteInscription', DateTimeType::class, ['widget'=>'single_text'
             ])
             ->add('nbInscriptionMax', IntegerType::class)
-            ->add('campus')
+
             ->add('lieu')
         ;
     }
