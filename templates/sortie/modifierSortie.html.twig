@@ -33,69 +33,15 @@
             <div>
                 {{ form_row(updateForm.lieu) }}
             </div>
-
-{#            <div>#}
-{#                <label for="{{ field_name(updateForm.nom) }}">#}
-{#                    Nom :#}
-{#                </label>#}
-{#                <input type="text" id="{{ field_name(updateForm.nom) }}"#}
-{#                       name="{{ field_name(updateForm.nom) }}">#}
-{#                {% for error in field_errors(updateForm.nom) %}#}
-{#                    <div class="error">{{ error }}</div>#}
-{#                {% endfor %}#}
-{#            </div>#}
-
-{#            <div>#}
-{#                {{ form_widget(updateForm.dateHeureDebut) }}#}
-{#            </div>#}
-
-{#            <div>#}
-{#                <label for="{{ field_name(updateForm.duree) }}">#}
-{#                    Durée de la sortie en min :#}
-{#                </label>#}
-{#                <input type="number" id="{{ field_name(updateForm.duree) }}"#}
-{#                       name="{{ field_name(updateForm.duree) }}" min="20">#}
-{#                {% for error in field_errors(updateForm.duree) %}#}
-{#                    <div class="error">{{ error }}</div>#}
-{#                {% endfor %}#}
-{#            </div>#}
-
-{#            <div>#}
-{#                {{ form_widget(updateForm.dateLimiteInscription) }}#}
-
-{#            </div>#}
-
-{#            <div>#}
-{#                <label for="{{ field_name(updateForm.nbInscriptionMax) }}">#}
-{#                    Nombre d'inscription maximum :#}
-{#                </label>#}
-{#                <input type="number" id="{{ field_name(updateForm.nbInscriptionMax) }}"#}
-{#                       name="{{ field_name(updateForm.nbInscriptionMax) }}" min="2">#}
-{#                {% for error in field_errors(updateForm.nbInscriptionMax) %}#}
-{#                    <div class="error">{{ error }}</div>#}
-{#                {% endfor %}#}
-{#            </div>#}
-
-{#            <div>#}
-
-{#                {{ form_label(updateForm.lieu) }}#}
-{#                {{ form_widget(updateForm.lieu) }}#}
-
-{#            </div>#}
-
-{#                                                <!-- BUTTON -->#}
-{#            <div>#}
-
-                <button name="save"  value="save">Enregistrer</button>
-                <button name="publish" value="publish">Publier la sortie</button>
-
-
-            </div>
+                                <!-- BUTTON -->
+            <button name="save"  value="save">Enregistrer</button>
+            <button name="publish" value="publish">Publier la sortie</button>
+        </div>
 
             {{ form_end(updateForm) }}
 
             <div>
-                <a class="btn btn-secondary" href="{{ path('app_sortie_supprimer', {id : sortie.id}) }}" role="button" >
+                <a class="btn btn-secondary" href="{{ path('app_sortie_supprimer', {slug : sortie.slug}) }}" role="button" >
                     Supprimer la sortie
                 </a>
             </div>

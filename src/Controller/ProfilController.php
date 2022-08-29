@@ -49,9 +49,15 @@ class ProfilController extends AbstractController
 
 
     /**
-     * @Route("/profil/{participant}", name="app_afficher_profil")
+     * @Route("/profil/{slug}", name="app_afficher_profil")
      */
-    public function afficherProfil(Participant $participant){
+    public function afficherProfil($slug, ParticipantRepository $repoParticipant){
+        $participant = $repoParticipant->findOneBy(array("slug"=>$slug));
+
+        if ($participant == null){
+            return $this->redirectToRoute("app_home");
+        }
+
         if ($participant == $this->getUser()){
             return $this->redirectToRoute("app_profil");
         }

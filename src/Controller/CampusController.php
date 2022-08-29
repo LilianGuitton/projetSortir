@@ -41,10 +41,11 @@ class CampusController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="app_campus_edit", methods={"GET", "POST"})
+     * @Route("/edit/{slug}", name="app_campus_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Campus $campus, CampusRepository $campusRepository): Response
+    public function edit(Request $request, $slug, CampusRepository $campusRepository): Response
     {
+        $campus = $campusRepository->findOneBy(array("slug"=>$slug));
         $form = $this->createForm(CampusType::class, $campus);
         $form->handleRequest($request);
 
@@ -61,11 +62,12 @@ class CampusController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="app_campus_delete", methods={"POST"})
+     * @Route("/delete/{slug}", name="app_campus_delete", methods={"POST"})
      */
     #IsGranted["ROLE_ADMIN"]
-    public function delete(Request $request, Campus $campus, CampusRepository $campusRepository): Response
+    public function delete(Request $request, $slug, CampusRepository $campusRepository): Response
     {
+        $campus = $campusRepository->findOneBy(array("slug"=>$slug));
         if ($this->isCsrfTokenValid('delete'.$campus->getId(), $request->request->get('_token'))) {
             $campusRepository->remove($campus, true);
         }
