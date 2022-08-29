@@ -31,12 +31,13 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/sortie/afficher", name="app_afficher_sortie")
+     * @Route("/sortie/afficher/{sortie}", name="app_afficher_sortie")
      */
-    public function afficherSortie(): Response
+    public function afficherSortie(Sortie $sortie): Response
     {
+
         return $this->render('sortie/afficherSortie.html.twig', [
-            'controller_name' => 'SortieController',
+            'sortie'=>$sortie
         ]);
     }
 
