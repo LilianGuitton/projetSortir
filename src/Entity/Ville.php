@@ -25,6 +25,7 @@ class Ville
     private $nom;
 
     /**
+     * @Assert\Length(min=5,max=5,minMessage="Le code postal doit faire 5 chiffres", maxMessage="Le code postal doit faire 5 chiffres")
      * @ORM\Column(type="string", length=5)
      */
     private $codePostal;
