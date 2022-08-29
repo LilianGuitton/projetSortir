@@ -8,6 +8,8 @@ use App\Entity\Participant;
 use App\Form\CreerSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use App\Services\Slugify;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use http\Client\Curl\User;
@@ -17,16 +19,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Sortie;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\String\ByteString;
 
 
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/sortie/afficher/{sortie}", name="app_afficher_sortie")
+     * @Route("/sortie/afficher/{slug}", name="app_afficher_sortie")
      */
-    public function afficherSortie($sortie, SortieRepository $repoSortie): Response
+    public function afficherSortie($slug, SortieRepository $repoSortie): Response
     {
-        $sortie = $repoSortie->find($sortie);
+        $sortie = $repoSortie->findOneBy(array("slug" => $slug));
 
         if ($sortie==null){
             return $this->redirectToRoute("app_home");
@@ -50,19 +53,24 @@ class SortieController extends AbstractController
 
         if ($createForm->isSubmitted() && $createForm->isValid()){
 
-            dump($request->get('save'));
+            $slugify = new Slugify();
 
             if ("save" === $request->get('save')){
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
             } elseif ("publish" === $request->get('publish')){
+                $sortie->addParticipant($this->getUser());
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(2));
             }
 
             $sortie->setCampus($this->getUser()->getEstRattacherA());
             $sortie->setOrganisateur($this->getUser());
+            $random = ByteString::fromRandom(4)->toString();
+            $sortie->setSlug($slugify->slugify($sortie->getNom() . " " .$random));
 
             $entityManager->persist($sortie);
             $entityManager->flush();
+
+
 
             return $this->redirectToRoute("app_home");
         }
@@ -75,16 +83,22 @@ class SortieController extends AbstractController
 //MODIFICATION D'UNE SORTIE : fonction update, supprimer
 
     /**
-     * @Route("/sortie/modifier/{sortie}", name="app_sortie_modification")
+     * @Route("/sortie/modifier/{slug}", name="app_sortie_modification")
      */
     public function sortieModifier(
         EntityManagerInterface $entityManager,
-        Sortie $sortie,
+        $slug,
         Request $request,
         SortieRepository $repoSortie
     ): Response
     {
+        $sortie = $repoSortie->findOneBy(array("slug" => $slug));
+
         if ($sortie->getEtat()->getLibelle()!="En création"){
+            return $this->redirectToRoute("app_home");
+        }
+
+        if ($sortie==null){
             return $this->redirectToRoute("app_home");
         }
 
@@ -96,6 +110,7 @@ class SortieController extends AbstractController
             if ("save" === $request->get('save')){
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
             } elseif ("publish" === $request->get('publish')){
+                $sortie->addParticipant($this->getUser());
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(2));
             }
 
@@ -106,9 +121,7 @@ class SortieController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            return $this->redirectToRoute("app_home", [
-                "id" => $sortie->getId()
-            ]);
+            return $this->redirectToRoute("app_home");
         }
 
         return $this->render('sortie/modifierSortie.html.twig', [
@@ -118,9 +131,15 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/sortie/supprimer/{id}", name="app_sortie_supprimer")
+     * @Route("/sortie/supprimer/{slug}", name="app_sortie_supprimer")
      */
-    public function deleteSortie(EntityManagerInterface $entityManager,Sortie $sortie ){
+    public function deleteSortie(EntityManagerInterface $entityManager,$slug, SortieRepository $repoSortie){
+
+        $sortie = $repoSortie->findOneBy(array("slug" => $slug));
+
+        if ($sortie==null){
+            return $this->redirectToRoute("app_home");
+        }
 
         $entityManager->remove($sortie);
         $entityManager->flush();
@@ -131,9 +150,16 @@ class SortieController extends AbstractController
 
 //INSCRIPTION DANS UNE SORTIE : fonction inscrit/désinscrit
     /**
-     * @Route ("/sortie/inscrit/{sortie}", name="app_sortie_inscrit")
+     * @Route ("/sortie/inscrit/{slug}", name="app_sortie_inscrit")
      */
-    public function inscritSortie(Sortie $sortie, EntityManagerInterface $entityManager){
+    public function inscritSortie($slug, EntityManagerInterface $entityManager, SortieRepository $repoSortie){
+
+        $sortie = $repoSortie->findOneBy(array("slug" => $slug));
+
+        if ($sortie==null){
+            return $this->redirectToRoute("app_home");
+        }
+
         $sortie->addParticipant($this->getUser());
 
         $entityManager->persist($sortie);
@@ -143,9 +169,15 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route ("/sortie/desinscrit/{sortie}", name="app_sortie_desinscrit")
+     * @Route ("/sortie/desinscrit/{slug}", name="app_sortie_desinscrit")
      */
-    public function desinscritSortie(Sortie $sortie, EntityManagerInterface $entityManager){
+    public function desinscritSortie(EntityManagerInterface $entityManager, SortieRepository $repoSortie, $slug){
+        $sortie = $repoSortie->findOneBy(array("slug" => $slug));
+
+        if ($sortie==null){
+            return $this->redirectToRoute("app_home");
+        }
+
         $sortie->removeParticipant($this->getUser());
 
         $entityManager->persist($sortie);
@@ -155,9 +187,15 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route ("/sortie/publier/{sortie}", name="app_sortie_publier")
+     * @Route ("/sortie/publier/{slug}", name="app_sortie_publier")
      */
-    public function publierSortie(Sortie $sortie, EntityManagerInterface $entityManager, EtatRepository $repoEtat){
+    public function publierSortie($slug, EntityManagerInterface $entityManager, EtatRepository $repoEtat, SortieRepository $repoSortie){
+        $sortie = $repoSortie->findOneBy(array("slug" => $slug));
+
+        if ($sortie==null){
+            return $this->redirectToRoute("app_home");
+        }
+
         $sortie->setEtat($repoEtat->find('2'));
         $sortie->addParticipant($this->getUser());
 
@@ -170,10 +208,16 @@ class SortieController extends AbstractController
 //AFFICHAGE D'UNE SORTIE SUR LA TWIG ANNULER
 
     /**
-     * @Route("/sortie/annuler/{sortie}", name="app_annuler_sortie")
+     * @Route("/sortie/annuler/{slug}", name="app_annuler_sortie")
      */
-    public function annulerSortie(Sortie $sortie): Response
+    public function annulerSortie($slug, SortieRepository $repoSortie): Response
     {
+        $sortie = $repoSortie->findOneBy(array("slug" => $slug));
+
+        if ($sortie==null){
+            return $this->redirectToRoute("app_home");
+        }
+
         return $this->render('sortie/annulerSortie.html.twig', [
            'sortie' => $sortie
         ]);

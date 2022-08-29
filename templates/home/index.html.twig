@@ -122,32 +122,32 @@
                                 </span>
                             </div>
                             <div class="column-7">
-                                <span><a href="{{ path('app_afficher_profil', {participant: sortie.organisateur.id}) }}">{{ sortie.organisateur.pseudo }}</a></span>
+                                <span><a href="{{ path('app_afficher_profil', {slug: sortie.organisateur.slug}) }}">{{ sortie.organisateur.pseudo }}</a></span>
                             </div>
                             <div class="column-8">
                                 {% if sortie.etat.libelle == "En création" %}
-                                    <span><a href="{{ path('app_sortie_modification', {sortie: sortie.id}) }}">Modifier</a> - <a href="{{ path('app_sortie_publier', {sortie: sortie.id}) }}">Publier</a></span>
+                                    <span><a href="{{ path('app_sortie_modification', {slug: sortie.slug}) }}">Modifier</a> - <a href="{{ path('app_sortie_publier', {slug: sortie.slug}) }}">Publier</a></span>
                                 {% elseif sortie.etat.libelle == "Ouvert" %}
-                                    <span><a href="{{ path('app_afficher_sortie', {sortie: sortie.id}) }}">Afficher</a>
+                                    <span><a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a>
                                         {% if sortie.organisateur.pseudo == app.user.pseudo %}
-                                            - <a href="{{ path('app_annuler_sortie', {sortie: sortie.id}) }}">Annuler</a>
+                                            - <a href="{{ path('app_annuler_sortie', {slug: sortie.slug}) }}">Annuler</a>
                                         {% elseif app.user in sortie.participants %}
-                                            - <a href="{{ path('app_sortie_desinscrit', {sortie: sortie.id}) }}">Se désister</a>
+                                            - <a href="{{ path('app_sortie_desinscrit', {slug: sortie.slug}) }}">Se désister</a>
                                         {% elseif sortie.participants|length < sortie.nbInscriptionMax %}
                                             {% if  app.user not in sortie.participants %}
-                                                - <a href="{{ path('app_sortie_inscrit', {sortie: sortie.id}) }}">S'inscrire</a>
+                                                - <a href="{{ path('app_sortie_inscrit', {slug: sortie.slug}) }}">S'inscrire</a>
                                             {% endif %}
                                         {% endif %}
                                     </span>
                                 {% elseif sortie.etat.libelle == "Fermé" %}
                                     <span>
-                                        <a href="{{ path('app_afficher_sortie', {sortie: sortie.id}) }}">Afficher</a>
+                                        <a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a>
                                         {% if app.user in sortie.participants %}
-                                            - <a href="{{ path('app_sortie_desinscrit', {sortie: sortie.id}) }}">Se désister</a>
+                                            - <a href="{{ path('app_sortie_desinscrit', {slug: sortie.slug}) }}">Se désister</a>
                                         {% endif %}
                                     </span>
                                     {% else %}
-                                <span><a href="{{ path('app_afficher_sortie', {sortie: sortie.id}) }}">Afficher</a></span>
+                                <span><a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a></span>
                                 {% endif %}
 
                             </div>

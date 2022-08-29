@@ -87,7 +87,7 @@ class Sortie
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $slug;
 

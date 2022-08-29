@@ -46,10 +46,10 @@
                 <td>{{ ville.codePostal }}</td>
                 <td>
                  <div>
-                    <form method="post" action="{{ path('app_ville_edit', {'id': ville.id}) }}">
+                    <form method="post" action="{{ path('app_ville_edit', {'slug': ville.slug}) }}">
                             <button class="btn">Editer</button>
                         </form>
-                    <form method="post" action="{{ path('app_ville_delete', {'id': ville.id}) }}" onsubmit="return confirm('Confirmez vous la suppression?');">
+                    <form method="post" action="{{ path('app_ville_delete', {'slug': ville.slug}) }}" onsubmit="return confirm('Confirmez vous la suppression?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ville.id) }}">
                             <button class="btn">Supprimer</button>
                         </form>

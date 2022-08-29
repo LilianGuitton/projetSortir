@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Participant;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
+use App\Services\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +35,8 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setActif(true);
+            $slugify = new Slugify();
+            $user->setSlug($slugify->slugify($user->getPseudo()));
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
