@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
+use App\Form\AnnulerSortieType;
 use App\Form\CreerSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
@@ -210,7 +211,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/annuler/{slug}", name="app_annuler_sortie")
      */
-    public function annulerSortie($slug, SortieRepository $repoSortie): Response
+    public function annulerSortie($slug, SortieRepository $repoSortie, Request $request, EtatRepository $repoEtat): Response
     {
         $sortie = $repoSortie->findOneBy(array("slug" => $slug));
 
@@ -218,8 +219,20 @@ class SortieController extends AbstractController
             return $this->redirectToRoute("app_home");
         }
 
+        $cancelForm = $this->createForm(AnnulerSortieType::class, $sortie);
+        $cancelForm->handleRequest($request);
+
+        if ($cancelForm->isSubmitted() && $cancelForm->isValid()){
+            $sortie->setEtat($repoEtat->find(7));
+
+            $repoSortie->add($sortie, true);
+
+            return $this->redirectToRoute("app_home");
+        }
+
         return $this->render('sortie/annulerSortie.html.twig', [
-           'sortie' => $sortie
+            'cancelForm' => $cancelForm->createView(),
+            'sortie' => $sortie
         ]);
     }
 }
