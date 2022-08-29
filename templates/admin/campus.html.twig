@@ -45,10 +45,10 @@
             <td>
 
 
-                <a><form method="post" action="{{ path('app_campus_edit', {'slug': campus.slug}) }}">
+                <a><form method="post" action="{{ path('app_campus_edit', {slug: campus.slug}) }}">
                         <button class="btn">Editer</button>
                     </form>
-                <form method="post" action="{{ path('app_campus_delete', {'slug': campus.slug}) }}" onsubmit="return confirm('Confirmez vous la suppression?');">
+                <form method="post" action="{{ path('app_campus_delete', {slug: campus.slug}) }}" onsubmit="return confirm('Confirmez vous la suppression?');">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campus.id) }}">
                     <button class="btn">Supprimer</button>
                 </form></a>

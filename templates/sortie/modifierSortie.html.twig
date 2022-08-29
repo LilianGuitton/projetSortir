@@ -14,56 +14,59 @@
 
                                                 <!-- FORM -->
         <div>
-            {{ form_start(updateForm) }}
             <div>
-                <p>Nom de la sortie :
-                    {{ form_widget(updateForm.nom) }}
-                    {{ form_errors(updateForm.nom) }}
-                </p>
-            </div>
-            <div>
-                <p> Date et heure du début de la sortie :
-                    {{ form_widget(updateForm.dateHeureDebut) }}
-                    {{ form_errors(updateForm.dateHeureDebut) }}
-                </p>
-            </div>
-            <div>
-                <p>Date limite d'inscription :
-                    {{ form_widget(updateForm.dateLimiteInscription) }}
-                    {{ form_errors(updateForm.dateLimiteInscription) }}
-                </p>
-            </div>
-            <div>
-                <p>Nombre de places :
-                    {{ form_widget(updateForm.nbInscriptionMax) }}
-                    {{ form_errors(updateForm.nbInscriptionMax) }}
-                </p>
-            </div>
-            <div>
-                <p>Durée :
-                    {{ form_widget(updateForm.duree) }}
-                    {{ form_errors(updateForm.duree) }}
-                </p>
-            </div>
+                {{ form_start(updateForm) }}
+                <div>
+                    <label>Nom de la sortie : </label>
+                        <p>
+                            {{ form_widget(updateForm.nom) }}
+                            {{ form_errors(updateForm.nom) }}
+                        </p>
 
-            <div>
-                <p>Description et infos  :
-                    {{ form_widget(updateForm.description) }}
-                    {{ form_errors(updateForm.description) }}
-                </p>
-            </div>
-            <div>
-                <p>Lieu :
-                    {{ form_widget(updateForm.lieu) }}
-                    {{ form_errors(updateForm.lieu) }}
-                </p>
-            </div>
+                </div>
+                <div class="">
+                    <p> Date et heure du début de la sortie :
+                        {{ form_widget(updateForm.dateHeureDebut) }}
+                        {{ form_errors(updateForm.dateHeureDebut) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Date limite d'inscription :
+                        {{ form_widget(updateForm.dateLimiteInscription) }}
+                        {{ form_errors(updateForm.dateLimiteInscription) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Nombre de places :
+                        {{ form_widget(updateForm.nbInscriptionMax) }}
+                        {{ form_errors(updateForm.nbInscriptionMax) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Durée :
+                        {{ form_widget(updateForm.duree) }}
+                        {{ form_errors(updateForm.duree) }}
+                    </p>
+                </div>
 
+                <div>
+                    <p>Description et infos  :
+                        {{ form_widget(updateForm.description) }}
+                        {{ form_errors(updateForm.description) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Lieu :
+                        {{ form_widget(updateForm.lieu) }}
+                        {{ form_errors(updateForm.lieu) }}
+                    </p>
+                </div>
+            </div>
                                                <!-- BUTTON -->
 
 
-                <button name="save"  value="save" class="btn-wide btn-normal">Enregistrer</button>
-                <button name="publish" value="publish" class="btn-wide btn-normal">Publier la sortie</button>
+                <button name="save"  value="save" class="btn-wide btn-normal center">Enregistrer</button>
+                <button name="publish" value="publish" class="btn-wide btn-normal center">Publier la sortie</button>
 
 
             </div>
@@ -71,12 +74,12 @@
             {{ form_end(updateForm) }}
 
             <div>
-                <a class="btn-wide btn-normal" href="{{ path('app_sortie_supprimer', {id : sortie.id}) }}">
+                <a class="btn-wide btn-normal center" href="{{ path('app_sortie_supprimer', {'slug' : sortie.slug}) }}">
                     Supprimer la sortie
                 </a>
             </div>
             <div>
-                <a class="btn-wide btn-normal" href="{{ path("app_home") }}">
+                <a class="btn-wide btn-normal center" href="{{ path("app_home") }}">
                     Annuler
                 </a>
             </div>

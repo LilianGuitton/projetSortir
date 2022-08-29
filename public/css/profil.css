@@ -2,12 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,500&display=swap');
 
 
-
-body{
-
-}
-
-
 .form-label{
     margin-left: 13%;
 }
@@ -49,13 +43,6 @@ h2{
     display: flex;
 }
 
-.page-wrapper {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: row wrap;
-}
 .btn-wide {
     width: 230px;
     height: 50px;
@@ -122,4 +109,7 @@ h2{
 .column-8{
     width: 160px;
 }
-
+.center {
+    display: inline-block;
+    margin : auto;
+}
