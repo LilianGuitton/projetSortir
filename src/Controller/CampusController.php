@@ -12,38 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/campus")
+ * @Route("/admin/campus")
  */
 class CampusController extends AbstractController
 {
     /**
-     * @Route("/", name="app_campus_index", methods={"GET"})
-     */
-    #IsGranted["ROLE_ADMIN"]
-    public function index(Request $request,CampusRepository $campusRepository): Response
-    {
-
-        $recherche = $request->get('recherche');
-        $listeCampus = [];
-        if ($recherche != null){
-            $listeCampus = $campusRepository->rechercheCampus($recherche['recherche']);
-        }
-
-
-        $rechercheForm = $this->createForm(RechercheType::class, $recherche);
-
-        return $this->render('campus/index.html.twig', [
-            'rechercheForm' => $rechercheForm->createView(),
-            'controller_name' => 'AdminController',
-            'campus' => $listeCampus,
-            'campuses' => $campusRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/new", name="app_campus_new", methods={"GET", "POST"})
      */
-    #IsGranted["ROLE_ADMIN"]
     public function new(Request $request, CampusRepository $campusRepository): Response
     {
         $campus = new Campus();
@@ -63,20 +38,8 @@ class CampusController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_campus_show", methods={"GET"})
+     * @Route("/edit/{id}", name="app_campus_edit", methods={"GET", "POST"})
      */
-    #IsGranted["ROLE_ADMIN"]
-    public function show(Campus $campus): Response
-    {
-        return $this->render('campus/show.html.twig', [
-            'campus' => $campus,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="app_campus_edit", methods={"GET", "POST"})
-     */
-    #IsGranted["ROLE_ADMIN"]
     public function edit(Request $request, Campus $campus, CampusRepository $campusRepository): Response
     {
         $form = $this->createForm(CampusType::class, $campus);
@@ -95,7 +58,7 @@ class CampusController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_campus_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="app_campus_delete", methods={"POST"})
      */
     #IsGranted["ROLE_ADMIN"]
     public function delete(Request $request, Campus $campus, CampusRepository $campusRepository): Response

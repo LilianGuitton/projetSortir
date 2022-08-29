@@ -155,7 +155,7 @@
                                 {% elseif sortie.etat.libelle == "Ouvert" %}
                                     <span><a href="{{ path('app_afficher_sortie', {sortie: sortie.id}) }}">Afficher</a>
                                         {% if sortie.organisateur.pseudo == app.user.pseudo %}
-                                            - <a href="{{ path('app_annuler_sortie') }}">Annuler</a>
+                                            - <a href="{{ path('app_annuler_sortie', {sortie: sortie.id}) }}">Annuler</a>
                                         {% elseif app.user in sortie.participants %}
                                             - <a href="{{ path('app_sortie_desinscrit', {sortie: sortie.id}) }}">Se désister</a>
                                         {% elseif sortie.participants|length < sortie.nbInscriptionMax %}
