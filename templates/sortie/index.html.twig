@@ -16,42 +16,64 @@
 
     <!-- FORM -->
     <div class="row">
-        <div class="col-4">
+        <div class=" form col-5">
             {{ form_start(createForm) }}
                     <div>
-                        {{ form_row(createForm.nom) }}
+                        <p>Nom de la sortie :
+                            {{ form_widget(createForm.nom) }}
+                            {{ form_errors(createForm.nom) }}
+                        </p>
                     </div>
                     <div>
-                        {{ form_row(createForm.dateHeureDebut) }}
+                        <p> Date et heure du début de la sortie :
+                            {{ form_widget(createForm.dateHeureDebut) }}
+                            {{ form_errors(createForm.dateHeureDebut) }}
+                        </p>
                     </div>
                     <div>
-                        {{ form_row(createForm.duree) }}
+                        <p>Date limite d'inscription :
+                            {{ form_widget(createForm.dateLimiteInscription) }}
+                            {{ form_errors(createForm.dateLimiteInscription) }}
+                        </p>
                     </div>
                     <div>
-                        {{ form_row(createForm.dateLimiteInscription) }}
+                        <p>Nombre de places :
+                            {{ form_widget(createForm.nbInscriptionMax) }}
+                            {{ form_errors(createForm.nbInscriptionMax) }}
+                        </p>
                     </div>
                     <div>
-                        {{ form_row(createForm.nbInscriptionMax) }}
+                        <p>Durée :
+                            {{ form_widget(createForm.duree) }}
+                            {{ form_errors(createForm.duree) }}
+                        </p>
                     </div>
-                    <div>
 
+                    <div>
+                        <p>Description et infos  :
+                            {{ form_widget(createForm.description) }}
+                            {{ form_errors(createForm.description) }}
+                        </p>
                     </div>
                     <div>
-                        {{ form_row(createForm.lieu) }}
+                        <p>Lieu :
+                            {{ form_widget(createForm.lieu) }}
+                            {{ form_errors(createForm.lieu) }}
+                        </p>
                     </div>
 
                                                 <!-- BUTTON -->
-            <div>
+            <div class="page-wrapper">
 
-                <button  name="save" value="save">Enregistrer</button>
-                <button  name="publish" value="publish">Publier la sortie</button>
+                <button class="btn-wide btn-normal" name="save" value="save">Enregistrer</button>
+                <button class="btn-wide btn-normal" name="publish" value="publish">Publier la sortie</button>
 
             </div>
         </div>
         {{ form_end(createForm) }}
 
         <div>
-            <a class="" href="{{ path("app_home") }}" >
+            <a class="btn-wide btn-normal" href="{{ path("app_home") }}" >
                 Annuler
             </a>
         </div>
