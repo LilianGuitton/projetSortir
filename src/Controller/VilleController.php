@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ville;
 use App\Form\VilleType;
 use App\Repository\VilleRepository;
+use App\Services\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,8 @@ class VilleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slugify = new Slugify();
+            $ville->setSlug($slugify->slugify($ville->getNom()));
             $villeRepository->add($ville, true);
 
             return $this->redirectToRoute('app_ville', [], Response::HTTP_SEE_OTHER);
@@ -37,10 +40,12 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="app_ville_edit", methods={"GET", "POST"})
+     * @Route("/edit/{slug}", name="app_ville_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Ville $ville, VilleRepository $villeRepository): Response
+    public function edit(Request $request, $slug, VilleRepository $villeRepository): Response
     {
+        $ville = $villeRepository->findOneBy(array("slug" => $slug));
+
         $form = $this->createForm(VilleType::class, $ville);
         $form->handleRequest($request);
 
@@ -57,10 +62,12 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="app_ville_delete", methods={"POST"})
+     * @Route("/delete/{slug}", name="app_ville_delete", methods={"POST"})
      */
-    public function delete(Request $request, Ville $ville, VilleRepository $villeRepository): Response
+    public function delete(Request $request, $slug, VilleRepository $villeRepository): Response
     {
+        $ville = $villeRepository->findOneBy(array("slug" => $slug));
+
         if ($this->isCsrfTokenValid('delete'.$ville->getId(), $request->request->get('_token'))) {
             $villeRepository->remove($ville, true);
         }
