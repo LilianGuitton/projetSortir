@@ -8,6 +8,7 @@ use App\Entity\Participant;
 use App\Form\CreerSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use App\Services\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use http\Client\Curl\User;
@@ -50,7 +51,7 @@ class SortieController extends AbstractController
 
         if ($createForm->isSubmitted() && $createForm->isValid()){
 
-            dump($request->get('save'));
+            $slugify = new Slugify();
 
             if ("save" === $request->get('save')){
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
@@ -60,6 +61,7 @@ class SortieController extends AbstractController
 
             $sortie->setCampus($this->getUser()->getEstRattacherA());
             $sortie->setOrganisateur($this->getUser());
+            $sortie->setSlug($slugify->slugify($sortie->getNom()));
 
             $entityManager->persist($sortie);
             $entityManager->flush();

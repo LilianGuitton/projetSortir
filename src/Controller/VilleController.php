@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ville;
 use App\Form\VilleType;
 use App\Repository\VilleRepository;
+use App\Services\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,8 @@ class VilleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slugify = new Slugify();
+            $ville->setSlug($slugify->slugify($ville->getNom()));
             $villeRepository->add($ville, true);
 
             return $this->redirectToRoute('app_ville', [], Response::HTTP_SEE_OTHER);

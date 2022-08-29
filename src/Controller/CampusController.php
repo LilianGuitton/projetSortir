@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Form\CampusType;
 use App\Form\RechercheType;
 use App\Repository\CampusRepository;
+use App\Services\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,8 @@ class CampusController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slugify = new Slugify();
+            $campus->setSlug($slugify->slugify($campus->getNom()));
             $campusRepository->add($campus, true);
 
             return $this->redirectToRoute('app_campus', [], Response::HTTP_SEE_OTHER);
