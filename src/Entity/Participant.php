@@ -85,6 +85,11 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $estInscrit;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->sortieOrganiser = new ArrayCollection();
@@ -314,6 +319,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeEstInscrit(Sortie $estInscrit): self
     {
         $this->estInscrit->removeElement($estInscrit);
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
