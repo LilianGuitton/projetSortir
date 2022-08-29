@@ -58,6 +58,7 @@ class SortieController extends AbstractController
             if ("save" === $request->get('save')){
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
             } elseif ("publish" === $request->get('publish')){
+                $sortie->addParticipant($this->getUser());
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(2));
             }
 
@@ -109,6 +110,7 @@ class SortieController extends AbstractController
             if ("save" === $request->get('save')){
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
             } elseif ("publish" === $request->get('publish')){
+                $sortie->addParticipant($this->getUser());
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(2));
             }
 
