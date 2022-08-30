@@ -25,33 +25,30 @@ class CreerSortieType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 "attr" => [
-                    'class' => "form-control",
-                    'style' => "border-radius: 50px"
+                    'class' => "form-control form-theme"
                 ]
             ])
             ->add('dateHeureDebut', DateTimeType::class, ['widget'=>'single_text', "attr" => [
-                'style' => "border-radius: 20px"
+                'class' => "form-date form-theme"
             ]])
             ->add('duree', IntegerType::class,[
                 "attr" => [
-                    'class' => "form-control",
-                    'style' => "border-radius: 50px"
+                    'class' => "form-control form-theme"
                 ]
             ])
             ->add('dateLimiteInscription', DateTimeType::class, ['widget'=>'single_text',
                  "attr" => [
-                    'style' => "border-radius: 20px"
+                    'class' => "form-date form-theme"
                 ]
             ])
             ->add('nbInscriptionMax', IntegerType::class,[
                 "attr" => [
-                    'class' => "form-control",
-                    'style' => "border-radius: 50px"
+                    'class' => "form-control form-theme"
                 ]
             ])
             ->add('description', TextareaType::class, [
                 "attr" => [
-                    "class" => "form-control"
+                    "class" => "form-control form-theme"
                 ]
             ] )
             ->add('lieu')

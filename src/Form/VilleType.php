@@ -16,13 +16,13 @@ class VilleType extends AbstractType
             ->add('nom',TextType::class,[
                 'label' => "Nom : ",
                 "attr" => [
-                    'style' => "border-radius: 20px"
+                    'style' => "border-radius: 20px;margin-left:12.5%;"
                 ]
             ])
             ->add('codePostal',TextType::class,[
         'label' => "Code Postal : ",
                 "attr" => [
-                    'style' => "border-radius: 20px"
+                    'style' => "border-radius: 20px;margin-top: 3%;margin-bottom:3%;"
                 ]
     ]);
 
