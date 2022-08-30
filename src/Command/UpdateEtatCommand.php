@@ -55,7 +55,6 @@ class UpdateEtatCommand extends Command
                         $sortie->setEtat($ARCHIVE);
                     }
                 } else {
-                    dump($sortie->getDateLimiteInscription());
                     $sortie->setEtat($OUVERT);
                 }
             }
