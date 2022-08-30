@@ -5,107 +5,135 @@
 
 {% block body %}
 
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 700px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
+<style>
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 700px;
+        width: 95%;
+        font: 18px/1.5 sans-serif;
+    }
 
-    <div class="example-wrapper">
-         <h1 class="titre1">Modifier une sortie</h1>
+    .example-wrapper code {
+        background: #F5F5F5;
+        padding: 2px 6px;
+    }
+</style>
 
-                                                <!-- FORM -->
+<div class="example-wrapper">
+    <h1 class="titre1">Modifier une sortie</h1>
+
+    <!-- FORM -->
+    <div>
         <div>
+            {{ form_start(updateForm) }}
             <div>
-                {{ form_start(updateForm) }}
                 <div>
-                    <div>
-                        <label>Nom de la sortie : </label>
-                            <p>
-                                {{ form_widget(updateForm.nom) }}
-                                {{ form_errors(updateForm.nom) }}
-                            </p>
+                    <label>Nom de la sortie : </label>
+                    <p>
+                        {{ form_widget(updateForm.nom) }}
+                        {{ form_errors(updateForm.nom) }}
+                    </p>
 
-                    </div>
-                    <div >
-                        <p> Date et heure du début de la sortie :
-                            {{ form_widget(updateForm.dateHeureDebut) }}
-                            {{ form_errors(updateForm.dateHeureDebut) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Date limite d'inscription :
-                            {{ form_widget(updateForm.dateLimiteInscription) }}
-                            {{ form_errors(updateForm.dateLimiteInscription) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Nombre de places :
-                            {{ form_widget(updateForm.nbInscriptionMax) }}
-                            {{ form_errors(updateForm.nbInscriptionMax) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Durée :
-                            {{ form_widget(updateForm.duree) }}
-                            {{ form_errors(updateForm.duree) }}
-                        </p>
-                    </div>
-
-                    <div>
-                        <p>Description et infos  :
-                            {{ form_widget(updateForm.description) }}
-                            {{ form_errors(updateForm.description) }}
-                        </p>
-                    </div>
                 </div>
                 <div>
-                    <div>
-                        <p>Campus : {{ sortie.campus }}</p>
-                    </div>
-                    <div>
-                        <p>Ville :
+                    <p> Date et heure du début de la sortie :
+                        {{ form_widget(updateForm.dateHeureDebut) }}
+                        {{ form_errors(updateForm.dateHeureDebut) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Date limite d'inscription :
+                        <span class="limiteDate">&ensp;</span>
 
-                        </p>
-                    </div>
-                    <div>
-                        <p>Lieu :
-                            {{ form_widget(updateForm.lieu) }}
-                            {{ form_errors(updateForm.lieu) }}
-                        </p>
-                    </div>
-                    <div>
-                       <p>Rue : {{ sortie.lieu.rue }}</p>
-                    </div>
-                    <div>
-                        <p>Code postal : {{ sortie.lieu.ville.codePostal }}</p>
-                    </div>
-                    <div>latitude</div>
-                    <div>longitude</div>
+                        {{ form_widget(updateForm.dateLimiteInscription) }}
+
+                        {{ form_errors(updateForm.dateLimiteInscription) }}
+
+                    </p>
+                </div>
+                <div>
+                    <p>Nombre de places :
+                        {{ form_widget(updateForm.nbInscriptionMax) }}
+                        {{ form_errors(updateForm.nbInscriptionMax) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Durée :
+                        {{ form_widget(updateForm.duree) }}
+                        {{ form_errors(updateForm.duree) }}
+                    </p>
+                </div>
+
+                <div>
+                    <p>Description et infos :
+                        {{ form_widget(updateForm.description) }}
+                        {{ form_errors(updateForm.description) }}
+                    </p>
                 </div>
             </div>
+            <div>
+                <div>
+                    <p>Campus : {{ sortie.campus }}</p>
+                </div>
+                <div>
+                    <p>Ville :
 
-                                               <!-- BUTTON -->
+                    </p>
+                </div>
+                <div>
+                    <p>Lieu :
+                        {{ form_widget(updateForm.lieu) }}
+                        {{ form_errors(updateForm.lieu) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Rue : {{ sortie.lieu.rue }}</p>
+                </div>
+                <div>
+                    <p>Code postal : {{ sortie.lieu.ville.codePostal }}</p>
+                </div>
+                <div>latitude</div>
+                <div>longitude</div>
+            </div>
+        </div>
+    </div>
+    <!-- BUTTON -->
 
-
-                <button name="save"  value="save" class="btn-wide btn-normal center col-4">Enregistrer</button>
-                <button name="publish" value="publish" class="btn-wide btn-normal center col-4">Publier la sortie</button>
-
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-2">
 
             </div>
+            <div class="col-md-4">
+                <div >
+                <button name="save" value="save" class="btn-wide btn-normal center col-4">Enregistrer</button>
+                    </div>
+                <div class="btnModif">
+                <button name="publish" value="publish" class="btn-wide btn-normal center col-4">Publier la sortie
+                </button>
+                    </div>
+            </div>
+
 
             {{ form_end(updateForm) }}
+            <div class="col-md-4 ">
+                <div>
+                    <a class="btn-wide btn-normal" href="{{ path('app_sortie_supprimer', {'slug' : sortie.slug}) }}">
+                        Supprimer la sortie
+                    </a>
+                </div>
 
-            <div>
-                <a class="btn-wide btn-normal" href="{{ path('app_sortie_supprimer', {'slug' : sortie.slug}) }}">
-                    Supprimer la sortie
-                </a>
+                <div class="btnModif">
+                    <a class="btn-wide btn-normal" href="{{ path("app_home") }}">
+                        Annuler
+                    </a>
+                </div>
             </div>
-            <div>
-                <a class="btn-wide btn-normal" href="{{ path("app_home") }}">
-                    Annuler
-                </a>
+            <div class="col-md-2">
+
             </div>
 
-
+        </div>
     </div>
-{% endblock %}
+</div>
+        {% endblock %}

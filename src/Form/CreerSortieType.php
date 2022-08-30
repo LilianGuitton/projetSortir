@@ -30,7 +30,7 @@ class CreerSortieType extends AbstractType
                 ]
             ])
             ->add('dateHeureDebut', DateTimeType::class, ['widget'=>'single_text', "attr" => [
-                'style' => "border-radius: 20px"
+                'style' => "border-radius: 20px;margin-left:13%;"
             ]])
             ->add('duree', IntegerType::class,[
                 "attr" => [
@@ -40,7 +40,7 @@ class CreerSortieType extends AbstractType
             ])
             ->add('dateLimiteInscription', DateTimeType::class, ['widget'=>'single_text',
                  "attr" => [
-                    'style' => "border-radius: 20px"
+                    'style' => "border-radius: 20px;margin-left:13%;"
                 ]
             ])
             ->add('nbInscriptionMax', IntegerType::class,[

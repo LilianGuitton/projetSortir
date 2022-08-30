@@ -4,8 +4,8 @@
 
 {% block body %}
     <h1 class="titre1">Créer une nouvelle Ville</h1>
-
+<div class="text-center">
     {{ include('ville/_form.html.twig') }}
-
+  </div>
     <a href="{{ path('app_ville') }}" class="btn-wide btn-normal">Retour</a>
 {% endblock %}

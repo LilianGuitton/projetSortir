@@ -9,12 +9,13 @@
 {% block body %}
     <div class="date">
         <div>
-            <p><strong>On est le  : {{ "now"|date("m/d/Y") }}</strong></p>
+            <p><strong>On est le : {{ "now"|date("m/d/Y") }}</strong></p>
         </div>
         <div>
             <p><strong>Connecté en tant que : {{ app.user.prenom }} {{ app.user.nom|slice(0,1) }}.</strong></p>
         </div>
     </div>
+    <h2 class="titreFiltre ">Tu recherches une sortie ? </h2>
     <div class="form-label">
         <div class="container">
             <div class="row">
@@ -23,9 +24,8 @@
 
                 </div>
 
-                <h2 class="titreFiltre ">Tu recherches une sortie ? </h2>
-                <div class="col-md-4 formIndex">
 
+                <div class="col-md-4 formIndex">
 
 
                     &nbsp;<div class="group">
@@ -184,6 +184,6 @@
         </div>
     </div>
     <a class="btn-wide btn-normal" href="{{ path('app_sortie_creation') }}">Créer une sortie</a>
-    </div>
+    <div>&ensp;</div>
 
 {% endblock %}
