@@ -12,12 +12,12 @@
     <h1 class="titre1">Gérer les villes</h1>
 
     <div class="container example-wrapper">
-        <div class="row">
+        <div class="row justify-content-center">
 
 
             <div class="col-md-4">
                 {{ form_start(rechercheForm) }}
-                <div class="groupVille">
+                <div class="groupVille text-center">
                 <label for="{{ field_name(rechercheForm.recherche) }}">Recherche ville</label>
                 <input type="text"
                 id="{{ field_name(rechercheForm.recherche)}}"
@@ -30,8 +30,10 @@
         </div>
     </div>
 
+    <div class="text-center">
+        {{ form_end(rechercheForm) }}
+    </div>
 
-    {{ form_end(rechercheForm) }}
 
     <table class="table">
         <thead>

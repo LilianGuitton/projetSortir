@@ -63,7 +63,8 @@ h2{
 .btn-wide {
     width: 230px;
     height: 50px;
-    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 50px;
     font-size: 18px;
     color: #708090;
@@ -127,8 +128,7 @@ h2{
     width: 160px;
 }
 .center {
-    display: inline-block;
+    display: flex;
     margin : auto;
 }
-
 
