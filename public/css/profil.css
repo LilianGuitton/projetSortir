@@ -28,16 +28,24 @@ body{
 .btnVille{
     margin-bottom: 5%;
 }
+.formCamp{
+    margin-bottom:1%
+}
+.formVille{
+    margin-bottom:1%;
+    margin-top:1%;
+}
 .limiteDate{
 margin-left: 11.6%;
 }
 .form-label{
     margin-left: 13%;
 }
+
 .titre1{
     /*font-family: 'Roboto Mono', monospace;*/
     margin-top: 10%;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
     text-align: center;
 }
 h2{

@@ -5,10 +5,11 @@
 {% block body %}
     <h1 class="titre1">Créer un nouveau Campus</h1>
 
+    <div class="text-center formCamp">
     {{ include('campus/_form.html.twig') }}
-
+    </div>
 
     <a><form method="post" action="{{ path('app_campus') }}">
-            <button class="btn-wide btn-normal">Retour</button>
+            <button class="btn-wide btn-normal ">Retour</button>
         </form></a>
 {% endblock %}
