@@ -18,8 +18,8 @@ class FiltreType extends AbstractType
     {
         $builder
             ->add('campus', EntityType::class, ["class"=>Campus::class, "label"=>"Campus"])
-            ->add('nom', TextType::class, ["label"=>"Le nom de la sortie contient :"])
-            ->add('debut', DateType::class,["label"=>"Entre :"])
+            ->add('nom', TextType::class, ["label"=>"Le nom de la sortie contient :", "attr"=> ["class"=>"form-theme"]])
+            ->add('debut', DateType::class,["label"=>"Entre :", "attr"=>["class"=>"form-date"]])
             ->add('fin', DateType::class, ["label"=> "et :"])
             ->add('monOrga', CheckboxType::class, ["label"=> "Sorties dont je suis l'organisateur/trice"])
             ->add('inscrit', CheckboxType::class, ["label"=> "Sorties auxquelles je suis inscrit/e"])

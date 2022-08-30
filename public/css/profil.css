@@ -7,7 +7,7 @@ body{
 
 
 
-    /*background-image: url('../img/afterwork.jpg');*/
+    /*background-image: url('');*/
     font-family: 'Oswald', sans-serif;
     font-family: 'Roboto', sans-serif;
 }
@@ -44,7 +44,6 @@ margin-left: 11.6%;
 .form-label{
     margin-left: 13%;
 }
-
 .titre1{
     /*font-family: 'Roboto Mono', monospace;*/
     margin-top: 5%;
@@ -172,6 +171,12 @@ padding-top: 1%;
 .form-date{
     text-align: center;
     border: none;
+}
+.btn-sortie{
+    margin-bottom: 5%;
+}
+.btn-annuler{
+    margin-left: 34%;
 }
 
 
