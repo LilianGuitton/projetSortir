@@ -24,39 +24,34 @@ class MonProfilType extends AbstractType
         $builder
             ->add('pseudo', TextType::class, [
                 "attr" => [
-                    "class" => "form-control",
-                    'style' => "border-radius: 50px"
+                    "class" => "form-control form-theme"
                 ]
             ])
             ->add('prenom', TextType::class, [
         "attr" => [
-            "class" => "form-control",
-            'style' => "border-radius: 50px"
+            "class" => "form-control form-theme"
           ]
        ])
             ->add('nom', TextType::class, [
                 "attr" => [
-                    "class" => "form-control",
-                    'style' => "border-radius: 50px"
+                    "class" => "form-control form-theme"
                 ]
             ])
 
             ->add('telephone',TextType::class, [
                 "attr" => [
-                    "class" => "form-control",
-                    'style' => "border-radius: 50px"
+                    "class" => "form-control form-theme"
                 ]
             ])
             ->add('email', EmailType::class, [
                 "attr" => [
-                    "class" => "form-control",
-                    'style' => "border-radius: 50px"
+                    "class" => "form-control form-theme"
                 ]
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'les mots de passe doivent être identique.',
-                'options' => ['attr' => ['class' => 'form-control','style' => "border-radius: 50px"]],
+                'options' => ['attr' => ['class' => 'form-control form-theme']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password']
@@ -65,15 +60,13 @@ class MonProfilType extends AbstractType
             ->add('estRattacherA',EntityType::class, [
                 "class" => Campus::class,
                 "attr" => [
-                    "class" => "form-control",
-                    'style' => "border-radius: 50px"
+                    "class" => "form-control form-theme"
                 ]
             ])
             ->add('photo', TextType::class, [
                 "attr" => [
 
-                    "class" => "form-control",
-                    'style' => "border-radius: 50px"
+                    "class" => "form-control form-theme"
                 ],
                 'required' => false
             ])
