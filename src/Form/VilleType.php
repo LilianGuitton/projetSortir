@@ -14,10 +14,16 @@ class VilleType extends AbstractType
     {
         $builder
             ->add('nom',TextType::class,[
-                'label' => "Nom :"
+                'label' => "Nom : ",
+                "attr" => [
+                    'style' => "border-radius: 20px"
+                ]
             ])
             ->add('codePostal',TextType::class,[
-        'label' => "CP  :"
+        'label' => "Code Postal : ",
+                "attr" => [
+                    'style' => "border-radius: 20px"
+                ]
     ]);
 
     }
