@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Form\AnnulerSortieType;
+use App\Repository\EtatRepository;
+use App\Repository\ParticipantRepository;
+use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -74,5 +78,90 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/participants", name="app_participants_admin")
+     */
+    public function participants(ParticipantRepository $repoParticipant): Response
+    {
+        $participants = $repoParticipant->findAll();
 
+        return $this->render('admin/participants.html.twig', [
+            "participants" => $participants
+        ]);
+    }
+
+    /**
+     * @Route("/admin/participant/disable/{slug}", name="app_participant_disable")
+     */
+    public function disableParticipants(ParticipantRepository $repoParticipant, $slug): Response
+    {
+        $participant = $repoParticipant->findOneBy(array("slug"=>$slug));
+        $participant->setActif(false);
+        $repoParticipant->add($participant, true);
+
+        return $this->redirectToRoute("app_participants_admin");
+    }
+
+    /**
+     * @Route("/admin/participant/enable/{slug}", name="app_participant_enable")
+     */
+    public function enableParticipants(ParticipantRepository $repoParticipant, $slug): Response
+    {
+        $participant = $repoParticipant->findOneBy(array("slug"=>$slug));
+        $participant->setActif(true);
+        $repoParticipant->add($participant, true);
+
+        return $this->redirectToRoute("app_participants_admin");
+    }
+
+    /**
+     * @Route("/admin/participant/delete/{slug}", name="app_participant_delete")
+     */
+    public function deleteParticipants(ParticipantRepository $repoParticipant, $slug): Response
+    {
+        $participant = $repoParticipant->findOneBy(array("slug"=>$slug));
+        $repoParticipant->remove($participant, true);
+
+        return $this->redirectToRoute("app_participants_admin");
+    }
+
+    /**
+     * @Route("/admin/sorties", name="app_sorties_admin")
+     */
+    public function sorties(SortieRepository $repoSortie): Response
+    {
+        $sorties = $repoSortie->findAll();
+
+        return $this->render('admin/sorties.html.twig', [
+            "sorties" => $sorties
+        ]);
+    }
+
+    /**
+     * @Route("/admin/sortie/annuler/{slug}", name="app_annuler_sortie_admin")
+     */
+    public function annulerSortie($slug, SortieRepository $repoSortie, Request $request, EtatRepository $repoEtat): Response
+    {
+        $sortie = $repoSortie->findOneBy(array("slug" => $slug));
+
+        if ($sortie==null){
+            return $this->redirectToRoute("app_home");
+        }
+
+        $cancelForm = $this->createForm(AnnulerSortieType::class, $sortie);
+        $cancelForm->handleRequest($request);
+
+        if ($cancelForm->isSubmitted() && $cancelForm->isValid()){
+            $sortie->setEtat($repoEtat->find(7));
+
+            $repoSortie->add($sortie, true);
+
+            return $this->redirectToRoute("app_sorties_admin");
+        }
+
+        return $this->render('/admin/annulerSortie.html.twig', [
+            'cancelForm' => $cancelForm->createView(),
+            'sortie' => $sortie
+        ]);
+    }
 }
