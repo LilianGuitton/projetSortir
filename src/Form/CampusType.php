@@ -28,7 +28,7 @@ class CampusType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Campus::class,[
                 'attr' => ['class' => 'btn',
-                    'style' => 'margin-top:3%; ',],
+                    'style' => 'margin-top:3%;margin-bottom:3%; ',],
 
 
                 ]

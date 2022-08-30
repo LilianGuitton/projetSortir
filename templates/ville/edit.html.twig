@@ -6,28 +6,20 @@
     <h1 class="titre1">Editer la ville</h1>
 
 
-    <div class="container">
-        <div class="row ">
-            <div class="col-md-4">
-
-            </div>
-
-            <div class="col-md-4 text-center">
-                {{ include('ville/_form.html.twig', {'button_label': 'Modifer'}) }}
-            </div>
-            <div class="btnVille">
-
-                <a>
-                    <form method="post" action="{{ path('app_ville') }} ">
-                <div>.</div>
-            <button class="btn-wide btn-normal ">Retour</button>
-            </form></a>
-            </div>
-
-            <div class="col-md-4">
-
-            </div>
-        </div>
+    <div class="text-center formCamp">
+        {{ include('ville/_form.html.twig', {'button_label': 'Modifer'}) }}
     </div>
+
+
+    <a>
+        <form method="post" action="{{ path('app_ville') }} ">
+
+            <button class="btn-wide btn-normal ">Retour</button>
+        </form>
+    </a>
+
+
+
+
 
 {% endblock %}
