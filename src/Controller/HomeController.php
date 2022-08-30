@@ -42,26 +42,6 @@ class HomeController extends AbstractController
             $sortieList = $repoSortie->findAll();
         }
 
-        $now = new \DateTime('now');
-
-        foreach ($sortieList as $sortie){
-            if ($sortie->getEtat()->getLibelle() != "En création"){
-                if ($sortie->getDateLimiteInscription() < $now){
-                    if ($sortie->getDateHeureDebut() > $now){
-                        $sortie->setEtat($entityManager->getRepository(Etat::class)->find(4));
-                    } elseif (date_add($sortie->getDateHeureDebut(), \DateInterval::createFromDateString("+".$sortie->getDuree()." minutes")) > $now){
-                        $sortie->setEtat($entityManager->getRepository(Etat::class)->find(3));
-                    } elseif (date_add($sortie->getDateHeureDebut(), \DateInterval::createFromDateString("+".$sortie->getDuree()." minutes")) < $now and date_add($sortie->getDateHeureDebut(), \DateInterval::createFromDateString("+1 month")) > $now){
-                        $sortie->setEtat($entityManager->getRepository(Etat::class)->find(5));
-                    } else {
-                        $sortie->setEtat($entityManager->getRepository(Etat::class)->find(6));
-                    }
-                    $entityManager->persist($sortie);
-                    $entityManager->flush();
-                }
-            }
-        }
-
         return $this->render('home/index.html.twig', ["sortieList" => $sortieList, "filtre"=>$filtre,
             "filterForm" => $this->createForm(FiltreType::class)->createView()
         ]);
