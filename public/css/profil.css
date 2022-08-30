@@ -54,7 +54,13 @@ h2{
     /*text-align: center;*/
     justify-content: center;
 }
-
+.annulSortie{
+    margin: 2%;
+    font-size: 20px;
+}
+.annulSortiebtn{
+    margin : 3%;
+}
 .header {
     /*font-family: 'Roboto Mono', monospace;*/
     /*background: rgba(187, 186, 186, 0.96);*/
