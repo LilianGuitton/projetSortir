@@ -2,15 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
+use App\Entity\Participant;
 use App\Form\AnnulerSortieType;
+use App\Form\UploadCSVType;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Services\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\RechercheType;
 use App\Repository\VilleRepository;
@@ -18,7 +24,7 @@ use App\Repository\CampusRepository;
 use App\Entity\Ville;
 use App\Controller\VilleController;
 use App\Form\VilleType;
-
+use League\Csv\Reader;
 
 class AdminController extends AbstractController
 {
@@ -87,6 +93,63 @@ class AdminController extends AbstractController
 
         return $this->render('admin/participants.html.twig', [
             "participants" => $participants
+        ]);
+    }
+
+    /**
+     * @Route("/admin/participants/add", name="app_register_multiple")
+     */
+    public function registerParticipants(ParticipantRepository $repoParticipant, Request $request, UserPasswordHasherInterface $userPasswordHasher, Slugify $slugify, CampusRepository $repoCampus): Response
+    {
+        $uploadForm = $this->createForm(UploadCSVType::class);
+        $uploadForm->handleRequest($request);
+
+        if ($uploadForm->isSubmitted() && $uploadForm->isValid()){
+            $file = $uploadForm->get('file')->getData();
+            $csv = Reader::createFromPath($file->getPathname(), 'r');
+            $csv->setHeaderOffset(0);
+
+            $header = $csv->getHeader();
+            $records = $csv->getRecords();
+            if ($header[0] != "pseudo;prenom;nom;telephone;email;campus"){
+                return $this->redirectToRoute("app_register_multiple");
+            }
+            foreach ($records as $record){
+                $strData = $record[$header[0]];
+                $data = explode(";",$strData);
+                $participant = $repoParticipant->findOneBy(array("pseudo"=>$data[0]));
+
+                if ($participant==null){
+                    $participant = new Participant();
+                }
+
+                $participant->setPassword($userPasswordHasher->hashPassword($participant,'Pa$$w0rd'));
+                $participant->setPseudo($data[0]);
+                $participant->setPrenom($data[1]);
+                $participant->setNom($data[2]);
+                $participant->setTelephone("0" . $data[3]);
+                $participant->setEmail($data[4]);
+                $participant->setSlug($slugify->slugify($data[0]));
+                $participant->setActif(true);
+
+                $campus = $repoCampus->findOneBy(array("nom"=>$data[5]));
+
+                if ($campus==null){
+                    $campus = new Campus();
+                    $campus->setNom($data[5]);
+                    $campus->setSlug($slugify->slugify($data[5]));
+                    $repoCampus->add($campus, true);
+                }
+
+                $participant->setEstRattacherA($campus);
+
+                $repoParticipant->add($participant, true);
+            }
+            return $this->redirectToRoute("app_participants_admin");
+        }
+
+        return $this->render('admin/ajoutParticipants.html.twig', [
+            "uploadForm" => $uploadForm->createView()
         ]);
     }
 
