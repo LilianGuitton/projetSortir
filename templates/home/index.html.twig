@@ -8,139 +8,156 @@
 
 {% block body %}
     <div class="date">
-        <div >
-            <p><strong>Date du jour : {{ "now"|date("m/d/Y") }}</strong></p>
+        <div>
+            <p><strong>On est le  : {{ "now"|date("m/d/Y") }}</strong></p>
         </div>
         <div>
-            <p><strong>Participant : {{ app.user.prenom }} {{ app.user.nom|slice(0,1) }}.</strong></p>
+            <p><strong>Connecté en tant que : {{ app.user.prenom }} {{ app.user.nom|slice(0,1) }}.</strong></p>
         </div>
     </div>
-<div class="container">
-    <div class="row">
+    <div class="form-label">
+        <div class="container">
+            <div class="row">
 
+                <div class="col-md-1">
 
-
-        <div class="form-label">
-
-    <div>
-
-        <h2 class="titreFiltre">Filtrer les sorties :</h2>
-        &nbsp;
-        {{ form_start(filterForm) }}
-        <div class="group">
-            {{ form_label(filterForm.campus) }}
-
-            {{ form_widget(filterForm.campus) }}
-
-            {{ form_errors(filterForm.campus) }}
-
-        </div>
-        &nbsp;
-        <div class="group">
-            {{ form_label(filterForm.nom) }}
-            <input type="text" name="{{ field_name(filterForm.nom) }}">
-            {{ form_errors(filterForm.nom) }}
-        </div>
-        &nbsp;
-        <div class="group d-flex">
-            {{ form_label(filterForm.debut) }}
-            <input type="date" name="{{ field_name(filterForm.debut) }}">
-            {{ form_label(filterForm.fin) }}
-            <input type="date" name="{{ field_name(filterForm.fin) }}">
-        </div>
-        &nbsp;
-        <div class="group">
-            <input type="checkbox" name="{{ field_name(filterForm.monOrga) }}">
-            {{ form_label(filterForm.monOrga) }}
-        </div>
-
-        <div class="group">
-            <input type="checkbox" name="{{ field_name(filterForm.inscrit) }}">
-            {{ form_label(filterForm.inscrit) }}
-        </div>
-
-        <div class="group">
-            <input type="checkbox" name="{{ field_name(filterForm.nonInscrit) }}">
-            {{ form_label(filterForm.nonInscrit) }}
-        </div>
-
-        <div class="group">
-            <input type="checkbox" name="{{ field_name(filterForm.passee) }}">
-            {{ form_label(filterForm.passee) }}
-        </div>
-        &nbsp;
-        {{ form_end(filterForm) }}
-
-    </div>
-
-    </div>
-    </div>
-
-    &nbsp;
-
-        <div class="wrapper">
-            <div class="labels d-flex">
-                <div class="label column-1">
-                    <span>Nom de la sortie</span>
                 </div>
-                <div class="label column-2">
-                    <span>Date de la sortie</span>
+
+                <h2 class="titreFiltre ">Tu recherches une sortie ? </h2>
+                <div class="col-md-4 formIndex">
+
+
+
+                    &nbsp;<div class="group">
+                        {{ form_start(filterForm) }}
+
+                        {{ form_label(filterForm.campus) }}
+
+                        {{ form_widget(filterForm.campus) }}
+
+                        {{ form_errors(filterForm.campus) }}
+
+                    </div>
+                    &nbsp;
+                    <div class="group">
+                        {{ form_label(filterForm.nom) }}
+                        <input type="text" name="{{ field_name(filterForm.nom) }}">
+                        {{ form_errors(filterForm.nom) }}
+                    </div>
+                    &nbsp;
+                    <div class="group d-flex">
+                        {{ form_label(filterForm.debut) }}
+                        <input type="date" name="{{ field_name(filterForm.debut) }}">
+                        {{ form_label(filterForm.fin) }}
+                        <input type="date" name="{{ field_name(filterForm.fin) }}">
+                    </div>
                 </div>
-                <div class="label column-3">
-                    <span>Clôture</span>
+
+                &nbsp;
+
+
+                <div class="col-md-4 formCheck formIndex">
+                    <div class="group">
+
+
+                        <input type="checkbox" name="{{ field_name(filterForm.monOrga) }}">
+                        {{ form_label(filterForm.monOrga) }}
+                    </div>
+
+                    <div class="group">
+
+                        <input type="checkbox" name="{{ field_name(filterForm.inscrit) }}">
+                        {{ form_label(filterForm.inscrit) }}
+                    </div>
+
+                    <div class="group">
+
+                        <input type="checkbox" name="{{ field_name(filterForm.nonInscrit) }}">
+                        {{ form_label(filterForm.nonInscrit) }}
+                    </div>
+                    <div class="group">
+
+                        <input type="checkbox" name="{{ field_name(filterForm.passee) }}">
+                        {{ form_label(filterForm.passee) }}
+                    </div>
+                    &nbsp;{{ form_end(filterForm) }}
                 </div>
-                <div class="label column-4">
-                    <span>Inscrits/places</span>
-                </div>
-                <div class="label column-5">
-                    <span>Etat</span>
-                </div>
-                <div class="label column-6">
-                    <span>Inscrit</span>
-                </div>
-                <div class="label column-7">
-                    <span>Organisateur</span>
-                </div>
-                <div class="label column-8">
-                    <span>Actions</span>
+                <div class="col-md-3">
+
                 </div>
             </div>
-            <div class="tabs">
-                {% for sortie in sortieList %}
-                    {% if (sortie.etat.libelle == "En création" and sortie.organisateur.pseudo == app.user.pseudo) or (sortie.etat.libelle != "En création" and sortie.etat.libelle != "Archivé") %}
-                        <div class="tab-row">
-                            <div class="column-1">
-                                <span>{{ sortie.nom }}</span>
-                            </div>
-                            <div class="column-2">
-                                <span>{{ sortie.dateHeureDebut|date("d/m/Y H:i", "Europe/Paris") }}</span>
-                            </div>
-                            <div class="column-3">
-                                <span>{{ sortie.dateLimiteInscription|date("d/m/Y", "Europe/Paris") }}</span>
-                            </div>
-                            <div class="column-4">
-                                <span>{{ sortie.participants|length }}/{{ sortie.nbInscriptionMax }}</span>
-                            </div>
-                            <div class="column-5">
-                                <span>{{ sortie.etat }}</span>
-                            </div>
-                            <div class="column-6">
+        </div>
+
+    </div>
+
+
+
+
+    <div class="wrapper">
+        <div class="labels d-flex">
+            <div class="label column-1">
+                <span>Nom de la sortie</span>
+            </div>
+            <div class="label column-2">
+                <span>Date de la sortie</span>
+            </div>
+            <div class="label column-3">
+                <span>Clôture</span>
+            </div>
+            <div class="label column-4">
+                <span>Inscrits/places</span>
+            </div>
+            <div class="label column-5">
+                <span>Etat</span>
+            </div>
+            <div class="label column-6">
+                <span>Inscrit</span>
+            </div>
+            <div class="label column-7">
+                <span>Organisateur</span>
+            </div>
+            <div class="label column-8">
+                <span>Actions</span>
+            </div>
+        </div>
+        <div class="tabs">
+            {% for sortie in sortieList %}
+                {% if (sortie.etat.libelle == "En création" and sortie.organisateur.pseudo == app.user.pseudo) or (sortie.etat.libelle != "En création" and sortie.etat.libelle != "Archivé") %}
+                    <div class="tab-row">
+                        <div class="column-1">
+                            <span>{{ sortie.nom }}</span>
+                        </div>
+                        <div class="column-2">
+                            <span>{{ sortie.dateHeureDebut|date("d/m/Y H:i", "Europe/Paris") }}</span>
+                        </div>
+                        <div class="column-3">
+                            <span>{{ sortie.dateLimiteInscription|date("d/m/Y", "Europe/Paris") }}</span>
+                        </div>
+                        <div class="column-4">
+                            <span>{{ sortie.participants|length }}/{{ sortie.nbInscriptionMax }}</span>
+                        </div>
+                        <div class="column-5">
+                            <span>{{ sortie.etat }}</span>
+                        </div>
+                        <div class="column-6">
                                 <span>
                                     {% if app.user in sortie.participants %}
                                         X
                                     {% endif %}
                                 </span>
-                            </div>
-                            <div class="column-7">
-                                <span><a href="{{ path('app_afficher_profil', {slug: sortie.organisateur.slug}) }}">{{ sortie.organisateur.pseudo }}</a></span>
-                            </div>
-                            <div class="column-8">
-                                {% if sortie.etat.libelle == "En création" %}
-                                    <span><a href="{{ path('app_sortie_modification', {slug: sortie.slug}) }}">Modifier</a> - <a href="{{ path('app_sortie_publier', {slug: sortie.slug}) }}">Publier</a></span>
-                                {% elseif sortie.etat.libelle == "Ouvert" %}
-                                    <span><a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a>
+                        </div>
+                        <div class="column-7">
+                            <span><a href="{{ path('app_afficher_profil', {slug: sortie.organisateur.slug}) }}">{{ sortie.organisateur.pseudo }}</a></span>
+                        </div>
+                        <div class="column-8">
+                            {% if sortie.etat.libelle == "En création" %}
+                                <span><a href="{{ path('app_sortie_modification', {slug: sortie.slug}) }}">Modifier</a> - <a
+                                            href="{{ path('app_sortie_publier', {slug: sortie.slug}) }}">Publier</a></span>
+                            {% elseif sortie.etat.libelle == "Ouvert" %}
+                                <span><a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a>
                                         {% if sortie.organisateur.pseudo == app.user.pseudo %}
-                                            - <a href="{{ path('app_annuler_sortie', {slug: sortie.slug}) }}">Annuler</a>
+                                            - <a
+                                                href="{{ path('app_annuler_sortie', {slug: sortie.slug}) }}">Annuler</a>
                                         {% elseif app.user in sortie.participants %}
                                             - <a href="{{ path('app_sortie_desinscrit', {slug: sortie.slug}) }}">Se désister</a>
                                         {% elseif sortie.participants|length < sortie.nbInscriptionMax %}
@@ -149,24 +166,24 @@
                                             {% endif %}
                                         {% endif %}
                                     </span>
-                                {% elseif sortie.etat.libelle == "Fermé" %}
-                                    <span>
+                            {% elseif sortie.etat.libelle == "Fermé" %}
+                                <span>
                                         <a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a>
                                         {% if app.user in sortie.participants %}
                                             - <a href="{{ path('app_sortie_desinscrit', {slug: sortie.slug}) }}">Se désister</a>
                                         {% endif %}
                                     </span>
-                                    {% else %}
+                            {% else %}
                                 <span><a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a></span>
-                                {% endif %}
+                            {% endif %}
 
-                            </div>
                         </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
-        <a class="btn-wide btn-normal" href="{{ path('app_sortie_creation') }}" >Créer une sortie</a>
+    </div>
+    <a class="btn-wide btn-normal" href="{{ path('app_sortie_creation') }}">Créer une sortie</a>
     </div>
 
 {% endblock %}

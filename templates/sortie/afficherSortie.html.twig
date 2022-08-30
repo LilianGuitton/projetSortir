@@ -6,7 +6,12 @@
         {
             width:500px;
         }
-
+        .title
+        {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 30px;
+        }
         .tab-row{
             display: flex;
         }
@@ -28,15 +33,18 @@
 
 {% block body %}
     <div class="row justify-content-center">
-        <h2>Afficher une sortie</h2>
-        <div class="col-5">
+        <h2 class="title">Afficher une sortie</h2>
+        <div class="col-3">
+
+        </div>
+        <div class="col-4">
             <p>Nom de la sortie : {{ sortie.nom }}</p>
             <p>Date et heure de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y H:i:s", "Europe/Paris") }}</p>
             <p>Date limite d'inscription : {{ sortie.dateLimiteInscription|date("d/m/Y H:i:s", "Europe/Paris") }}</p>
             <p>Nombre de places : {{ sortie.nbInscriptionMax }}</p>
             <p>Durée : {{ sortie.duree }} minutes</p>
         </div>
-        <div class="col-5">
+        <div class="col-4">
             <p>Campus : {{ sortie.campus }}</p>
             <p>Lieu : {{ sortie.lieu }}</p>
             <p>Rue : {{ sortie.lieu.rue }}</p>
@@ -46,7 +54,7 @@
         </div>
     </div>
     <div>
-        <h3>Liste des participants inscrits :</h3>
+        <h3 class="title">Liste des participants inscrits :</h3>
         <div class="wrapper">
             <div class="labels d-flex">
                 <div class="label column-1">

@@ -4,12 +4,12 @@
 
 {% block body %}
 <div class="row">
-    <div class="photo col-4">
+    <div class="photo col-6">
         {% if participant.photo!=null %}
             <img src="{{ participant.photo }}" alt="profil_pic">
         {% endif %}
     </div>
-    <div class="col-4">
+    <div class="col-6">
         <h2 class="text-center">{{ participant.pseudo }}</h2>
         <div>
             <p>Prénom : {{ participant.prenom }}</p>
