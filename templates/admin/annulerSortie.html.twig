@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1 class="titre1">Annuler une sortie</h1>
+
+    <div>
+        <div>
+            <span>Nom de la sortie : {{ sortie.nom }}</span>
+        </div>
+        <div>
+            <span>Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y", "Europe/Paris") }}</span>
+        </div>
+        <div>
+            <span>Campus : {{ sortie.campus }}</span>
+        </div>
+        <div>
+            <span>Lieu : {{ sortie.lieu }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville }}</span>
+        </div>
+        <div>
+            {{ form_start(cancelForm) }}
+
+            {{ form_row(cancelForm.description) }}
+            <button>Enregister</button>
+            <a class="btn" href="{{ path("app_sorties_admin") }}">Annuler</a>
+            {{ form_end(cancelForm) }}
+
+        </div>
+
+
+    </div>
+
+{% endblock %}
