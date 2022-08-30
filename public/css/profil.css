@@ -7,7 +7,7 @@ body{
 
 
 
-    /*background-image: url('../img/afterwork.jpg');*/
+    /*background-image: url('');*/
     font-family: 'Oswald', sans-serif;
     font-family: 'Roboto', sans-serif;
 }
@@ -28,6 +28,16 @@ body{
 .btnVille{
     margin-bottom: 5%;
 }
+.formCamp{
+    margin-bottom:1%
+}
+.formVille{
+    margin-bottom:3%;
+    margin-top:1%;
+}
+.btnCamp{
+    margin : 3%;
+}
 .limiteDate{
 margin-left: 11.6%;
 }
@@ -36,15 +46,21 @@ margin-left: 11.6%;
 }
 .titre1{
     /*font-family: 'Roboto Mono', monospace;*/
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     text-align: center;
 }
 h2{
     /*text-align: center;*/
     justify-content: center;
 }
-
+.annulSortie{
+    margin: 2%;
+    font-size: 20px;
+}
+.annulSortiebtn{
+    margin : 3%;
+}
 .header {
     /*font-family: 'Roboto Mono', monospace;*/
     /*background: rgba(187, 186, 186, 0.96);*/
@@ -161,6 +177,12 @@ padding-top: 1%;
 .form-date{
     text-align: center;
     border: none;
+}
+.btn-sortie{
+    margin-bottom: 5%;
+}
+.btn-annuler{
+    margin-left: 34%;
 }
 
 

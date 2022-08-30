@@ -21,23 +21,25 @@
 
         </div>
         <div class="col-6 align">
-            <div>
+            <div class="annulSortie">
                 <span>Nom de la sortie : {{ sortie.nom }}</span>
             </div>
-            <div>
+            <div class="annulSortie">
                 <span>Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y", "Europe/Paris") }}</span>
             </div>
-            <div>
+            <div class="annulSortie">
                 <span>Campus : {{ sortie.campus }}</span>
             </div>
-            <div>
+            <div class="annulSortie">
                 <span>Lieu : {{ sortie.lieu }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville }}</span>
             </div>
-            <div>
+            <div class="annulSortie">
                 {{ form_start(cancelForm) }}
 
                 {{ form_row(cancelForm.description) }}
+                <div class="annulSortiebtn">
                 <button class="btn-wide btn-normal">Enregister</button>
+                </div>
                 <a class="btn-wide btn-normal" href="{{ path("app_home") }}">Annuler</a>
                 {{ form_end(cancelForm) }}
 

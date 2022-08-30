@@ -5,26 +5,17 @@
 {% block body %}
     <h1 class="titre1">Editer Campus</h1>
 
-<div class="container">
-    <div class="row ">
-            <div class="col-md-4">
 
-            </div>
-            <div class="col-md-4  " >
-                <div class="edit">
+    <div class="text-center formCamp">
                     {{ include('campus/_form.html.twig', {'button_label': 'Modifier'}) }}
-
+    </div>
 
                 <a ><form method="post" action="{{ path('app_campus') }}">
+
                 <button class="btn-wide btn-normal">Retour</button>
+
                 </form>
                 </a>
-                </div>
-            </div>
-            <div class="col-md-4">
 
-            </div>
-    </div>
-</div>
 
 {% endblock %}

@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Campus{% endblock %}
+{% block title %}Ajouter Campus{% endblock %}
 
 {% block body %}
     <h1 class="titre1">Créer un nouveau Campus</h1>
 
-    {{ include('campus/_form.html.twig') }}
+    <div class="text-center formCamp">
+        {{ include('campus/_form.html.twig') }}
+    </div>
 
-
-    <a><form method="post" action="{{ path('app_campus') }}">
-            <button class="btn-wide btn-normal">Retour</button>
-        </form></a>
+    <a>
+        <form method="post" action="{{ path('app_campus') }}">
+            <button class="btn-wide btn-normal ">Retour</button>
+        </form>
+    </a>
 {% endblock %}
