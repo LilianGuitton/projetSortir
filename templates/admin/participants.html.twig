@@ -1,34 +1,60 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Liste des participants</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    Pseudo
-                </th>
-                <th>
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for participant in participants %}
-                <tr>
-                    <td>{{ participant.pseudo }}</td>
-                    <td>
-                        {% if participant.isActif %}
-                            <a href="{{ path("app_participant_disable", {slug: participant.slug}) }}">Désactiver</a>
-                        {% else %}
-                            <a href="{{ path("app_participant_enable", {slug: participant.slug}) }}">Activer</a>
-                        {% endif %}
-                        - <a href="{{ path("app_participant_delete", {slug: participant.slug}) }}">Supprimer</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{ path("app_register") }}">Ajouter un participant</a>
+
+    <style>
+
+        table {
+            table-layout: fixed;
+            width: 100%;
+            border-collapse: collapse;
+            
+        }
+        th{
+            padding: 20px;
+        }
+
+
+    </style>
+
+    <div class="row justify-content-center">
+        <h2 class="titre1">Liste des participants</h2>
+
+            <div class="col-4">
+                <div class="tab">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>
+                                Pseudo
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for participant in participants %}
+                            <tr>
+                                <td>{{ participant.pseudo }}</td>
+                                <td>
+                                    {% if participant.isActif %}
+                                        <a href="{{ path("app_participant_disable", {slug: participant.slug}) }} ">Désactiver</a>
+                                    {% else %}
+                                        <a href="{{ path("app_participant_enable", {slug: participant.slug}) }}">Activer</a>
+                                    {% endif %}
+                                    - <a href="{{ path("app_participant_delete", {slug: participant.slug}) }}">Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+    </div>
+
+    <a href="{{ path("app_register") }}" class="btn-wide btn-normal">Ajouter un participant</a>
 
 {% endblock %}

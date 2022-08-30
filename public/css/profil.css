@@ -143,4 +143,14 @@ padding-top: 1%;
     display: flex;
     margin : auto;
 }
+.form-theme{
+    border-radius: 50px;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    background: #ecf0f3;
+}
+.form-date{
+    text-align: center;
+    border: none;
+}
+
 
