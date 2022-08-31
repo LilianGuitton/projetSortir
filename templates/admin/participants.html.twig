@@ -1,25 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <style>
-
-        table {
-            table-layout: fixed;
-            width: 100%;
-            border-collapse: collapse;
-
-        }
-        th{
-            padding: 20px;
-        }
-
-
-    </style>
-
-    <div class="row justify-content-center">
-        <h2 class="titre1">Liste des participants</h2>
-
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <h2 class="titre1">Liste des participants</h2>
             <div class="col-4">
                 <div class="tab">
                     <table class="th-participant">
@@ -50,9 +34,8 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
-
+        </div>
     </div>
 
     <a href="{{ path("app_register") }}" id="ajout-participant1" class="btn-wide btn-normal">Ajouter un participant</a>

@@ -7,7 +7,11 @@
         <div class="text-center ">
         <p class="message-mail">
             Un mail vient d'être envoyé à l'adresse email que vous venez de nous communiquer.
+        </p>
+        <p class="message-mail">
             Il contient un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
+        </p>
+        <p class="message-mail">
             Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
         </p>
         <p class="message-mail">

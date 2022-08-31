@@ -9,7 +9,7 @@
 {% block body %}
     <div class="date">
         <div>
-            <p><strong>On est le : {{ "now"|date("m/d/Y") }}</strong></p>
+            <p><strong>Aujourd'hui, on est le : {{ "now"|date("m/d/Y") }}</strong></p>
         </div>
         <div>
             <p><strong>Connecté en tant que : {{ app.user.prenom }} {{ app.user.nom|slice(0,1) }}.</strong></p>
