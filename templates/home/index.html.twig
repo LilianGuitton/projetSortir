@@ -122,7 +122,7 @@
         </div>
         <div class="tabs">
             {% for sortie in sortieList %}
-                {% if (sortie.etat.libelle == "En création" and sortie.organisateur.pseudo == app.user.pseudo) or (sortie.etat.libelle != "En création" and sortie.etat.libelle != "Archivé") %}
+                {% if (sortie.etat.libelle == "En création" and sortie.organisateur.pseudo == app.user.pseudo) or (sortie.etat.libelle != "En création" and sortie.etat.libelle != "Archivée") %}
                     <div class="tab-row">
                         <div class="column-1">
                             <span>{{ sortie.nom }}</span>
@@ -166,7 +166,7 @@
                                             {% endif %}
                                         {% endif %}
                                     </span>
-                            {% elseif sortie.etat.libelle == "Fermé" %}
+                            {% elseif sortie.etat.libelle == "Fermée" %}
                                 <span>
                                         <a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a>
                                         {% if app.user in sortie.participants %}

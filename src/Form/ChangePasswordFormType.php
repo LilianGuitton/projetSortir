@@ -36,7 +36,7 @@ class ChangePasswordFormType extends AbstractType
                 'second_options' => [
                     'attr' => ['autocomplete' => 'new-password',
                         'class'=>"form-control form-theme"],
-                    'label' => 'Répéter le nouveau mot de passe : ',
+                    'label' => 'Ecrire de nouveau le mot de passe : ',
                 ],
                 'invalid_message' => 'The password fields must match.',
                 // Instead of being set onto the object directly,

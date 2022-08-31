@@ -3,34 +3,39 @@
 {% block body %}
 
     <h1 class="titre1">Annuler une sortie</h1>
+        <div class="container-fluid">
+            <div class="row justify-content">
+                <div class="col-5">
+                </div>
+                <div class="col-4">
+                    <div>
+                        <span>Nom de la sortie : {{ sortie.nom }}</span>
+                    </div>
+                    <div>
+                        <span>Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y", "Europe/Paris") }}</span>
+                    </div>
+                    <div>
+                        <span>Campus : {{ sortie.campus }}</span>
+                    </div>
+                    <div>
+                        <span>Lieu : {{ sortie.lieu }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville }}</span>
+                    </div>
+                    <div>
+                        {{ form_start(cancelForm) }}
 
-    <div>
-        <div>
-            <span class="space-bt">Nom de la sortie : {{ sortie.nom }}</span>
+
+                        {{ form_row(cancelForm.description) }}
+
+
+                        <button class="btn-wide btn-normal">Enregister</button>
+                        <a class="btn-wide btn-normal" href="{{ path("app_sorties_admin") }}">Annuler</a>
+                        {{ form_end(cancelForm) }}
+
+                    </div>
+
+                </div>
+
+
+            </div>
         </div>
-        <div>
-            <span>Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y", "Europe/Paris") }}</span>
-        </div>
-        <div>
-            <span>Campus : {{ sortie.campus }}</span>
-        </div>
-        <div>
-            <span>Lieu : {{ sortie.lieu }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville }}</span>
-        </div>
-        <div>
-            {{ form_start(cancelForm) }}
-
-
-            {{ form_row(cancelForm.description) }}
-
-
-            <button>Enregister</button>
-            <a class="btn" href="{{ path("app_sorties_admin") }}">Annuler</a>
-            {{ form_end(cancelForm) }}
-
-        </div>
-
-
-    </div>
-
 {% endblock %}
