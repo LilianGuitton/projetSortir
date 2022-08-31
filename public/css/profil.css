@@ -196,7 +196,7 @@ padding-top: 1%;
     margin-top: 5%;
     width:100%;
     padding-top:7px;
-    bottom: 0;
+    min-height: auto;
 }
 .center-footer {
     display: table;
@@ -207,7 +207,7 @@ padding-top: 1%;
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    font-size: 30px;
+    font-size: 60px;
  }
 .social {
     padding-left: 0px;
@@ -217,17 +217,15 @@ li {
 }
 li a {
     color: rgba(256, 256, 256, 0.6);
-    border-radius: 6px;
+    border-radius: 8px;
     list-style-type: none;
     display: inline-block;
     width: 50px;
     height: 50px;
     line-height: 50px;
-    padding: 1%;
     border: 1px solid rgba(256, 256, 256, 0.6);
     cursor: pointer;
     margin-left: 10px;
-    margin-bottom: 5px;
     transition: ease .3s;
 }
 
@@ -242,10 +240,6 @@ li a {
     font-size: 15px;
     font-family: Open Sans;
     color: rgba(256, 256, 256, 0.6);
-}
-.inlign{
-    display: flex;
-    justify-content: space-between;
 }
 
 
