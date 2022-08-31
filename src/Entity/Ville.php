@@ -27,7 +27,7 @@ class Ville
     private $nom;
 
     /**
-     * @Assert\Regex(pattern="/^[0-9]{5}/")
+     * @Assert\Regex(pattern="/\b\d{5}\b/")
      * @ORM\Column(type="string", length=5)
      */
     private $codePostal;
