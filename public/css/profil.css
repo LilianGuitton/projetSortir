@@ -206,10 +206,10 @@ padding-top: 1%;
 
     background:black;
     position:absolute;
-
+    margin-top: 5%;
     width:100%;
-    padding-top:20px;
-
+    padding-top:7px;
+    min-height: auto;
 }
 .center-footer {
     display: table;
@@ -220,7 +220,7 @@ padding-top: 1%;
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    font-size: 30px;
+    font-size: 60px;
  }
 .social {
     padding-left: 0px;
@@ -230,17 +230,15 @@ li {
 }
 li a {
     color: rgba(256, 256, 256, 0.6);
-    border-radius: 6px;
+    border-radius: 8px;
     list-style-type: none;
     display: inline-block;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    padding: 1%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
     border: 1px solid rgba(256, 256, 256, 0.6);
     cursor: pointer;
     margin-left: 10px;
-    margin-bottom: 5px;
     transition: ease .3s;
 }
 
