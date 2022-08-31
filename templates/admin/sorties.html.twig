@@ -2,29 +2,49 @@
 
 {% block body %}
     <h2 class="titre1">Liste des sorties</h2>
-    <div class="tableSortie">
-    <table >
-       <caption class="hidden">Liste des sorties ouvertes</caption>
-        <thead>
-            <tr>
-                <th class="th-sortie">Nom de la sortie   </th>
-                <th class="th-sortie">Date de la sortie   </th>
-                <th class="th-sortie">Organisateur   </th>
-                <th class="th-sortie"> Action </th>
-            </tr>
-        </thead>
-        <tbody class="tbody">
-            {% for sortie in sorties %}
-                {% if sortie.etat == "Ouvert" %}
-                    <tr>
-                        <td>{{ sortie.nom }}</td>
-                        <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
-                        <td>{{ sortie.organisateur.pseudo }}</td>
-                        <td><a href="{{ path("app_annuler_sortie_admin", {slug: sortie.slug}) }}">Annuler</a></td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
+
+
+    <div class="wrapper1">
+    <div class="labels d-flex">
+        <div class="label column-1b">
+            <span>Nom de la sortie</span>
+        </div>
+        <div class="label column-2b">
+            <span>Date de la sortie</span>
+        </div>
+        <div class="label column-3b">
+            <span>Organisateur</span>
+        </div>
+        <div class="label column-4b">
+            <span>Action</span>
+        </div>
     </div>
+        <div class="tabs">
+            {% for sortie in sorties %}
+
+                <div class="tab-row">
+                <div class="column-1">
+                    <span>{{ sortie.nom }}</span>
+                </div>
+                <div class="column-2">
+                    <span>{{sortie.dateHeureDebut|date("d/m/Y") }}</span>
+                </div>
+                <div class="column-3">
+                    <span>{{sortie.organisateur.pseudo}}</span>
+                </div>
+                    <div class="column-4">
+                        <a href="{{ path("app_annuler_sortie_admin", {slug: sortie.slug}) }}">Annuler</a>
+
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+
 {% endblock %}
