@@ -5,12 +5,18 @@
 {% block body %}
     <h1 class="titre1">Réinitialise ton mot de passe par là</h1>
 
-    <div>
-        <div>
-            {{ form_start(resetForm) }}
-            {{ form_row(resetForm.plainPassword) }}
-            <button class="btn-wide btn-normal btnVille btnModif">Réinitilisation du mot de passe</button>
-            {{ form_end(resetForm) }}
+    <div class="row justify-content">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+            <div class="text-center">
+                {{ form_start(resetForm) }}
+                {{ form_row(resetForm.plainPassword) }}
+                <button class="btn-wide btn-normal btnVille btnModif">Réinitiliser</button>
+                {{ form_end(resetForm) }}
+            </div>
+
         </div>
     </div>
 
