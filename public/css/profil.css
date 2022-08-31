@@ -210,6 +210,7 @@ padding-top: 1%;
     width:100%;
     padding-top:7px;
     min-height: auto;
+
 }
 .center-footer {
     display: table;
@@ -253,6 +254,11 @@ li a {
     font-size: 15px;
     font-family: Open Sans;
     color: rgba(256, 256, 256, 0.6);
+}
+.message-mail{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    font-size: 120%;
 }
 
 
