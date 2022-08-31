@@ -47,6 +47,8 @@ class CreerSortieType extends AbstractType
                 ]
             ])
             ->add('description', TextareaType::class, [
+                'label' => 'Description :',
+
                 "attr" => [
                     "class" => "form-control form-theme"
                 ]

@@ -5,93 +5,89 @@
 {% block body %}
 
 
-    <div class="container l">
-        <div class="row">
-            <div class="col-md-3">
+<div class="container l">
+    <div class="row">
+        <div class="col-md-3">
 
-            </div>
-            <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
 
-                <h1 class="titre1">Mon profil</h1>
+            <h1 class="titre1">Mon profil</h1>
+            {{ form_start(MonProfilForm) }}
+
+            <div>
                 {{ form_start(MonProfilForm) }}
+                <div>
+                    <p>Pseudo :
+                        {{ form_widget(MonProfilForm.pseudo) }}
+                        {{ form_errors(MonProfilForm.pseudo) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Prénom :
+                        {{ form_widget(MonProfilForm.prenom) }}
+                        {{ form_errors(MonProfilForm.prenom) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Nom :
+                        {{ form_widget(MonProfilForm.nom) }}
+                        {{ form_errors(MonProfilForm.nom) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Téléphone :
+                        {{ form_widget(MonProfilForm.telephone) }}
+                        {{ form_errors(MonProfilForm.telephone) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Email :
+                        {{ form_widget(MonProfilForm.email) }}
+                        {{ form_errors(MonProfilForm.email) }}
+                    </p>
+                </div>
 
                 <div>
-                    {{ form_start(MonProfilForm) }}
-                    <div>
-                        <p>Pseudo :
-                            {{ form_widget(MonProfilForm.pseudo) }}
-                            {{ form_errors(MonProfilForm.pseudo) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Prénom :
-                            {{ form_widget(MonProfilForm.prenom) }}
-                            {{ form_errors(MonProfilForm.prenom) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Nom :
-                            {{ form_widget(MonProfilForm.nom) }}
-                            {{ form_errors(MonProfilForm.nom) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Téléphone :
-                            {{ form_widget(MonProfilForm.telephone) }}
-                            {{ form_errors(MonProfilForm.telephone) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Email :
-                            {{ form_widget(MonProfilForm.email) }}
-                            {{ form_errors(MonProfilForm.email) }}
-                        </p>
-                    </div>
-
-                    <div>
-                        <p>Mot de passe  :
-                            {{ form_widget(MonProfilForm.password.first) }}
-                            {{ form_errors(MonProfilForm.password.first) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Confirmation :
-                            {{ form_widget(MonProfilForm.password.second) }}
-                            {{ form_errors(MonProfilForm.password.second) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Campus :
-                            {{ form_widget(MonProfilForm.estRattacherA) }}
-                            {{ form_errors(MonProfilForm.estRattacherA) }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>Ma photo :
-                            {{ form_widget(MonProfilForm.photo) }}
-                            {{ form_errors(MonProfilForm.photo) }}
-                        </p>
-                    </div>
-
+                    <p>Mot de passe :
+                        {{ form_widget(MonProfilForm.password.first) }}
+                        {{ form_errors(MonProfilForm.password.first) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Confirmation :
+                        {{ form_widget(MonProfilForm.password.second) }}
+                        {{ form_errors(MonProfilForm.password.second) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Campus :
+                        {{ form_widget(MonProfilForm.estRattacherA) }}
+                        {{ form_errors(MonProfilForm.estRattacherA) }}
+                    </p>
+                </div>
+                <div>
+                    <p>Ma photo :
+                        {{ form_widget(MonProfilForm.photo) }}
+                        {{ form_errors(MonProfilForm.photo) }}
+                    </p>
+                </div>
+                <div class="annulSortiebtn">
                     <button class="btn-wide btn-normal center" value="Enregistrer">Enregistrer</button>
+                </div>
+                <div class="annulSortiebtn">
                     <a href="{{ path('app_home') }}" class="btn-wide btn-normal">Annuler</a>
-{#                </div>#}
-                    {{ form_end(MonProfilForm) }}
+                    <div class="annulSortiebtn">
+
+                        {{ form_end(MonProfilForm) }}
 
 
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3">
-
-            </div>
-        </div>
-    </div>
 
 
-
-
-
-
-
-
-
-{% endblock %}
+            {% endblock %}
