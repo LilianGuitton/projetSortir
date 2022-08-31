@@ -17,10 +17,15 @@ class FiltreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('campus', EntityType::class, ["class"=>Campus::class, "label"=>"Campus"])
-            ->add('nom', TextType::class, ["label"=>"Le nom de la sortie contient :", "attr"=> ['style'=>"form-control form-theme"]])
-            ->add('debut', DateType::class,["label"=>"Entre :", "attr"=>["class"=>"form-theme form-date"]])
-            ->add('fin', DateType::class, ["label"=> "et :"])
+            ->add('campus', EntityType::class, ["class"=>Campus::class, "label"=>"Campus",
+                'attr'=>['class'=> 'form-theme']
+                ])
+            ->add('nom', TextType::class, ["label"=>"Le nom de la sortie contient :",
+                'attr'=> ['class'=>'form-theme']
+            ])
+            ->add('debut', DateType::class,["label"=>"Entre :"])
+            ->add('fin', DateType::class, ["label"=> "et :"
+                ])
             ->add('monOrga', CheckboxType::class, ["label"=> "Sorties dont je suis l'organisateur/trice"])
             ->add('inscrit', CheckboxType::class, ["label"=> "Sorties auxquelles je suis inscrit/e"])
             ->add('nonInscrit', CheckboxType::class, ["label"=> "Sorties auxquelles je ne suis pas inscrit/e"])
