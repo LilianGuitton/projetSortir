@@ -105,45 +105,47 @@ class AdminController extends AbstractController
         $uploadForm->handleRequest($request);
 
         if ($uploadForm->isSubmitted() && $uploadForm->isValid()){
+            ini_set('max_execution_time', 0);
             $file = $uploadForm->get('file')->getData();
             $csv = Reader::createFromPath($file->getPathname(), 'r');
             $csv->setHeaderOffset(0);
-
+            $defaultHeader = ["pseudo", "prenom", "nom", "telephone", "email", "campus"];
             $header = $csv->getHeader();
             $records = $csv->getRecords();
-            if ($header[0] != "pseudo;prenom;nom;telephone;email;campus"){
+            if ($header != $defaultHeader){
+                dump($defaultHeader);
+                dump($header);
+                dump($records);
+                die();
                 return $this->redirectToRoute("app_register_multiple");
             }
             foreach ($records as $record){
-                $strData = $record[$header[0]];
-                $data = explode(";",$strData);
-                $participant = $repoParticipant->findOneBy(array("pseudo"=>$data[0]));
+                $participant = $repoParticipant->findOneBy(array("pseudo"=>$record["pseudo"]));
 
-                if ($participant==null){
+                if ($participant==null) {
                     $participant = new Participant();
+                    $participant->setPassword($userPasswordHasher->hashPassword($participant, 'Pa$$w0rd'));
+                    $participant->setPseudo($record["pseudo"]);
+                    $participant->setPrenom($record["prenom"]);
+                    $participant->setNom($record["nom"]);
+                    $participant->setTelephone($record["telephone"]);
+                    $participant->setEmail($record["email"]);
+                    $participant->setSlug($slugify->slugify($record["pseudo"]));
+                    $participant->setActif(true);
+
+                    $campus = $repoCampus->findOneBy(array("nom" => $record["campus"]));
+
+                    if ($campus == null) {
+                        $campus = new Campus();
+                        $campus->setNom($record["campus"]);
+                        $campus->setSlug($slugify->slugify($record["campus"]));
+                        $repoCampus->add($campus, true);
+                    }
+
+                    $participant->setEstRattacherA($campus);
+
+                    $repoParticipant->add($participant, true);
                 }
-
-                $participant->setPassword($userPasswordHasher->hashPassword($participant,'Pa$$w0rd'));
-                $participant->setPseudo($data[0]);
-                $participant->setPrenom($data[1]);
-                $participant->setNom($data[2]);
-                $participant->setTelephone("0" . $data[3]);
-                $participant->setEmail($data[4]);
-                $participant->setSlug($slugify->slugify($data[0]));
-                $participant->setActif(true);
-
-                $campus = $repoCampus->findOneBy(array("nom"=>$data[5]));
-
-                if ($campus==null){
-                    $campus = new Campus();
-                    $campus->setNom($data[5]);
-                    $campus->setSlug($slugify->slugify($data[5]));
-                    $repoCampus->add($campus, true);
-                }
-
-                $participant->setEstRattacherA($campus);
-
-                $repoParticipant->add($participant, true);
             }
             return $this->redirectToRoute("app_participants_admin");
         }
