@@ -1,18 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Liste des sorties</h2>
-    <table>
-        <caption>Liste des sorties ouvertes</caption>
+    <h2 class="titre1">Liste des sorties</h2>
+    <div class="tableSortie">
+    <table >
+       <caption class="hidden">Liste des sorties ouvertes</caption>
         <thead>
             <tr>
-                <th>Nom de la sortie</th>
-                <th>Date de la sortie</th>
-                <th>Organisateur</th>
-                <th>Action</th>
+                <th class="th-sortie">Nom de la sortie   </th>
+                <th class="th-sortie">Date de la sortie   </th>
+                <th class="th-sortie">Organisateur   </th>
+                <th class="th-sortie"> Action </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="tbody">
             {% for sortie in sorties %}
                 {% if sortie.etat == "Ouvert" %}
                     <tr>
@@ -25,4 +26,5 @@
             {% endfor %}
         </tbody>
     </table>
+    </div>
 {% endblock %}

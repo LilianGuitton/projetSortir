@@ -6,10 +6,10 @@
 body{
 
 
-
     /*background-image: url('');*/
     font-family: 'Oswald', sans-serif;
     font-family: 'Roboto', sans-serif;
+
 }
 .edit{
     margin-left : 22%;
@@ -55,9 +55,30 @@ margin-left: 11.6%;
     margin-bottom: 3%;
     text-align: center;
 }
+.tableSortie{
+    margin-left: 40%;
+}
+.th-sortie,.th{
+    white-space: pre-wrap;
+}
+
+
+.hidden{
+    visibility: hidden;
+    display: none;
+}
+#ajout-participant1,#ajout-participant2{
+    margin-top: 1%;
+}
 h2{
     /*text-align: center;*/
     justify-content: center;
+}
+.tbody,.form-participant{
+    margin: 5%;
+}
+.th-participant{
+    margin-left: 20%;
 }
 .annulSortie{
     margin: 2%;
@@ -101,7 +122,9 @@ padding-top: 1%;
     margin-top: 2%;
     margin-bottom: 2%;
 }
+.register{
 
+}
 .btn-wide {
     width: 230px;
     height: 50px;
@@ -136,7 +159,22 @@ padding-top: 1%;
     text-align: center;
     padding-top: 3%;
 }
-
+.wrapper1
+{
+    width:600px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    padding-top: 3%;
+}
+.wrapper2
+{
+    width:500px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    padding-top: 3%;
+}
 .tab-row{
     display: flex;
 }
@@ -145,7 +183,14 @@ padding-top: 1%;
     height: 250px;
     overflow-y: scroll;
 }
-
+.column-1a{
+    width: 160px;
+    margin-top: 1.1%;
+}
+.column-2a{
+    width: 160px;
+    margin-top: 1.1%;
+}
 .column-1{
     width: 160px;
 }
@@ -193,9 +238,10 @@ padding-top: 1%;
 
     background:black;
     position:absolute;
-
+    margin-top: 5%;
     width:100%;
-    padding-top:20px;
+    padding-top:7px;
+    min-height: auto;
 
 }
 .center-footer {
@@ -207,7 +253,7 @@ padding-top: 1%;
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    font-size: 30px;
+    font-size: 60px;
  }
 .social {
     padding-left: 0px;
@@ -217,17 +263,15 @@ li {
 }
 li a {
     color: rgba(256, 256, 256, 0.6);
-    border-radius: 6px;
+    border-radius: 8px;
     list-style-type: none;
     display: inline-block;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    padding: 1%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
     border: 1px solid rgba(256, 256, 256, 0.6);
     cursor: pointer;
     margin-left: 10px;
-    margin-bottom: 5px;
     transition: ease .3s;
 }
 
@@ -242,6 +286,11 @@ li a {
     font-size: 15px;
     font-family: Open Sans;
     color: rgba(256, 256, 256, 0.6);
+}
+.message-mail{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    font-size: 120%;
 }
 
 
