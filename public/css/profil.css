@@ -55,9 +55,22 @@ margin-left: 11.6%;
     margin-bottom: 3%;
     text-align: center;
 }
+.tableSortie{
+    margin-left: 40%;
+}
+.th-sortie{
+    white-space: pre-wrap;
+}
+.hidden{
+    visibility: hidden;
+    display: none;
+}
 h2{
     /*text-align: center;*/
     justify-content: center;
+}
+.tbody{
+    margin-top: 5%;
 }
 .annulSortie{
     margin: 2%;

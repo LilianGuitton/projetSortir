@@ -14,8 +14,10 @@ class AnnulerSortieType extends AbstractType
     {
         $builder
             ->add('description', TextareaType::class,[
+                'label' => 'Motif:' ,
                 "attr"=>[
                     "class"=>"form-theme"
+
     ]])
         ;
     }
