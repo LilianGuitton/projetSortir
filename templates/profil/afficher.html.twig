@@ -3,22 +3,24 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="photo col-6">
-        {% if participant.photo!=null %}
-            <img src="{{ participant.photo }}" alt="profil_pic">
-        {% endif %}
-    </div>
-    <div class="col-6">
-        <h2 class="text-center">{{ participant.pseudo }}</h2>
-        <div>
-            <p>Prénom : {{ participant.prenom }}</p>
-            <p>Nom : {{ participant.nom }}</p>
-            <p>Téléphone : {{ participant.telephone }}</p>
-            <p>Email : {{ participant.email }}</p>
-            <p>Campus : {{ participant.estRattacherA }}</p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="photo col-4">
+                {% if participant.photo!=null %}
+                    <img src="{{ participant.photo }}" alt="profil_pic">
+                {% endif %}
+            </div>
+            <div class="col-4">
+                <h2 class="text-center">{{ participant.pseudo }}</h2>
+                <div>
+                    <p>Prénom : {{ participant.prenom }}</p>
+                    <p>Nom : {{ participant.nom }}</p>
+                    <p>Téléphone : {{ participant.telephone }}</p>
+                    <p>Email : {{ participant.email }}</p>
+                    <p>Campus : {{ participant.estRattacherA }}</p>
+                </div>
+                <a class="btn-wide btn-normal" href="{{ path("app_home") }}">Retour accueil</a>
+            </div>
         </div>
-        <a class="btn-wide btn-normal" href="{{ path("app_home") }}">Retour accueil</a>
     </div>
-</div>
 {% endblock %}

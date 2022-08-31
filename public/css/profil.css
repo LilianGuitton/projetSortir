@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,500&display=swap');
 
 main{
-    min-height: 50vh !important;
+    min-height: 62.2vh;
 }
 
 body{
@@ -51,7 +51,6 @@ margin-left: 11.6%;
     margin-top: 5%;
     margin-bottom: 5%;
     text-align: center;
-    padding: 0;
 }
 .titre2{
     margin-top: 5%;
