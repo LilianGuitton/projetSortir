@@ -22,23 +22,22 @@
 
             <div class="col-4">
                 <div class="tab">
-                    <table>
+                    <table class="th-participant">
                         <caption class="hidden">Liste des participants</caption>
                         <thead>
                         <tr>
-                            <th>
+                            <th >
                                 Pseudo
-                            </th>
-                            <th>
-                                Action
+                            </th >
+                            <th class=" th">         Action
                             </th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                         {% for participant in participants %}
                             <tr>
-                                <td>{{ participant.pseudo }}</td>
-                                <td>
+                                <td class="th-sortie">{{ participant.pseudo }}</td>
+                                <td >
                                     {% if participant.isActif %}
                                         <a href="{{ path("app_participant_disable", {slug: participant.slug}) }} ">Désactiver</a>
                                     {% else %}
@@ -56,6 +55,6 @@
 
     </div>
 
-    <a href="{{ path("app_register") }}" class="btn-wide btn-normal">Ajouter un participant</a>
-    <a href="{{ path("app_register_multiple") }}" class="btn-wide btn-normal">Ajouter des participants</a>
+    <a href="{{ path("app_register") }}" id="ajout-participant1" class="btn-wide btn-normal">Ajouter un participant</a>
+    <a href="{{ path("app_register_multiple") }}" id="ajout-participant2" class="btn-wide btn-normal">Ajouter des participants</a>
 {% endblock %}

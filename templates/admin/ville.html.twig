@@ -5,8 +5,17 @@
 {% block body %}
 
     <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
     </style>
 
     <h1 class="titre1">Gérer les villes</h1>
@@ -17,78 +26,122 @@
             <div class="col-md-4">
                 {{ form_start(rechercheForm) }}
                 <div class="groupVille text-center">
-                <label for="{{ field_name(rechercheForm.recherche) }}">Recherche ville</label>
-                <input type="text"
-                id="{{ field_name(rechercheForm.recherche)}}"
-                name="{{ field_name(rechercheForm.recherche) }}"
-                value="{{ field_value(rechercheForm.recherche) }}"
-                class="form-control">
+                    <label for="{{ field_name(rechercheForm.recherche) }}">Recherche ville</label>
+                    <input type="text"
+                           id="{{ field_name(rechercheForm.recherche) }}"
+                           name="{{ field_name(rechercheForm.recherche) }}"
+                           value="{{ field_value(rechercheForm.recherche) }}"
+                           class="form-control">
                 </div>
 
-            <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+            </div>
         </div>
-    </div>
 
-    <div class="text-center">
-        {{ form_end(rechercheForm) }}
-    </div>
-
-
-    <table class="table">
-        <caption class="hidden">Liste des villes</caption>
-        <thead>
-        <tr>
-            <th></th>
-            <th>Nom de la ville</th>
-            <th>CodePostal</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-
-
-        {% for ville in villes %}
-            <tr>
-                <td></td>
-                <td>{{ ville.nom }}</td>
-                <td>{{ ville.codePostal }}</td>
-                <td>
-                 <div>
-                    <div>
-                    <form method="post" action="{{ path('app_ville_edit', {slug: ville.slug}) }}">
-                            <button class="btn center">Editer</button>
-                        </form>
-                    </div>
-                    <div>
-                    <form method="post" action="{{ path('app_ville_delete', {slug: ville.slug}) }}" onsubmit="return confirm('Confirmez vous la suppression?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ville.id) }}">
-                            <button class="btn">Supprimer</button>
-                        </form>
-                    </div>
-                 </div>
-                </td>
-
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Pas de résultat</td>
-            </tr>
-        {% endfor %}
-
-
-        </tbody>
-    </table>
-
-
-
-        <div class="ajout">
-
-            <a><form method="post" action="{{ path('app_ville_new') }}">
-            <button class="btn-wide btn-normal">Ajouter une ville</button>
-        </form></a>
-
+        <div class="text-center">
+            {{ form_end(rechercheForm) }}
         </div>
 
 
+        <div class="wrapper1">
+            <div class="labels d-flex">
+                <div class="label column-1">
+                    <span>Nom de la ville</span>
+                </div>
+                <div class="label column-2">
+                    <span>Code postal</span>
+                </div>
+                <div class="label column-3">
+                    <span>Action</span>
+                </div>
+            </div>
+            <div class="tabs">
+                {% for ville in villes %}
+
+                <div class="tab-row">
+                    <div class="column-1a">
+                        <span>{{ ville.nom }}</span>
+                    </div>
+                    <div class="column-2a">
+                        <span>{{ ville.codePostal }}</span>
+                    </div>
+                    <div class="column-3">
+                        <div class="d-flex">
+                            <div>
+                                <form method="post" action="{{ path('app_ville_edit', {slug: ville.slug}) }}">
+                                    <button class="btn center">Editer</button>
+                                </form>
+                            </div>
+                            <div>
+                                <form method="post" action="{{ path('app_ville_delete', {slug: ville.slug}) }}"
+                                      onsubmit="return confirm('Confirmez vous la suppression?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ville.id) }}">
+                                    <button class="btn center">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>{% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    {#    <table class="table"> #}
+    {#        <caption class="hidden">Liste des villes</caption> #}
+    {#        <thead> #}
+    {#        <tr> #}
+    {#            <th></th> #}
+    {#            <th>Nom de la ville</th> #}
+    {#            <th>CodePostal</th> #}
+    {#            <th></th> #}
+    {#        </tr> #}
+    {#        </thead> #}
+    {#        <tbody> #}
+
+
+    {#        {% for ville in villes %} #}
+    {#            <tr> #}
+    {#                <td></td> #}
+    {#                <td>{{ ville.nom }}</td> #}
+    {#                <td>{{ ville.codePostal }}</td> #}
+    {#                <td> #}
+    {#                    <div class="d-flex"> #}
+    {#                        <div> #}
+    {#                            <form method="post" action="{{ path('app_ville_edit', {slug: ville.slug}) }}"> #}
+    {#                                <button class="btn center">Editer</button> #}
+    {#                            </form> #}
+    {#                        </div> #}
+    {#                        <div> #}
+    {#                            <form method="post" action="{{ path('app_ville_delete', {slug: ville.slug}) }}" #}
+    {#                                  onsubmit="return confirm('Confirmez vous la suppression?');"> #}
+    {#                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ville.id) }}"> #}
+    {#                                <button class="btn center">Supprimer</button> #}
+    {#                            </form> #}
+    {#                        </div> #}
+    {#                    </div> #}
+    {#                </td> #}
+
+    {#            </tr> #}
+    {#        {% else %} #}
+    {#            <tr> #}
+    {#                <td colspan="4">Pas de résultat</td> #}
+    {#            </tr> #}
+    {#        {% endfor %} #}
+
+
+    {#        </tbody> #}
+    {#    </table> #}
+
+
+    <div class="ajout">
+
+
+            <form method="post" action="{{ path('app_ville_new') }}">
+                <button class="btn-wide btn-normal">Ajouter une ville</button>
+            </form>
+
+
+    </div>
 
 {% endblock %}
