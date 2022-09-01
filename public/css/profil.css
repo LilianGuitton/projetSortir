@@ -160,6 +160,8 @@ h2 {
     align-items: center;
     justify-content: center;
     border-style: none;
+    background: white;
+    text-decoration: none;
 }
 
 .btn-normal {
@@ -506,14 +508,6 @@ li a {
 }
 
 .nav-link:hover{
-    color: #FAF8F9;
-}
-
-.btn {
-    color: #FAF8F9;
-}
-
-.btn:hover{
     color: #FAF8F9;
 }
 

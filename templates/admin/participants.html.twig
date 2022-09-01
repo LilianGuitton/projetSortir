@@ -18,13 +18,12 @@
             </div>
             <div class="tabs">
                 {% for participant in participants %}
-
+                    {% if "ROLE_ADMIN" NOT IN participant.roles %}
                     <div class="tab-row">
                     <div class="column-1a">
                         <span>{{ participant.pseudo }}</span>
                     </div>
                     <div class="column-2a">
-
                             <span>
                                 {% if participant.isActif %}
                                     <a href="{{ path("app_participant_disable", {slug: participant.slug}) }} ">Désactiver</a>
@@ -33,10 +32,10 @@
                                 {% endif %}
                                 - <a href="{{ path("app_participant_delete", {slug: participant.slug}) }}">Supprimer</a>
                             </span>
-
-
+                        </div>
                     </div>
-                    </div>{% endfor %}
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>

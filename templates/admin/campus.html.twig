@@ -81,47 +81,7 @@
         </div>
     </div>
 
-
-    {#    <table class="table"> #}
-    {#        <caption class="hidden">Liste des campus</caption> #}
-    {#        <thead> #}
-    {#        <tr> #}
-    {#            <th></th> #}
-    {#            <th>Nom du campus</th> #}
-    {#            <th></th> #}
-    {#        </tr> #}
-    {#        </thead> #}
-    {#        <tbody> #}
-    {#        {% for campus in campus %} #}
-    {#            <tr> #}
-    {#                <td></td> #}
-    {#                <td>{{ campus.nom }}</td> #}
-    {#                <td> #}
-
-
-    {#                    <a> #}
-    {#                        <form method="post" action="{{ path('app_campus_edit', {slug: campus.slug}) }}"> #}
-    {#                            <button class="btn">Editer</button> #}
-    {#                        </form> #}
-    {#                        <form method="post" action="{{ path('app_campus_delete', {slug: campus.slug}) }}" #}
-    {#                              onsubmit="return confirm('Confirmez vous la suppression?');"> #}
-    {#                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campus.id) }}"> #}
-    {#                            <button class="btn">Supprimer</button> #}
-    {#                        </form> #}
-    {#                    </a> #}
-    {#                </td> #}
-    {#            </tr> #}
-    {#        {% else %} #}
-    {#            <tr> #}
-    {#                <td colspan="3">Pas de résultat</td> #}
-    {#            </tr> #}
-    {#        {% endfor %} #}
-    {#        </tbody> #}
-    {#    </table> #}
-
-
     <div class="ajout">
-
         <a>
             <form method="post" action="{{ path('app_campus_new') }}">
                 <button class="btn-wide btn-normal">Ajouter un campus</button>
