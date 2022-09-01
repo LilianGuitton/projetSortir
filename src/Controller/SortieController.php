@@ -59,10 +59,9 @@ class SortieController extends AbstractController
             if ("save" === $request->get('save')){
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
             } elseif ("publish" === $request->get('publish')){
-                $sortie->addParticipant($this->getUser());
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(2));
             }
-
+            $sortie->addParticipant($this->getUser());
             $sortie->setCampus($this->getUser()->getEstRattacherA());
             $sortie->setOrganisateur($this->getUser());
             $random = ByteString::fromRandom(4)->toString();
@@ -111,10 +110,10 @@ class SortieController extends AbstractController
             if ("save" === $request->get('save')){
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(1));
             } elseif ("publish" === $request->get('publish')){
-                $sortie->addParticipant($this->getUser());
                 $sortie->setEtat($entityManager->getRepository(Etat::class)->find(2));
             }
 
+            $sortie->addParticipant($this->getUser());
             $sortie->setCampus($this->getUser()->getEstRattacherA());
             $sortie->setOrganisateur($this->getUser());
 
@@ -195,6 +194,12 @@ class SortieController extends AbstractController
 
         if ($sortie==null){
             return $this->redirectToRoute("app_home");
+        }
+
+        $now = new \DateTime('now');
+
+        if ($sortie->getDateLimiteInscription()<$now->modify('+2 hours')){
+            return $this->redirectToRoute("app_sortie_modification", ["slug" => $sortie->getSlug()]);
         }
 
         $sortie->setEtat($repoEtat->find('2'));

@@ -29,8 +29,10 @@ class CreerSortieType extends AbstractType
                 ]
             ])
             ->add('dateHeureDebut', DateTimeType::class, ['widget'=>'single_text', "attr" => [
-                'class' => "form-date form-theme"
-            ]])
+                'class' => "form-date form-theme"],
+                'model_timezone' => 'Europe/Paris',
+                'view_timezone' => 'Europe/Paris'
+            ])
             ->add('duree', IntegerType::class,[
                 "attr" => [
                     'class' => "form-control form-theme"
@@ -38,8 +40,9 @@ class CreerSortieType extends AbstractType
             ])
             ->add('dateLimiteInscription', DateTimeType::class, ['widget'=>'single_text',
                  "attr" => [
-                    'class' => "form-date form-theme"
-                ]
+                    'class' => "form-date form-theme"],
+                'model_timezone' => 'Europe/Paris',
+                'view_timezone' => 'Europe/Paris'
             ])
             ->add('nbInscriptionMax', IntegerType::class,[
                 "attr" => [
