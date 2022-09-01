@@ -51,12 +51,12 @@
 
             <div class="navbar-collapse " id="navbarNavAltMarkup">
                 {% if app.user %}
-                    <div class="navbar-nav">
+                    <div class="navbar-nav ">
 
                         {% if is_granted("ROLE_ADMIN") %}
 
                             <div class="dropdown">
-                                <button class="btn " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Admin
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -73,7 +73,7 @@
 
                         {% endif %}
                         <div>
-                            <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+                            <a class="nav-link " href="{{ path('app_home') }}">Accueil</a>
                         </div>
                         <div>
                             <a class="nav-link" href="{{ path('app_profil') }}">Profil</a>
@@ -100,7 +100,7 @@
         <div class="center-footer">
             <div id="social-test " class="row ">
                 <ul class="social col-md-5 col-6">
-                    <div class="text-center">
+                    <div class="text-center nav">
                         <li><a href="https://www.facebook.com/EniEcoleInformatique/"><i class="fa fa-facebook"
                                                                                         aria-hidden="true"></i></a></li>
                         <li><a href="https://twitter.com/ENIEcoleInforma"><i class="fa fa-twitter"

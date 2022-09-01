@@ -5,10 +5,17 @@ main{
     min-height: 62.2vh;
     margin-bottom: 5%;
 }
-
+.nav{
+    color: #fff;
+}
 body{
     font-family: 'Oswald', sans-serif;
     font-family: 'Roboto', sans-serif;
+    background-image: linear-gradient(to right bottom, #f48835, #f79b29, #f7af1d, #f3c312, #ebd812);
+
+}
+header{
+    background : black;
 
 }
 
@@ -121,6 +128,7 @@ h2 {
 
 
 }
+
 
 .dud {
     color: #757575;
@@ -492,6 +500,22 @@ li a {
     font-size: 15px;
     font-family: Open Sans;
     color: rgba(256, 256, 256, 0.6);
+}
+
+.nav-link{
+    color: #FAF8F9;
+}
+
+.nav-link:hover{
+    color: #FAF8F9;
+}
+
+.btn {
+    color: #FAF8F9;
+}
+
+.btn:hover{
+    color: #FAF8F9;
 }
 
 .message-mail {
