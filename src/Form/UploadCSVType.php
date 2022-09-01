@@ -19,7 +19,8 @@ class UploadCSVType extends AbstractType
             ->add('submit', SubmitType::class,[
                "attr" => ["class" => "btn-wide btn-normal",
                 'style' => "margin-top: 2%"
-                ]
+                ],
+                'label'=>"Enregistrer"
             ])
         ;
     }

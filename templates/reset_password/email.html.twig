@@ -4,6 +4,6 @@
 
 <a href="http://localhost:8000{{ path('app_reset_password', {token: resetToken.token}) }}">http://localhost:8000{{ path('app_reset_password', {token: resetToken.token}) }}</a>
 
-<p>Ce lien expire dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+<p>Ce lien expire dans 1 heure {# {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }} #}.</p>
 
-<p>A très vite!</p>
+<p>A tout de suite sur notre site!</p>
