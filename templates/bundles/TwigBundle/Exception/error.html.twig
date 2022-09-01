@@ -1,0 +1,58 @@
+{# templates/bundles/TwigBundle/Exception/error.html.twig #}
+
+{% block stylesheets %}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{ asset('/css/profil.css') }}" rel="stylesheet"/>
+
+{% endblock %}
+
+{% block body %}
+    <div class=" container-fluid style-error">
+        <h1 class="titre-error500">Erreur !</h1>
+        <div class="row justify-content-center">
+            <div class="img-error500">
+                <img src="https://www.septetdemi.fr/wp-content/uploads/2020/06/enhanced-5242-1471959285-2.png">
+            </div>
+
+            <p class="text-error lign1">
+                Vous savez, moi je ne crois pas qu'il y ait de bonne ou de mauvaise situation.
+            </p>
+            <p class="text-error lign2">
+                Moi, si je devais résumer ma vie aujourd'hui avec vous, je dirais que c'est d'abord des rencontres.
+            </p>
+            <p class="text-error lign3">
+                Des gens qui m'ont tendu la main, peut-être à un moment où je ne pouvais pas, où j'étais seul chez moi.
+            </p>
+            <p class="text-error lign4">
+                Et c'est assez curieux de se dire que les hasards, les rencontres, forgent une destinée...
+            </p>
+            <p class="text-error lign5">
+                Parce que quand on a le goût de la chose, quand on a le goût de la chose bien faite, le beau geste,
+            </p>
+            <p class="text-error lign6">
+                parfois on ne trouve pas l'interlocuteur en face je dirais, le miroir qui vous aide à avancer.
+            </p>
+            <p class="text-error lign7">
+                Alors ça n'est pas mon cas, comme je disais là, puisque moi au contraire, j'ai pu : et je dis merci à la vie,
+            </p>
+            <p class="text-error lign8">
+                je lui dis merci, je chante la vie, je danse la vie... je ne suis qu'amour !
+            </p>
+            <p class="text-error lign9">
+                Et finalement, quand beaucoup de gens aujourd'hui me disent « Mais comment fais-tu pour avoir cette humanité ? »,
+            </p>
+            <p class="text-error lign10">
+                et bien je leur réponds très simplement, je leur dis que c'est ce goût de l'amour ce goût donc qui m'a poussé aujourd'hui à entreprendre une construction mécanique,
+            </p>
+            <p class="text-error lign11">
+                mais demain qui sait ? Peut-être simplement à me mettre au service de la communauté, à faire le don, le don de soi...
+            </p>
+            <p class="text-error lign12">
+                ou alors tu peux <a href="{{ path('app_home') }}">clicker ici</a> pour revenir à l'accueil. Le serveur interne n'arrive plus à suivre notre cher Otis!'
+            </p>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,33 +1,36 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Annuler une sortie admin{% endblock %}
+
 {% block body %}
 
-    <h1 class="titre1">Annuler une sortie</h1>
+
         <div class="container-fluid">
-            <div class="row justify-content">
-                <div class="col-5">
+            <h1 class="titre1">Annuler une sortie</h1>
+            <div class="row justify-content-center">
+                <div>
+
                 </div>
-                <div class="col-4">
-                    <div>
+                <div class="col-6 align">
+                    <div class="annulSortie">
                         <span>Nom de la sortie : {{ sortie.nom }}</span>
                     </div>
-                    <div>
+                    <div class="annulSortie">
                         <span>Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y", "Europe/Paris") }}</span>
                     </div>
-                    <div>
+                    <div class="annulSortie">
                         <span>Campus : {{ sortie.campus }}</span>
                     </div>
-                    <div>
+                    <div class="annulSortie">
                         <span>Lieu : {{ sortie.lieu }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville }}</span>
                     </div>
-                    <div>
+                    <div class="annulSortie">
                         {{ form_start(cancelForm) }}
 
-
                         {{ form_row(cancelForm.description) }}
-
-
-                        <button class="btn-wide btn-normal">Enregister</button>
+                        <div class="annulSortiebtn">
+                            <button class="btn-wide btn-normal">Enregister</button>
+                        </div>
                         <a class="btn-wide btn-normal" href="{{ path("app_sorties_admin") }}">Annuler</a>
                         {{ form_end(cancelForm) }}
 

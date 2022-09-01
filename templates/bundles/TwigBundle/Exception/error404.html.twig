@@ -1,0 +1,31 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+
+{% block stylesheets %}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{ asset('/css/profil.css') }}" rel="stylesheet"/>
+
+{% endblock %}
+
+{% block body %}
+
+    <div class=" container-fluid style-error">
+        <h1 class="titre-error">Erreur 404 ! </h1>
+        <div class="row justify-content-center">
+            <div>
+                <div class="img-error">
+                    <img src="https://wp.fr.aleteia.org/wp-content/uploads/sites/6/2016/09/web-chuck-norris-movie-invasion-c2a9-archives-du-7eme-art-afp.jpg?w=620&h=348&crop=1">
+                </div>
+
+                <p class="text-error">
+                    Désolé, la page que tu cherches a été volé par Chuck Norris et nous n'osons pas aller la réccupérer.
+                </p>
+                <p class="text-error">
+                    Mais tu peux revenir à l'acceuil, on est quand même super cool alors <a href="{{ path('app_home') }}">click ici</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
