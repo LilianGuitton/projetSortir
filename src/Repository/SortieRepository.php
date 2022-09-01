@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 use function Symfony\Component\String\s;
 
@@ -58,9 +59,7 @@ class SortieRepository extends ServiceEntityRepository
             ->setParameter('nom', "%" . $nom . "%")
             ->setParameter('debut', $debut)
             ->setParameter('fin', $fin)
-            ->orderBy('s.nom', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('s.nom', 'ASC');
 
         if ($orga!==0){
             $query->andWhere('s.organisateur = :orga')
@@ -85,7 +84,9 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('nonInscrit', $nonInscrit);
         }
 
-        return $query;
+        $query = $query->getQuery();
+
+        return $query->getResult();
     }
 
     public function findAllSortie(): array
