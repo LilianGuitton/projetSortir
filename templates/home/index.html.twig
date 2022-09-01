@@ -1,15 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <style>
 
-    </style>
-{% endblock %}
 
 {% block body %}
     <div class="date">
         <div>
-            <p><strong>Aujourd'hui, on est le : {{ "now"|date("m/d/Y") }}</strong></p>
+            <p><strong>Aujourd'hui, on est le : {{ "now"|date("d/m/Y") }}</strong></p>
         </div>
         <div>
             <p><strong>Connecté en tant que : {{ app.user.prenom }} {{ app.user.nom|slice(0,1) }}.</strong></p>
@@ -90,7 +86,19 @@
 
     </div>
 
+    {% block stylesheets %}
+        <style>
 
+            @media (max-width :1024px){
+                .column-3,.column-4,.column-5,.column-6,.column-7{
+                    display: none;
+                }
+
+            }
+
+        </style>
+
+    {% endblock %}
 
 
     <div class="wrapper">
