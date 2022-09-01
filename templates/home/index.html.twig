@@ -74,24 +74,28 @@
                     <div class="group">
 
 
-                        <input type="checkbox" name="{{ field_name(filterForm.monOrga) }}" {% if filtre["monOrga"] is defined %} checked {% endif %}>
+                        <input type="checkbox"
+                               name="{{ field_name(filterForm.monOrga) }}" {% if filtre["monOrga"] is defined %} checked {% endif %}>
                         {{ form_label(filterForm.monOrga) }}
                     </div>
 
                     <div class="group">
 
-                        <input type="checkbox" name="{{ field_name(filterForm.inscrit) }}" {% if filtre["inscrit"] is defined %} checked {% endif %}>
+                        <input type="checkbox"
+                               name="{{ field_name(filterForm.inscrit) }}" {% if filtre["inscrit"] is defined %} checked {% endif %}>
                         {{ form_label(filterForm.inscrit) }}
                     </div>
 
                     <div class="group">
 
-                        <input type="checkbox" name="{{ field_name(filterForm.nonInscrit) }}" {% if filtre["nonInscrit"] is defined %} checked {% endif %}>
+                        <input type="checkbox"
+                               name="{{ field_name(filterForm.nonInscrit) }}" {% if filtre["nonInscrit"] is defined %} checked {% endif %}>
                         {{ form_label(filterForm.nonInscrit) }}
                     </div>
                     <div class="group">
 
-                        <input type="checkbox" name="{{ field_name(filterForm.passee) }}" {% if filtre["passee"] is defined %} checked {% endif %}>
+                        <input type="checkbox"
+                               name="{{ field_name(filterForm.passee) }}" {% if filtre["passee"] is defined %} checked {% endif %}>
                         {{ form_label(filterForm.passee) }}
                     </div>
                     &nbsp;{{ form_end(filterForm) }}
@@ -107,8 +111,8 @@
     {% block stylesheets %}
         <style>
 
-            @media (max-width :1024px){
-                .column-3,.column-4,.column-5,.column-6,.column-7{
+            @media (max-width: 1024px) {
+                .column-3, .column-4, .column-5, .column-6, .column-7 {
                     display: none;
                 }
 
@@ -196,7 +200,8 @@
                                 <span>
                                         <a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a>
                                         {% if sortie.organisateur.pseudo == app.user.pseudo %}
-                                            - <a href="{{ path('app_annuler_sortie', {slug: sortie.slug}) }}">Annuler</a>
+                                            - <a
+                                                href="{{ path('app_annuler_sortie', {slug: sortie.slug}) }}">Annuler</a>
                                         {% elseif app.user in sortie.participants %}
                                             - <a href="{{ path('app_sortie_desinscrit', {slug: sortie.slug}) }}">Se désister</a>
                                         {% endif %}
