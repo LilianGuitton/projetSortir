@@ -18,7 +18,7 @@
             </div>
             <div class="tabs">
                 {% for participant in participants %}
-                    {% if "ROLE_ADMIN" NOT IN participant.roles %}
+                    {% if "ROLE_ADMIN" != participant.roles[0] %}
                     <div class="tab-row">
                     <div class="column-1a">
                         <span>{{ participant.pseudo }}</span>
