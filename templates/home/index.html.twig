@@ -183,7 +183,7 @@
                             {% if sortie.etat.libelle == "En création" %}
                                 <span><a href="{{ path('app_sortie_modification', {slug: sortie.slug}) }}">Modifier</a> - <a
                                             href="{{ path('app_sortie_publier', {slug: sortie.slug}) }}">Publier</a></span>
-                            {% elseif sortie.etat.libelle == "Ouvert" %}
+                            {% elseif sortie.etat.libelle == "Ouverte" %}
                                 <span><a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a>
                                         {% if sortie.organisateur.pseudo == app.user.pseudo %}
                                             - <a
