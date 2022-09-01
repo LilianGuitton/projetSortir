@@ -31,15 +31,9 @@ class HomeController extends AbstractController
         $repoSortie = $entityManager->getRepository(Sortie::class);
 
         if ($filtre!=null){
-            if ($filtre["debut"]==""){
-                $filtre["début"]="1971-01-01";
-            }
-            if ($filtre["fin"]==""){
-                $filtre["fin"]="2037-12-12";
-            }
-            $sortieList = $repoSortie->findByFilter($filtre["campus"], $filtre["nom"], $filtre["debut"], $filtre["fin"], isset($filtre["monOrga"]) ? $this->getUser()->getId() : 0, isset($filtre["passee"]) ? 5 : 0, isset($filtre["inscrit"]) ? $this->getUser()->getEstInscrit() : null, isset($filtre["nonInscrit"]) ? $this->getUser()->getEstInscrit() : null);
+            $sortieList = $repoSortie->findByFilter($filtre["campus"], $filtre["nom"], $filtre["debut"] == "" ? "1971-01-01" : $filtre["debut"], $filtre["fin"] == "" ? "2037-12-12" : $filtre["fin"], isset($filtre["monOrga"]) ? $this->getUser()->getId() : 0, isset($filtre["passee"]) ? 5 : 0, isset($filtre["inscrit"]) ? $this->getUser()->getEstInscrit() : null, isset($filtre["nonInscrit"]) ? $this->getUser()->getEstInscrit() : null);
         } else {
-            $sortieList = $repoSortie->findAll();
+            $sortieList = $repoSortie->findAllSortie();
         }
 
         return $this->render('home/index.html.twig', ["sortieList" => $sortieList, "filtre"=>$filtre,

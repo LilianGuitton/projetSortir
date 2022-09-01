@@ -21,11 +21,21 @@ class FiltreType extends AbstractType
                 'attr'=>['class'=> 'form-theme']
                 ])
             ->add('nom', TextType::class, ["label"=>"Le nom de la sortie contient :",
-                'attr'=> ['class'=>'form-theme']
+                'attr'=> ['class'=>'form-theme text-center'],
+                "required" => false
             ])
-            ->add('debut', DateType::class,["label"=>"Entre :"])
-            ->add('fin', DateType::class, ["label"=> "et :"
-                ])
+            ->add('debut', DateType::class,[
+                "label"=>"Entre :",
+                'widget'=>'single_text',
+                "attr"=>["class"=>"form-theme text-center"],
+                "required" => false
+            ])
+            ->add('fin', DateType::class, [
+                "label"=> "et :",
+                'widget'=>'single_text',
+                "attr"=>["class"=>"form-theme text-center"],
+                "required" => false
+            ])
             ->add('monOrga', CheckboxType::class, ["label"=> "Sorties dont je suis l'organisateur/trice"])
             ->add('inscrit', CheckboxType::class, ["label"=> "Sorties auxquelles je suis inscrit/e"])
             ->add('nonInscrit', CheckboxType::class, ["label"=> "Sorties auxquelles je ne suis pas inscrit/e"])

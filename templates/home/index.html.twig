@@ -29,7 +29,11 @@
 
                         {{ form_label(filterForm.campus) }}
 
-                        {{ form_widget(filterForm.campus) }}
+                        {% if filtre["campus"] is defined %}
+                            {{ form_widget(filterForm.campus, {'value' : filtre["campus"] }) }}
+                        {% else %}
+                            {{ form_widget(filterForm.campus) }}
+                        {% endif %}
 
                         {{ form_errors(filterForm.campus) }}
 
@@ -37,15 +41,29 @@
                     &nbsp;
                     <div class="group">
                         {{ form_label(filterForm.nom) }}
-                        <input class="form-theme text-center" type="text" name="{{ field_name(filterForm.nom) }}">
+
+                        {% if filtre["nom"] is defined %}
+                            {{ form_widget(filterForm.nom, {'value' : filtre["nom"] }) }}
+                        {% else %}
+                            {{ form_widget(filterForm.nom) }}
+                        {% endif %}
+
                         {{ form_errors(filterForm.nom) }}
                     </div>
                     &nbsp;
                     <div class="group d-flex">
                         {{ form_label(filterForm.debut) }}
-                        <input class="form-theme text-center" type="date" name="{{ field_name(filterForm.debut) }}">
+                        {% if filtre["debut"] is defined %}
+                            {{ form_widget(filterForm.debut, {'value' : filtre["debut"] }) }}
+                        {% else %}
+                            {{ form_widget(filterForm.debut) }}
+                        {% endif %}
                         {{ form_label(filterForm.fin) }}
-                        <input class="form-theme text-center" type="date" name="{{ field_name(filterForm.fin) }}">
+                        {% if filtre["fin"] is defined %}
+                            {{ form_widget(filterForm.fin, {'value' : filtre["fin"] }) }}
+                        {% else %}
+                            {{ form_widget(filterForm.fin) }}
+                        {% endif %}
                     </div>
                 </div>
 
@@ -56,24 +74,24 @@
                     <div class="group">
 
 
-                        <input type="checkbox" name="{{ field_name(filterForm.monOrga) }}">
+                        <input type="checkbox" name="{{ field_name(filterForm.monOrga) }}" {% if filtre["monOrga"] is defined %} checked {% endif %}>
                         {{ form_label(filterForm.monOrga) }}
                     </div>
 
                     <div class="group">
 
-                        <input type="checkbox" name="{{ field_name(filterForm.inscrit) }}">
+                        <input type="checkbox" name="{{ field_name(filterForm.inscrit) }}" {% if filtre["inscrit"] is defined %} checked {% endif %}>
                         {{ form_label(filterForm.inscrit) }}
                     </div>
 
                     <div class="group">
 
-                        <input type="checkbox" name="{{ field_name(filterForm.nonInscrit) }}">
+                        <input type="checkbox" name="{{ field_name(filterForm.nonInscrit) }}" {% if filtre["nonInscrit"] is defined %} checked {% endif %}>
                         {{ form_label(filterForm.nonInscrit) }}
                     </div>
                     <div class="group">
 
-                        <input type="checkbox" name="{{ field_name(filterForm.passee) }}">
+                        <input type="checkbox" name="{{ field_name(filterForm.passee) }}" {% if filtre["passee"] is defined %} checked {% endif %}>
                         {{ form_label(filterForm.passee) }}
                     </div>
                     &nbsp;{{ form_end(filterForm) }}
@@ -177,7 +195,9 @@
                             {% elseif sortie.etat.libelle == "Fermée" %}
                                 <span>
                                         <a href="{{ path('app_afficher_sortie', {slug: sortie.slug}) }}">Afficher</a>
-                                        {% if app.user in sortie.participants %}
+                                        {% if sortie.organisateur.pseudo == app.user.pseudo %}
+                                            - <a href="{{ path('app_annuler_sortie', {slug: sortie.slug}) }}">Annuler</a>
+                                        {% elseif app.user in sortie.participants %}
                                             - <a href="{{ path('app_sortie_desinscrit', {slug: sortie.slug}) }}">Se désister</a>
                                         {% endif %}
                                     </span>
