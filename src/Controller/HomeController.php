@@ -39,7 +39,7 @@ class HomeController extends AbstractController
             }
             $sortieList = $repoSortie->findByFilter($filtre["campus"], $filtre["nom"], $filtre["debut"], $filtre["fin"], isset($filtre["monOrga"]) ? $this->getUser()->getId() : 0, isset($filtre["passee"]) ? 5 : 0, isset($filtre["inscrit"]) ? $this->getUser()->getEstInscrit() : null, isset($filtre["nonInscrit"]) ? $this->getUser()->getEstInscrit() : null);
         } else {
-            $sortieList = $repoSortie->findAll();
+            $sortieList = $repoSortie->findAllSortie();
         }
 
         return $this->render('home/index.html.twig', ["sortieList" => $sortieList, "filtre"=>$filtre,
