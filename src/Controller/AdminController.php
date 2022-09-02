@@ -113,10 +113,6 @@ class AdminController extends AbstractController
             $header = $csv->getHeader();
             $records = $csv->getRecords();
             if ($header != $defaultHeader){
-                dump($defaultHeader);
-                dump($header);
-                dump($records);
-                die();
                 return $this->redirectToRoute("app_register_multiple");
             }
             foreach ($records as $record){
